@@ -1,5 +1,11 @@
 # @chiko111/scene-kit-core
 
+## 0.4.0
+
+### Minor Changes
+
+- f937094: Glow can follow a transparent image's outline (`glow.contour`). New image `blur` effect (static, focusIn, breathe) — opacity-only crossfade, identical on web and native. Buttons: optional same-site `webPath` on `navigate` actions for web apps (relative paths only).
+
 ## 0.3.0
 
 ### Minor Changes
