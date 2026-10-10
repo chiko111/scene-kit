@@ -1,6 +1,6 @@
 {
   "name": "@scene-kit/native",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React Native renderer for scene-kit scenes \u2014 Reanimated + expo-image.",
   "license": "MIT",
   "author": "chiko111",
@@ -46,7 +46,7 @@
   },
   "react-native": "./dist/index.js",
   "dependencies": {
-    "@scene-kit/core": "^0.1.0"
+    "@scene-kit/core": "^0.2.0"
   },
   "peerDependencies": {
     "react": "^19.1.0",
