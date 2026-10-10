@@ -1,0 +1,42 @@
+{
+  "name": "scene-kit",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "typecheck": "tsc -p packages/core && tsc -p packages/web && tsc -p packages/editor && tsc -p packages/native",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test && npm run build",
+    "demo": "vite demo",
+    "e2e": "python3 demo/e2e.py",
+    "changeset": "changeset",
+    "version-packages": "changeset version && npm install --package-lock-only",
+    "release": "npm run build && changeset publish"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.7",
+    "@changesets/cli": "^3.0.3",
+    "@rolldown/plugin-babel": "^0.2.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "expo-image": "^57.0.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-native": "^0.87.1",
+    "react-native-reanimated": "^4.7.1",
+    "react-native-worklets": "^0.13.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3",
+    "zod": "^4.6.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

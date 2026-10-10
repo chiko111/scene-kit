@@ -1,0 +1,54 @@
+{
+  "name": "@scene-kit/web",
+  "version": "0.1.0",
+  "description": "React DOM renderer for scene-kit scenes \u2014 CSS animations, container-query sizing.",
+  "license": "MIT",
+  "author": "chiko111",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiko111/scene-kit.git",
+    "directory": "packages/web"
+  },
+  "homepage": "https://github.com/chiko111/scene-kit#readme",
+  "bugs": "https://github.com/chiko111/scene-kit/issues",
+  "keywords": [
+    "react",
+    "react-native",
+    "animation",
+    "banner",
+    "server-driven-ui",
+    "editor",
+    "json"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "scene-kit-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@scene-kit/core": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
