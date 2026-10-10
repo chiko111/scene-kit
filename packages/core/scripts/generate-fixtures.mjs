@@ -23,7 +23,8 @@ const full = {
       type: 'image', uri: 'https://cdn.example.com/scene-assets/coin.webp', fit: 'contain', alt: 'Gold coin', radius: 0,
       effects: [
         { type: 'float', distance: 1.5, durationMs: 2000 },
-        { type: 'glow', colors: ['gold', 'primary'], blur: 3, spread: 0.5, durationMs: 1200 },
+        { type: 'glow', colors: ['gold', 'primary'], blur: 3, spread: 0.5, durationMs: 1200, contour: true },
+        { type: 'blur', amount: 2, mode: 'focusIn', durationMs: 900 },
       ],
     },
     {
@@ -35,7 +36,7 @@ const full = {
     { ...base('shp_badge', 'Badge', frame(5, 40, 12, 12)), type: 'shape', shape: 'ellipse', fill: 'gold', radius: 0 },
     {
       ...base('btn_cta', 'CTA', frame(5, 70, 30, 14)),
-      type: 'button', label: 'Play now', action: { type: 'navigate', route: 'Casino', params: { tab: 'slots' } },
+      type: 'button', label: 'Play now', action: { type: 'navigate', route: 'Casino', webPath: '/casino/slots?tab=new', params: { tab: 'slots' } },
       bg: 'primary', fg: 'onPrimary', fontSize: 3, weight: '700', radius: 1.5,
       shadow: { color: 'black', opacity: 0.35, x: 0, y: 0.6, blur: 1.5 },
       effects: [
@@ -72,6 +73,8 @@ const cases = {
   'invalid-too-many-colors': withNode(1, { effects: [{ type: 'glow', colors: ['gold', 'gold', 'gold', 'gold', 'gold'], blur: 3, spread: 0, durationMs: 1000 }] }),
   'invalid-no-colors': withNode(1, { effects: [{ type: 'glow', colors: [], blur: 3, spread: 0, durationMs: 1000 }] }),
   'invalid-font-key': withNode(2, { font: '../../font' }),
+  'invalid-external-webpath': withNode(4, { action: { type: 'navigate', route: 'Casino', webPath: '//evil.example/login' } }),
+  'invalid-blur-mode': withNode(1, { effects: [{ type: 'blur', amount: 2, mode: 'explode', durationMs: 900 }] }),
   'invalid-missing-nodes': (() => { const s = clone(full); delete s.nodes; return s; })(),
 };
 

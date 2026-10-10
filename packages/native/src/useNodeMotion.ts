@@ -43,8 +43,8 @@ export function useLoop(durationMs: number, enabled: boolean, mode: LoopMode = '
   return progress;
 }
 
-/** Plays once, the first time the scene becomes active. */
-function useFadeIn(
+/** Plays once (0 → 1), the first time the scene becomes active. */
+export function useFadeIn(
   delayMs: number | undefined,
   durationMs: number | undefined,
   running: boolean,

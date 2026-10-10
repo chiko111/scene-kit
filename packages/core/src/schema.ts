@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 export const SCENE_VERSION = 1;
 export const MAX_NODES = 60;
-export const MAX_EFFECTS_PER_NODE = 7;
+export const MAX_EFFECTS_PER_NODE = 8;
 export const MAX_EFFECT_COLORS = 4;
 
 export const COLOR_TOKENS = [
@@ -100,6 +100,21 @@ export const GlowEffectSchema = z.object({
   blur: z.number().min(0.5).max(10),
   spread: z.number().min(0).max(5),
   durationMs: DurationSchema,
+  /** Images only: follow the picture's outline (transparent PNG/WebP) instead of its box. */
+  contour: z.boolean().optional(),
+});
+
+/**
+ * Images only. A blurred copy sits under the sharp image; only opacity is animated.
+ *  - static:  always blurred
+ *  - focusIn: blurred → sharp once, when the scene first becomes visible
+ *  - breathe: sharp ↔ blurred loop
+ */
+export const BlurEffectSchema = z.object({
+  type: z.literal('blur'),
+  amount: z.number().min(0.2).max(10),
+  mode: z.enum(['static', 'focusIn', 'breathe']),
+  durationMs: DurationSchema,
 });
 
 /** The edge flashes ("blink") or cross-fades ("fade") through the colors. durationMs = per color. */
@@ -128,16 +143,21 @@ export const EffectSchema = z.discriminatedUnion('type', [
   GlowEffectSchema,
   EdgeBlinkEffectSchema,
   BorderRunEffectSchema,
+  BlurEffectSchema,
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 export type EffectType = Effect['type'];
 export type EffectOf<T extends EffectType> = Extract<Effect, { type: T }>;
+/** Effects that only make sense on image nodes (the editor offers them only there). */
+export const IMAGE_ONLY_EFFECTS: readonly EffectType[] = ['blur'];
+
 export const EFFECT_TYPES: readonly EffectType[] = [
   'pulse',
   'outlinePulse',
   'glow',
   'edgeBlink',
   'borderRun',
+  'blur',
   'float',
   'fadeIn',
 ];
@@ -153,11 +173,22 @@ const EffectsSchema = z
 
 export const RouteSchema = z.string().regex(/^[A-Za-z][A-Za-z0-9_]{0,63}$/, 'invalid route name');
 export const ParamKeySchema = z.string().regex(/^[A-Za-z][A-Za-z0-9_]{0,31}$/);
+/**
+ * Relative path on your own site: starts with a single "/", no scheme, no "//", no backslashes,
+ * no whitespace or control characters. Blocks open redirects and javascript: links.
+ */
+export const WebPathSchema = z
+  .string()
+  .max(512)
+  .regex(/^\/(?![\/\\])[^\s\\<>"'`]*$/, 'webPath must be a relative path like /casino/slots');
 
 export const ActionSchema = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('navigate'),
+    /** App screen name — the app maps it to its own navigation. */
     route: RouteSchema,
+    /** Optional same-site web path (e.g. "/casino/slots?tab=new"). Never an absolute/external URL. */
+    webPath: WebPathSchema.optional(),
     params: z
       .record(ParamKeySchema, z.string().max(256))
       .refine((p) => Object.keys(p).length <= 10, { message: 'max 10 params' })

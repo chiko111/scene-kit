@@ -93,6 +93,40 @@ export function TextGlowLayers({
   );
 }
 
+/**
+ * Glow for transparent images that follows the picture's outline, not its box. Each color is a copy
+ * of the image with a drop-shadow halo behind the real one (native: tinted + blurred copy).
+ */
+export function ImageContourGlow({ node, palette }: { node: NodeOf<'image'>; palette: Palette }) {
+  const glow = findEffect(node.effects, 'glow');
+  if (!glow) return null;
+  const n = glow.colors.length;
+  const wrapper: CSSVars | undefined =
+    n > 1 ? { animation: `sk-breathe-soft ${glow.durationMs}ms ease-in-out infinite` } : undefined;
+
+  return (
+    <div className="sk-fx-box sk-fx" style={wrapper} aria-hidden>
+      {glow.colors.map((token, i) => (
+        <img
+          key={`${token}-${i}`}
+          className="sk-img sk-fx-box sk-fx sk-layer"
+          data-first={i === 0}
+          src={node.uri}
+          alt=""
+          draggable={false}
+          decoding="async"
+          loading="lazy"
+          style={{
+            objectFit: node.fit,
+            filter: `drop-shadow(0 0 ${cqw(glow.blur + glow.spread)} ${palette[token]})`,
+            animation: layerAnimation('fade', i, n, glow.durationMs),
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 /** On top of the content: edge that blinks or cross-fades through colors. */
 export function EdgeLayers({ effects, palette }: { effects: readonly Effect[]; palette: Palette }) {
   const edge = findEffect(effects, 'edgeBlink');

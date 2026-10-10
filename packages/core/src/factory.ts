@@ -97,6 +97,7 @@ const EFFECT_DEFAULTS: { [T in EffectType]: EffectOf<T> } = {
   glow: { type: 'glow', colors: ['gold', 'primary'], blur: 3, spread: 0.5, durationMs: 1200 },
   edgeBlink: { type: 'edgeBlink', colors: ['gold', 'danger'], width: 0.4, blur: 1, mode: 'blink', durationMs: 500 },
   borderRun: { type: 'borderRun', colors: ['gold', 'accent'], size: 1.2, durationMs: 2400 },
+  blur: { type: 'blur', amount: 2, mode: 'focusIn', durationMs: 900 },
 };
 
 export function createEffect<T extends EffectType>(type: T): EffectOf<T> {

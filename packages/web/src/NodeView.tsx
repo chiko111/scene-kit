@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { BorderRunners, EdgeLayers, GlowLayers, TextGlowLayers } from './effects';
+import { BorderRunners, EdgeLayers, GlowLayers, ImageContourGlow, TextGlowLayers } from './effects';
 import {
   findEffect,
   nodeRadius,
@@ -76,20 +76,42 @@ function Content({ node, palette, fonts, interactive, onAction }: Omit<Props, 'a
   const shadow = toBoxShadow(node.shadow, palette, cqw);
 
   switch (node.type) {
-    case 'image':
+    case 'image': {
+      const blur = findEffect(node.effects, 'blur');
+      const sharpAnimation =
+        blur?.mode === 'focusIn'
+          ? `sk-focus-in ${blur.durationMs}ms ease-out both`
+          : blur?.mode === 'breathe'
+            ? `sk-sharp-breathe ${blur.durationMs * 2}ms ease-in-out infinite`
+            : undefined;
       return (
         <div className="sk-content" style={{ boxShadow: shadow, overflow: 'hidden' }}>
-          <img
-            className="sk-img"
-            src={node.uri}
-            alt={node.alt}
-            draggable={false}
-            decoding="async"
-            loading="lazy"
-            style={{ objectFit: node.fit }}
-          />
+          {blur && (
+            <img
+              className="sk-img sk-fx-box"
+              src={node.uri}
+              alt=""
+              aria-hidden
+              draggable={false}
+              decoding="async"
+              loading="lazy"
+              style={{ objectFit: node.fit, filter: `blur(${cqw(blur.amount)})` }}
+            />
+          )}
+          {blur?.mode !== 'static' && (
+            <img
+              className={blur ? 'sk-img sk-fx-box sk-fx' : 'sk-img'}
+              src={node.uri}
+              alt={node.alt}
+              draggable={false}
+              decoding="async"
+              loading="lazy"
+              style={{ objectFit: node.fit, animation: sharpAnimation }}
+            />
+          )}
         </div>
       );
+    }
 
     case 'text': {
       const textShadow = node.shadow
@@ -151,6 +173,8 @@ export function NodeView(props: Props) {
     <div className="sk-node" data-node-id={node.id} style={nodeStyle(node)}>
       {node.type === 'text' ? (
         <TextGlowLayers node={node} palette={palette} fontFamily={resolveFont(fonts, node.font)} />
+      ) : node.type === 'image' && findEffect(node.effects, 'glow')?.contour ? (
+        <ImageContourGlow node={node} palette={palette} />
       ) : (
         <GlowLayers effects={node.effects} palette={palette} />
       )}

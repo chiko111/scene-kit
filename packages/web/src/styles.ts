@@ -24,6 +24,8 @@ export const SCENE_CSS = `
 .sk-layer{opacity:0}
 .sk-layer[data-first="true"]{opacity:1}
 .sk-runner{position:absolute;left:0;top:0;border-radius:50%;pointer-events:none}
+@keyframes sk-focus-in{from{opacity:0}to{opacity:1}}
+@keyframes sk-sharp-breathe{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
 @keyframes sk-breathe{0%{opacity:.3}50%{opacity:1}100%{opacity:.3}}
 @keyframes sk-breathe-soft{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
 @keyframes sk-blink-1{0%{opacity:1}50%{opacity:0}100%{opacity:0}}

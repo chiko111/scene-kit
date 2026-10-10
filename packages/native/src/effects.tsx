@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, type ViewStyle } from 'react-native';
+import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
+import { Image } from 'expo-image';
 import Animated, { useAnimatedStyle, type SharedValue } from 'react-native-reanimated';
 import {
   borderPoint,
@@ -11,7 +12,7 @@ import {
   type NodeOf,
   type Palette,
 } from '@chiko111/scene-kit-core';
-import { useLoop } from './useNodeMotion';
+import { useFadeIn, useLoop } from './useNodeMotion';
 
 type Radius = number | '50%';
 
@@ -145,6 +146,117 @@ export function TextGlowLayers({
   );
 }
 
+/**
+ * Image with the optional blur effect: a blurred copy under the sharp image; only the sharp image's
+ * opacity animates (UI thread), so blur itself is never re-rendered per frame.
+ */
+export function SceneImage({
+  node,
+  unit,
+  running,
+  reducedMotion,
+  borderRadius,
+  boxShadow,
+}: {
+  node: NodeOf<'image'>;
+  unit: number;
+  running: boolean;
+  reducedMotion: boolean;
+  borderRadius: Radius;
+  boxShadow: string | undefined;
+}) {
+  const blur = findEffect(node.effects, 'blur');
+  const focus = useFadeIn(
+    blur?.mode === 'focusIn' ? 0 : undefined,
+    blur?.mode === 'focusIn' ? blur.durationMs : undefined,
+    running,
+    reducedMotion,
+  );
+  const breathe = useLoop(blur?.mode === 'breathe' ? blur.durationMs : 0, running && !reducedMotion, 'pingpong');
+  const mode = blur?.mode;
+
+  const sharpStyle = useAnimatedStyle(() => {
+    'worklet';
+    if (mode === 'focusIn') return { opacity: focus.get() };
+    if (mode === 'breathe') return { opacity: 1 - breathe.get() };
+    return { opacity: 1 };
+  });
+
+  const image = (extra: { blurRadius?: number }) => (
+    <Image
+      source={{ uri: node.uri }}
+      contentFit={node.fit}
+      autoplay={running}
+      cachePolicy="memory-disk"
+      recyclingKey={node.id}
+      transition={0}
+      style={[styles.fill, { borderRadius }]}
+      {...extra}
+    />
+  );
+
+  return (
+    <View
+      style={[styles.fill, { borderRadius, boxShadow }]}
+      accessible={node.alt.length > 0}
+      accessibilityRole="image"
+      accessibilityLabel={node.alt || undefined}
+    >
+      {blur && image({ blurRadius: blur.amount * unit })}
+      {blur?.mode !== 'static' && <Animated.View style={[styles.fill, sharpStyle]}>{image({})}</Animated.View>}
+    </View>
+  );
+}
+
+/** Glow that follows a transparent image's outline: tinted + blurred copies behind it (web: drop-shadow). */
+export function ImageContourGlow({
+  node,
+  palette,
+  unit,
+  running,
+  reducedMotion,
+}: Omit<EffectProps, 'radius' | 'effects'> & { node: NodeOf<'image'> }) {
+  const glow = findEffect(node.effects, 'glow');
+  const count = glow?.colors.length ?? 0;
+  const progress = useLoop((glow?.durationMs ?? 0) * count, running && !reducedMotion && glow !== undefined, 'linear');
+
+  const breathe = useAnimatedStyle(() => {
+    'worklet';
+    if (count <= 1 || reducedMotion) return { opacity: 1 };
+    const p = (progress.get() * count) % 1;
+    return { opacity: 0.6 + 0.4 * (0.5 - 0.5 * Math.cos(2 * Math.PI * p)) };
+  });
+
+  if (!glow) return null;
+
+  return (
+    <Animated.View pointerEvents="none" style={[styles.fill, breathe]}>
+      {glow.colors.map((token, i) => (
+        <ColorLayer
+          key={`${token}-${i}`}
+          progress={progress}
+          index={i}
+          count={count}
+          mode="crossfade"
+          still={reducedMotion}
+          style={styles.none}
+        >
+          <Image
+            source={{ uri: node.uri }}
+            contentFit={node.fit}
+            autoplay={running}
+            cachePolicy="memory-disk"
+            transition={0}
+            tintColor={palette[token]}
+            blurRadius={(glow.blur + glow.spread) * unit}
+            style={styles.fill}
+          />
+        </ColorLayer>
+      ))}
+    </Animated.View>
+  );
+}
+
 /** On top of the content: edge that blinks or cross-fades through colors. */
 export function EdgeLayers({ effects, palette, unit, radius, running, reducedMotion }: EffectProps) {
   const edge = findEffect(effects, 'edgeBlink');
@@ -258,5 +370,6 @@ const styles = StyleSheet.create({
   fill: { ...StyleSheet.absoluteFill },
   runner: { position: 'absolute', left: 0, top: 0 },
   textBox: { justifyContent: 'center' },
+  none: {},
   text: { includeFontPadding: false },
 });

@@ -1,6 +1,5 @@
 import { Pressable, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { Image } from 'expo-image';
 import {
   findEffect,
   nodeRadius,
@@ -12,7 +11,14 @@ import {
   type SceneAction,
   type SceneNode,
 } from '@chiko111/scene-kit-core';
-import { BorderRunners, EdgeLayers, GlowLayers, TextGlowLayers } from './effects';
+import {
+  BorderRunners,
+  EdgeLayers,
+  GlowLayers,
+  ImageContourGlow,
+  SceneImage,
+  TextGlowLayers,
+} from './effects';
 import { OutlineRing } from './OutlineRing';
 import { useNodeMotion } from './useNodeMotion';
 
@@ -40,7 +46,16 @@ function frameStyle(node: SceneNode): ViewStyle {
   return { left: `${x}%`, top: `${y}%`, width: `${w}%`, height: `${h}%` };
 }
 
-function Content({ node, palette, unit, running, fontFamily, fonts, onAction }: Omit<Props, 'reducedMotion' | 'aspectRatio'>) {
+function Content({
+  node,
+  palette,
+  unit,
+  running,
+  reducedMotion,
+  fontFamily,
+  fonts,
+  onAction,
+}: Omit<Props, 'aspectRatio'>) {
   const r = nodeRadius(node);
   const borderRadius = r === 'ellipse' ? '50%' : r * unit;
   const boxShadow = toBoxShadow(node.shadow, palette, (u) => `${u * unit}px`);
@@ -48,19 +63,14 @@ function Content({ node, palette, unit, running, fontFamily, fonts, onAction }: 
   switch (node.type) {
     case 'image':
       return (
-        <View style={[styles.fill, { borderRadius, boxShadow }]}>
-          <Image
-            source={{ uri: node.uri }}
-            contentFit={node.fit}
-            autoplay={running}
-            cachePolicy="memory-disk"
-            recyclingKey={node.id}
-            transition={0}
-            accessible={node.alt.length > 0}
-            accessibilityLabel={node.alt || undefined}
-            style={[styles.fill, { borderRadius }]}
-          />
-        </View>
+        <SceneImage
+          node={node}
+          unit={unit}
+          running={running}
+          reducedMotion={reducedMotion}
+          borderRadius={borderRadius}
+          boxShadow={boxShadow}
+        />
       );
 
     case 'text':
@@ -155,6 +165,8 @@ export function NodeView({
     <Animated.View style={[styles.node, frameStyle(node), motionStyle]}>
       {node.type === 'text' ? (
         <TextGlowLayers {...fx} node={node} fontFamily={resolveFont(fonts, node.font) ?? fontFamily} />
+      ) : node.type === 'image' && findEffect(node.effects, 'glow')?.contour ? (
+        <ImageContourGlow {...fx} node={node} />
       ) : (
         <GlowLayers {...fx} radius={radius} />
       )}
@@ -163,6 +175,7 @@ export function NodeView({
         palette={palette}
         unit={unit}
         running={running}
+        reducedMotion={reducedMotion}
         fontFamily={fontFamily}
         fonts={fonts}
         onAction={onAction}

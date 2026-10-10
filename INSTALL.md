@@ -152,9 +152,15 @@ export function SceneSlot({ id, active, maxHeight }: Props) {
 
   const handleAction = (action: SceneAction) => {
     switch (action.type) {
-      case 'navigate': /* navigation.navigate(action.route, action.params) — само позволени екрани */ return;
-      case 'openPromo': /* … action.promoId */ return;
-      case 'openGame': /* … action.gameId */ return;
+      case 'navigate':
+        navigateTo(action.route, action.params); // вашата външна функция за навигация
+        return;
+      case 'openPromo':
+        navigateTo('Promo', { id: action.promoId });
+        return;
+      case 'openGame':
+        navigateTo('Game', { id: action.gameId });
+        return;
     }
   };
 
@@ -190,6 +196,30 @@ npm i @chiko111/scene-kit-web @chiko111/scene-kit-core
 
 Същото като RN, само `import { SceneView } from '@chiko111/scene-kit-web'`. Анимациите спират автоматично извън екрана.
 
+**Бутони на web:** ако в бекофиса е попълнен *Web path*, ползвайте него директно, иначе превеждайте екрана към URL:
+
+```ts
+const ROUTE_TO_PATH: Record<string, string> = { Home: '/', Casino: '/casino', Sport: '/sport', Promotions: '/promotions' };
+
+const handleAction = (action: SceneAction) => {
+  switch (action.type) {
+    case 'navigate': {
+      const path = action.webPath ?? ROUTE_TO_PATH[action.route];
+      if (path) router.push(path); // или window.location.assign(path)
+      return;
+    }
+    case 'openPromo':
+      router.push(`/promotions/${action.promoId}`);
+      return;
+    case 'openGame':
+      router.push(`/casino/game/${action.gameId}`);
+      return;
+  }
+};
+```
+
+`webPath` винаги е относителен път в собствения ви сайт (`/…`). Външни `https://` адреси, `//друг-сайт` и `javascript:` се отхвърлят още при запис и при зареждане.
+
 ---
 
 ## 6. Размер на сцената
@@ -214,11 +244,33 @@ npm i @chiko111/scene-kit-web @chiko111/scene-kit-core
   - Glow: сияние, преливащо между цветовете (при текст свети около буквите);
   - Blinking edge: рамката мига или прелива между цветовете;
   - Running border light: светлини обикалят рамката, по една на цвят;
+  - Glow по контура (за снимки): отметка "Follow image outline". Сиянието следва формата на прозрачна PNG/WebP (напр. изрязан човек), без квадрат;
+  - Blur (за снимки): "Focus in" (размазано → ясно при показване), "Sharp ↔ blurred" (цикъл) или постоянно размазано;
   - Float: плава нагоре-надолу;
   - Fade in: плавно появяване.
 - **Сянка** с цвят, бутони с позволени действия, undo/redo, import/export на JSON.
 
 Всички анимации са само с opacity/transform (не натоварват), спират извън екрана и уважават "Reduce motion" на устройството.
+
+Всеки ефект изглежда еднакво на web, iOS и Android. Ефекти, които не могат да се направят еднакво (blur на текст/бутони, "матово стъкло" зад елемент), съзнателно не са включени.
+
+---
+
+## 7.1 Защо е по-леко от WebView с HTML анимации
+
+| | WebView с HTML | scene-kit |
+|---|---|---|
+| Какво се стартира | цял браузърен engine за всеки WebView (отделен renderer процес, JS engine, layout, compositor) | обикновени native View/Image/Text, като всеки друг екран в приложението |
+| Памет | десетки MB за всеки WebView още преди съдържанието | няколко View-та на сцена; снимките са кеширани от expo-image |
+| Къде вървят анимациите | в JS/рендера на браузъра в WebView-то | на UI нишката (Reanimated), без да минават през JS |
+| Извън екрана / във фон | продължават, освен ако не ги спрете ръчно | спират автоматично |
+| Стартиране | зареждане на HTML, CSS и JS при всяко показване | JSON от няколко KB, кеширан |
+
+**Къде все пак има цена:**
+- **Анимирани WebP/GIF** се декодират кадър по кадър. Glow по контура и Blur правят копие на снимката, така че анимирана снимка с тези ефекти се декодира 2–5 пъти. За една–две такива на екран е напълно ок. Десет едновременно на един екран не е добра идея. Статичните снимки (PNG/WebP) почти не струват нищо допълнително.
+- **Glow с много цветове** = по едно копие на слой за всеки цвят (до 4). Анимира се само opacity, така че е евтино, но 4 цвята е по-тежко от 1.
+
+Дори с всички ефекти включени, сцената остава няколко десетки native View-та, а не браузър. Ако искате числа за вашите устройства, сравнете паметта и FPS в release build на същия екран с 3 WebView-та и с 3 сцени.
 
 ---
 

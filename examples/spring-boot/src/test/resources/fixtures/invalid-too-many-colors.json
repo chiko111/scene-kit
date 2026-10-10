@@ -159,6 +159,7 @@
       "action": {
         "type": "navigate",
         "route": "Casino",
+        "webPath": "/casino/slots?tab=new",
         "params": {
           "tab": "slots"
         }

@@ -52,7 +52,14 @@
           ],
           "blur": 3,
           "spread": 0.5,
-          "durationMs": 1200
+          "durationMs": 1200,
+          "contour": true
+        },
+        {
+          "type": "blur",
+          "amount": 2,
+          "mode": "focusIn",
+          "durationMs": 900
         }
       ],
       "type": "image",
@@ -150,6 +157,7 @@
       "action": {
         "type": "navigate",
         "route": "Casino",
+        "webPath": "/casino/slots?tab=new",
         "params": {
           "tab": "slots"
         }

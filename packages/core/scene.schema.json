@@ -167,7 +167,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 7,
+                "maxItems": 8,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -340,6 +340,9 @@
                           "type": "integer",
                           "minimum": 100,
                           "maximum": 20000
+                        },
+                        "contour": {
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -459,6 +462,40 @@
                         "type",
                         "colors",
                         "size",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "blur"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "minimum": 0.2,
+                          "maximum": 10
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "static",
+                            "focusIn",
+                            "breathe"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "amount",
+                        "mode",
                         "durationMs"
                       ],
                       "additionalProperties": false
@@ -624,7 +661,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 7,
+                "maxItems": 8,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -797,6 +834,9 @@
                           "type": "integer",
                           "minimum": 100,
                           "maximum": 20000
+                        },
+                        "contour": {
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -916,6 +956,40 @@
                         "type",
                         "colors",
                         "size",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "blur"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "minimum": 0.2,
+                          "maximum": 10
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "static",
+                            "focusIn",
+                            "breathe"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "amount",
+                        "mode",
                         "durationMs"
                       ],
                       "additionalProperties": false
@@ -1111,7 +1185,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 7,
+                "maxItems": 8,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -1284,6 +1358,9 @@
                           "type": "integer",
                           "minimum": 100,
                           "maximum": 20000
+                        },
+                        "contour": {
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -1406,6 +1483,40 @@
                         "durationMs"
                       ],
                       "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "blur"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "minimum": 0.2,
+                          "maximum": 10
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "static",
+                            "focusIn",
+                            "breathe"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "amount",
+                        "mode",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
                     }
                   ]
                 }
@@ -1431,6 +1542,11 @@
                       "route": {
                         "type": "string",
                         "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+                      },
+                      "webPath": {
+                        "type": "string",
+                        "maxLength": 512,
+                        "pattern": "^\\/(?![\\/\\\\])[^\\s\\\\<>\"'`]*$"
                       },
                       "params": {
                         "type": "object",
@@ -1684,7 +1800,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 7,
+                "maxItems": 8,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -1857,6 +1973,9 @@
                           "type": "integer",
                           "minimum": 100,
                           "maximum": 20000
+                        },
+                        "contour": {
+                          "type": "boolean"
                         }
                       },
                       "required": [
@@ -1976,6 +2095,40 @@
                         "type",
                         "colors",
                         "size",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "blur"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "minimum": 0.2,
+                          "maximum": 10
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "static",
+                            "focusIn",
+                            "breathe"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "amount",
+                        "mode",
                         "durationMs"
                       ],
                       "additionalProperties": false

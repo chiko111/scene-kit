@@ -1,10 +1,12 @@
 import {
   EFFECT_TYPES,
   FontKeySchema,
+  IMAGE_ONLY_EFFECTS,
   MAX_EFFECT_COLORS,
   IdSchema,
   ParamKeySchema,
   RouteSchema,
+  WebPathSchema,
   createEffect,
   type Effect,
   type EffectType,
@@ -39,6 +41,7 @@ const EFFECT_LABELS: Record<EffectType, string> = {
   pulse: 'Pulse',
   outlinePulse: 'Pulsing outline',
   glow: 'Glow',
+  blur: 'Blur',
   edgeBlink: 'Blinking edge',
   borderRun: 'Running border light',
   float: 'Float',
@@ -193,6 +196,7 @@ export function NodeInspector({ node, palette, routes, fonts, onChange, session 
 
       <EffectsEditor
         effects={node.effects}
+        nodeType={node.type}
         palette={palette}
         session={session}
         onChange={(effects) => onChange({ ...node, effects })}
@@ -358,7 +362,7 @@ function textToParams(text: string): Record<string, string> | undefined | null {
 }
 
 const ACTION_TYPES: readonly { value: SceneAction['type']; label: string }[] = [
-  { value: 'navigate', label: 'Navigate to screen' },
+  { value: 'navigate', label: 'Navigate (app screen / web path)' },
   { value: 'openPromo', label: 'Open promo' },
   { value: 'openGame', label: 'Open game' },
 ];
@@ -413,6 +417,16 @@ function ActionEditor({
               onChange={(route) => onChange({ ...action, route })}
             />
           )}
+          <TextField
+            label="Web path (optional)"
+            value={action.webPath ?? ''}
+            maxLength={512}
+            placeholder="/casino/slots?tab=new"
+            validate={(v) => v === '' || WebPathSchema.safeParse(v).success}
+            hint="Only on your site: starts with /. Empty = web uses the screen above."
+            session={session}
+            onChange={(v) => onChange({ ...action, webPath: v === '' ? undefined : v })}
+          />
           <TextField
             label="Params (key=value per line)"
             value={paramsToText(action.params)}
@@ -504,11 +518,13 @@ const DURATION = { min: 100, max: 20000, step: 50 } as const;
 
 function EffectFields({
   effect,
+  nodeType,
   palette,
   onChange,
   session,
 }: {
   effect: Effect;
+  nodeType: SceneNode['type'];
   palette: Palette;
   onChange: (effect: Effect) => void;
   session: EditSession;
@@ -550,6 +566,15 @@ function EffectFields({
     case 'glow':
       return (
         <>
+          {nodeType === 'image' && (
+            <div className="ske-field-wide">
+              <CheckboxField
+                label="Follow image outline (transparent PNG/WebP)"
+                checked={effect.contour === true}
+                onChange={(contour) => onChange({ ...effect, contour: contour || undefined })}
+              />
+            </div>
+          )}
           <ColorListField label="Colors (blends 1 → 2 → …)" colors={effect.colors} palette={palette} max={MAX_EFFECT_COLORS} onChange={(colors) => onChange({ ...effect, colors })} />
           <NumberField label="Blur (u)" value={effect.blur} min={0.5} max={10} step={0.25} session={session} onChange={(blur) => onChange({ ...effect, blur })} />
           <NumberField label="Spread (u)" value={effect.spread} min={0} max={5} step={0.25} session={session} onChange={(spread) => onChange({ ...effect, spread })} />
@@ -582,6 +607,23 @@ function EffectFields({
           <NumberField label="Ms per lap" value={effect.durationMs} {...DURATION} session={session} onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })} />
         </>
       );
+    case 'blur':
+      return (
+        <>
+          <SelectField
+            label="Mode"
+            value={effect.mode}
+            options={[
+              { value: 'focusIn', label: 'Focus in (once)' },
+              { value: 'breathe', label: 'Sharp ↔ blurred loop' },
+              { value: 'static', label: 'Always blurred' },
+            ]}
+            onChange={(mode) => onChange({ ...effect, mode })}
+          />
+          <NumberField label="Amount (u)" value={effect.amount} min={0.2} max={10} step={0.1} session={session} onChange={(amount) => onChange({ ...effect, amount })} />
+          {effect.mode !== 'static' && duration}
+        </>
+      );
     case 'fadeIn':
       return (
         <>
@@ -602,16 +644,20 @@ function EffectFields({
 
 function EffectsEditor({
   effects,
+  nodeType,
   palette,
   onChange,
   session,
 }: {
   effects: readonly Effect[];
+  nodeType: SceneNode['type'];
   palette: Palette;
   onChange: (effects: Effect[]) => void;
   session: EditSession;
 }) {
-  const available = EFFECT_TYPES.filter((type) => !effects.some((e) => e.type === type));
+  const available = EFFECT_TYPES.filter(
+    (type) => !effects.some((e) => e.type === type) && (nodeType === 'image' || !IMAGE_ONLY_EFFECTS.includes(type)),
+  );
 
   return (
     <Section title="Effects">
@@ -632,6 +678,7 @@ function EffectsEditor({
           <div className="ske-grid">
             <EffectFields
               effect={effect}
+              nodeType={nodeType}
               palette={palette}
               session={session}
               onChange={(next) => onChange(effects.map((e) => (e.type === next.type ? next : e)))}
