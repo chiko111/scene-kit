@@ -220,6 +220,8 @@ npm run e2e         # Playwright тест срещу пуснатото demo
 2. Push в `main` → GitHub Action отваря PR **"chore: version packages"** (версии + CHANGELOG).
 3. Merge на този PR → Action-ът build-ва и публикува в npm с provenance.
 
-Еднократна настройка:
-- npm **Granular Access Token** на акаунта `chiko111`: Read and write за пакетите, **Bypass two-factor authentication** включено → GitHub repo → Settings → Secrets → Actions → `NPM_TOKEN`.
+Еднократна настройка (вече направена):
+- **Trusted publishing** за всеки пакет в npm: package → Settings → Trusted Publisher → GitHub Actions, user `chiko111`, repo `scene-kit`, workflow `release.yml`. Без токени, нищо не изтича.
 - GitHub repo → Settings → Actions → General → Workflow permissions: **Read and write** + **Allow GitHub Actions to create and approve pull requests**.
+
+Публикуваните версии остават в npm завинаги — trusted publishing е нужен само за публикуване на нови версии.
