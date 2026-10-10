@@ -51,9 +51,17 @@ function App() {
       <section data-testid="app-preview" style={{ padding: 16, background: '#000', color: '#fff' }}>
         <h4 style={{ margin: '0 0 8px' }}>App preview (last saved JSON)</h4>
         {saved ? (
-          <div style={{ maxWidth: 480 }}>
-            <SceneView scene={saved} palette={palette} fontFamily={FONT} onAction={(a) => setActions((list) => [...list, a])} />
-          </div>
+          <>
+            <div style={{ maxWidth: 480 }}>
+              <SceneView scene={saved} palette={palette} fontFamily={FONT} onAction={(a) => setActions((list) => [...list, a])} />
+            </div>
+            <div data-testid="limit-max-height" style={{ width: 800 }}>
+              <SceneView scene={saved} palette={palette} fontFamily={FONT} maxHeight={120} />
+            </div>
+            <div data-testid="limit-contain" style={{ width: 300, height: 300, outline: '1px dashed #555' }}>
+              <SceneView scene={saved} palette={palette} fontFamily={FONT} fit="contain" />
+            </div>
+          </>
         ) : (
           <p>Press Save in the JSON tab.</p>
         )}

@@ -122,10 +122,19 @@ with sync_playwright() as p:
     page.get_by_role('tab', name='JSON').click()
     page.get_by_role('button', name='Save').click()
     expect(page.get_by_text('Saved at')).to_be_visible()
-    preview_btn = page.get_by_test_id('app-preview').locator('.sk-btn')
+    preview_btn = page.get_by_test_id('app-preview').locator('.sk-btn').first
     preview_btn.click(force=True)  # it pulses, so it's never 'stable'
     actions = json.loads(page.get_by_test_id('actions').inner_text())
     check('app preview fires whitelisted action', actions == [{'type': 'navigate', 'route': 'Casino'}], str(actions))
+
+    # 11b. Size limits keep the aspect ratio and never overflow the slot
+    ar = 16 / 9
+    box = page.get_by_test_id('limit-max-height').locator('.sk-scene').bounding_box()
+    check('maxHeight limits height and keeps ratio', abs(box['height'] - 120) < 1 and abs(box['width'] - 120 * ar) < 1, str(box))
+    slot = page.get_by_test_id('limit-contain').bounding_box()
+    box = page.get_by_test_id('limit-contain').locator('.sk-scene').bounding_box()
+    centered = abs((box['y'] - slot['y']) - (slot['height'] - box['height']) / 2) < 1
+    check('contain fits inside a fixed box, centered', abs(box['width'] - 300) < 1 and abs(box['height'] - 300 / ar) < 1 and centered, str(box))
 
     # 12. Editor buttons must not fire actions
     page.locator('.ske-canvas .sk-btn').click(force=True)

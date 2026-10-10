@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { Palette, Scene, SceneAction } from '@chiko111/scene-kit-core';
+import type { Palette, Scene, SceneAction, SceneFit } from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { SCENE_CSS } from './styles';
 import { useInViewport } from './useInViewport';
@@ -14,8 +14,27 @@ export type SceneViewProps = {
   interactive?: boolean;
   /** Font of the app (same value in editor and app keeps the preview identical). */
   fontFamily?: string;
+  /** Upper limits in px. The scene keeps its aspect ratio and is centered. */
+  maxWidth?: number;
+  maxHeight?: number;
+  /**
+   * 'width' (default): fill the slot's width, height follows the aspect ratio.
+   * 'contain': fit entirely inside the slot — the slot must have a height (e.g. a fixed-height box).
+   */
+  fit?: SceneFit;
   className?: string;
 };
+
+const positive = (n: number | undefined): n is number => typeof n === 'number' && Number.isFinite(n) && n > 0;
+
+/** CSS width that never exceeds the limits and never distorts (height comes from aspect-ratio). */
+function sceneWidth(aspectRatio: number, maxWidth?: number, maxHeight?: number, fit?: SceneFit): string {
+  const limits = ['100%'];
+  if (positive(maxWidth)) limits.push(`${maxWidth}px`);
+  if (positive(maxHeight)) limits.push(`${maxHeight * aspectRatio}px`);
+  if (fit === 'contain') limits.push(`${aspectRatio * 100}cqh`);
+  return limits.length === 1 ? '100%' : `min(${limits.join(', ')})`;
+}
 
 export function SceneView({
   scene,
@@ -24,6 +43,9 @@ export function SceneView({
   active,
   interactive,
   fontFamily,
+  maxWidth,
+  maxHeight,
+  fit,
   className,
 }: SceneViewProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,32 +54,35 @@ export function SceneView({
   const isInteractive = interactive ?? true;
 
   return (
-    <div
-      ref={ref}
-      className={className ? `sk-scene ${className}` : 'sk-scene'}
-      data-running={running}
-      role="group"
-      aria-label={scene.name || undefined}
-      style={{
-        aspectRatio: scene.aspectRatio,
-        background: scene.background ? palette[scene.background] : undefined,
-        fontFamily,
-      }}
-    >
+    <div className="sk-frame" data-fit={fit ?? 'width'}>
       <style href="scene-kit-renderer" precedence="medium">
         {SCENE_CSS}
       </style>
-      {scene.nodes.map((node) =>
-        node.hidden ? null : (
-          <NodeView
-            key={node.id}
-            node={node}
-            palette={palette}
-            interactive={isInteractive}
-            onAction={onAction}
-          />
-        ),
-      )}
+      <div
+        ref={ref}
+        className={className ? `sk-scene ${className}` : 'sk-scene'}
+        data-running={running}
+        role="group"
+        aria-label={scene.name || undefined}
+        style={{
+          width: sceneWidth(scene.aspectRatio, maxWidth, maxHeight, fit),
+          aspectRatio: scene.aspectRatio,
+          background: scene.background ? palette[scene.background] : undefined,
+          fontFamily,
+        }}
+      >
+        {scene.nodes.map((node) =>
+          node.hidden ? null : (
+            <NodeView
+              key={node.id}
+              node={node}
+              palette={palette}
+              interactive={isInteractive}
+              onAction={onAction}
+            />
+          ),
+        )}
+      </div>
     </div>
   );
 }

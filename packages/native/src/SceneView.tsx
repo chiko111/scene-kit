@@ -1,7 +1,14 @@
 import { useState } from 'react';
-import { StyleSheet, View, type LayoutChangeEvent, type StyleProp, type ViewStyle } from 'react-native';
+import {
+  PixelRatio,
+  StyleSheet,
+  View,
+  type LayoutChangeEvent,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
-import type { Palette, Scene, SceneAction } from '@chiko111/scene-kit-core';
+import { fitSceneWidth, type Palette, type Scene, type SceneAction, type SceneFit } from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { useAppActive } from './useAppActive';
 
@@ -17,51 +24,88 @@ export type SceneViewProps = {
   active?: boolean;
   /** Same font family the web/editor uses, so text wraps the same way. */
   fontFamily?: string;
+  /** Upper limits in dp. The scene keeps its aspect ratio and is centered. */
+  maxWidth?: number;
+  maxHeight?: number;
+  /**
+   * 'width' (default): fill the slot's width, height follows the aspect ratio.
+   * 'contain': fit entirely inside the slot — give the slot a height via `style` (or flex).
+   */
+  fit?: SceneFit;
+  /** Style of the slot (outer frame), e.g. margins or a fixed height for fit="contain". */
   style?: StyleProp<ViewStyle>;
 };
 
-export function SceneView({ scene, palette, onAction, active, fontFamily, style }: SceneViewProps) {
+type Box = { width: number; height: number };
+
+export function SceneView({
+  scene,
+  palette,
+  onAction,
+  active,
+  fontFamily,
+  maxWidth,
+  maxHeight,
+  fit,
+  style,
+}: SceneViewProps) {
   const appActive = useAppActive();
   const reducedMotion = useReducedMotion();
-  const [width, setWidth] = useState(0);
+  const [box, setBox] = useState<Box>({ width: 0, height: 0 });
   const running = (active ?? true) && appActive;
 
+  const width = PixelRatio.roundToNearestPixel(
+    fitSceneWidth({
+      availableWidth: box.width,
+      availableHeight: box.height,
+      aspectRatio: scene.aspectRatio,
+      maxWidth,
+      maxHeight,
+      fit,
+    }),
+  );
+
   const handleLayout = (event: LayoutChangeEvent) => {
-    setWidth(Math.round(event.nativeEvent.layout.width * 100) / 100);
+    const { width: w, height: h } = event.nativeEvent.layout;
+    setBox((prev) => (prev.width === w && prev.height === h ? prev : { width: w, height: h }));
   };
 
   return (
-    <View
-      onLayout={handleLayout}
-      accessibilityLabel={scene.name || undefined}
-      style={[
-        styles.scene,
-        {
-          aspectRatio: scene.aspectRatio,
-          backgroundColor: scene.background ? palette[scene.background] : undefined,
-        },
-        style,
-      ]}
-    >
-      {width > 0 &&
-        scene.nodes.map((node) =>
-          node.hidden ? null : (
-            <NodeView
-              key={node.id}
-              node={node}
-              palette={palette}
-              unit={width / 100}
-              running={running}
-              reducedMotion={reducedMotion}
-              fontFamily={fontFamily}
-              onAction={onAction}
-            />
-          ),
-        )}
+    <View onLayout={handleLayout} style={[fit === 'contain' ? styles.frameContain : styles.frame, style]}>
+      {width > 0 && (
+        <View
+          accessibilityLabel={scene.name || undefined}
+          style={[
+            styles.scene,
+            {
+              width,
+              height: width / scene.aspectRatio,
+              backgroundColor: scene.background ? palette[scene.background] : undefined,
+            },
+          ]}
+        >
+          {scene.nodes.map((node) =>
+            node.hidden ? null : (
+              <NodeView
+                key={node.id}
+                node={node}
+                palette={palette}
+                unit={width / 100}
+                running={running}
+                reducedMotion={reducedMotion}
+                fontFamily={fontFamily}
+                onAction={onAction}
+              />
+            ),
+          )}
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  scene: { width: '100%', overflow: 'hidden' },
+  frame: { width: '100%', alignItems: 'center' },
+  frameContain: { flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' },
+  scene: { overflow: 'hidden' },
 });

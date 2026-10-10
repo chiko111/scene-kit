@@ -4,7 +4,9 @@
  * Only transform-class properties (scale/translate/rotate) and opacity are animated → compositor only.
  */
 export const SCENE_CSS = `
-.sk-scene{position:relative;width:100%;overflow:hidden;container-type:inline-size;isolation:isolate}
+.sk-frame{display:flex;justify-content:center;align-items:center;width:100%}
+.sk-frame[data-fit="contain"]{height:100%;container-type:size}
+.sk-scene{position:relative;flex:none;overflow:hidden;container-type:inline-size;isolation:isolate}
 .sk-node{position:absolute;box-sizing:border-box;opacity:var(--sk-opacity,1)}
 .sk-content{position:absolute;inset:0;box-sizing:border-box;border-radius:var(--sk-radius,0)}
 .sk-img{display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none;pointer-events:none}
