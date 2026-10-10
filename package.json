@@ -13,7 +13,8 @@
     "e2e": "python3 demo/e2e.py",
     "changeset": "changeset",
     "version-packages": "changeset version && npm install --package-lock-only",
-    "release": "npm run build && changeset publish"
+    "release": "npm run build && changeset publish",
+    "sync:java": "node scripts/sync-java-example.mjs"
   },
   "devDependencies": {
     "@babel/core": "^8.0.7",

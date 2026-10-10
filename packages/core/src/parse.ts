@@ -122,3 +122,38 @@ export function serializeScene(scene: Scene, pretty = false): string {
   }
   return JSON.stringify(result.data, null, pretty ? 2 : undefined);
 }
+
+function deepEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (typeof a !== 'object' || typeof b !== 'object' || a === null || b === null) return false;
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
+  const ka = Object.keys(a);
+  const kb = Object.keys(b);
+  if (ka.length !== kb.length) return false;
+  return ka.every((k) => Object.hasOwn(b, k) && deepEqual((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]));
+}
+
+export type ValidateResult = { ok: true; scene: Scene } | { ok: false; errors: string[] };
+
+/**
+ * Strict validation for backends (before saving). Unlike parseScene, nothing is dropped or
+ * stripped silently: unknown properties, invalid nodes/effects or duplicates → ok: false.
+ * Same rules as scene.schema.json + the checks JSON Schema cannot express.
+ */
+export function validateScene(input: unknown): ValidateResult {
+  let data: unknown = input;
+  if (typeof input === 'string') {
+    try {
+      data = JSON.parse(input);
+    } catch {
+      return { ok: false, errors: ['Invalid JSON'] };
+    }
+  }
+  const result = parseScene(data);
+  if (!result.ok) return { ok: false, errors: [result.error] };
+  if (result.warnings.length > 0) {
+    return { ok: false, errors: result.warnings.map((w) => `${w.path}: ${w.message}`) };
+  }
+  if (!deepEqual(result.scene, data)) return { ok: false, errors: ['scene contains unknown properties'] };
+  return { ok: true, scene: result.scene };
+}

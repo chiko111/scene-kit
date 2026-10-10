@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "id": "promo_welcome",
+  "name": "Welcome banner",
+  "aspectRatio": 1.7778,
+  "background": "background",
+  "nodes": [
+    {
+      "id": "img_bg",
+      "name": "Background",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 100,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": null,
+      "effects": [],
+      "type": "image",
+      "uri": "https://cdn.example.com/scene-assets/bg.webp",
+      "fit": "cover",
+      "alt": "",
+      "radius": 0
+    },
+    {
+      "id": "img_coin",
+      "name": "Coin",
+      "frame": {
+        "x": 60,
+        "y": 10,
+        "w": 30,
+        "h": 40,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": null,
+      "effects": [
+        {
+          "type": "float",
+          "distance": 1.5,
+          "durationMs": 2000
+        }
+      ],
+      "type": "image",
+      "uri": "https://cdn.example.com/scene-assets/coin.webp",
+      "fit": "contain",
+      "alt": "Gold coin",
+      "radius": 0
+    },
+    {
+      "id": "txt_title",
+      "name": "Title",
+      "frame": {
+        "x": 5,
+        "y": 15,
+        "w": 50,
+        "h": 20,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": {
+        "color": "black",
+        "opacity": 0.4,
+        "x": 0,
+        "y": 0.3,
+        "blur": 0.8
+      },
+      "effects": [
+        {
+          "type": "fadeIn",
+          "delayMs": 200,
+          "durationMs": 600
+        }
+      ],
+      "type": "text",
+      "text": "Welcome bonus",
+      "color": "white",
+      "fontSize": 5,
+      "weight": "800",
+      "align": "left"
+    },
+    {
+      "id": "shp_badge",
+      "name": "Badge",
+      "frame": {
+        "x": 5,
+        "y": 40,
+        "w": 12,
+        "h": 12,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": null,
+      "effects": [],
+      "type": "shape",
+      "shape": "ellipse",
+      "fill": "gold",
+      "radius": 0
+    },
+    {
+      "id": "btn_cta",
+      "name": "CTA",
+      "frame": {
+        "x": 5,
+        "y": 70,
+        "w": 30,
+        "h": 14,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": {
+        "color": "black",
+        "opacity": 0.35,
+        "x": 0,
+        "y": 0.6,
+        "blur": 1.5
+      },
+      "effects": [
+        {
+          "type": "pulse",
+          "scale": 1.06,
+          "durationMs": 900
+        },
+        {
+          "type": "outlinePulse",
+          "color": "gold",
+          "width": 0.4,
+          "spread": 1.12,
+          "durationMs": 1400
+        }
+      ],
+      "type": "button",
+      "label": "Play now",
+      "action": {
+        "type": "openUrl",
+        "url": "https://evil.example"
+      },
+      "bg": "primary",
+      "fg": "onPrimary",
+      "fontSize": 3,
+      "weight": "700",
+      "radius": 1.5
+    },
+    {
+      "id": "btn_promo",
+      "name": "Promo",
+      "frame": {
+        "x": 40,
+        "y": 70,
+        "w": 25,
+        "h": 14,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": null,
+      "effects": [],
+      "type": "button",
+      "label": "Details",
+      "action": {
+        "type": "openPromo",
+        "promoId": "welcome-100"
+      },
+      "bg": "surface",
+      "fg": "onSurface",
+      "fontSize": 2.5,
+      "weight": "600",
+      "radius": 1.5
+    },
+    {
+      "id": "btn_game",
+      "name": "Game",
+      "frame": {
+        "x": 70,
+        "y": 70,
+        "w": 25,
+        "h": 14,
+        "rotation": 0
+      },
+      "opacity": 1,
+      "hidden": false,
+      "shadow": null,
+      "effects": [],
+      "type": "button",
+      "label": "Spin",
+      "action": {
+        "type": "openGame",
+        "gameId": "book_of_ra"
+      },
+      "bg": "accent",
+      "fg": "black",
+      "fontSize": 2.5,
+      "weight": "600",
+      "radius": 1.5
+    }
+  ]
+}

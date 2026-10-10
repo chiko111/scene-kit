@@ -189,6 +189,10 @@ import { SceneEditor } from '@chiko111/scene-kit-editor';
 
 **Сървърът също трябва да валидира**: `parseScene(body)` в API-то преди запис. Клиентската валидация не е защита.
 
+## Backend (Spring Boot / Java)
+
+Готов пример с endpoint-и, валидация, storage и тестове: [`examples/spring-boot`](examples/spring-boot). Java валидира срещу `scene.schema.json`, която се генерира от същата схема и идва в `@chiko111/scene-kit-core`. За Node backend ползвай `validateScene()` от core.
+
 ## Защо е безопасно за App Store / Google Play
 
 JSON-ът е декларативни данни (позиции, текстове, токени, whitelisted actions) — не изпълним код. Няма `eval`, изрази, HTML или произволни URL-и. Изображенията са само `https://`. Неизвестни ефекти/слоеве се пропускат, непозната `version` връща `ok: false` → показвате fallback.

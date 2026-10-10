@@ -1,0 +1,16 @@
+scene-kit:
+  # Folder for scenes + images. Mount a persistent volume here in production.
+  storage-dir: ./scene-kit-data
+  # Base URL the apps reach the public endpoints (or your CDN) at. Must be https in production,
+  # because scenes only accept https:// image URLs.
+  public-base-url: http://localhost:8080/public
+  max-upload-bytes: 2097152    # 2 MB per image
+  max-scene-bytes: 262144      # 256 KB per scene JSON
+  public-cache-seconds: 60     # how quickly apps see a saved change
+  backoffice-origins: []       # e.g. [https://backoffice.example.com] if it runs on another domain
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 3MB
