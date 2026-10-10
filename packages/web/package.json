@@ -1,6 +1,6 @@
 {
   "name": "@chiko111/scene-kit-web",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React DOM renderer for scene-kit scenes \u2014 CSS animations, container-query sizing.",
   "license": "MIT",
   "author": "chiko111",
@@ -45,7 +45,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@chiko111/scene-kit-core": "^0.3.0"
+    "@chiko111/scene-kit-core": "^0.4.0"
   },
   "peerDependencies": {
     "react": "^19.2.0",
