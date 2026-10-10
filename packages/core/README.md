@@ -1,13 +1,13 @@
-# @scene-kit/core
+# @chiko111/scene-kit-core
 
 Scene schema (zod), tolerant parser and helpers for **scene-kit** — animated, data-driven banners designed in a back-office editor and rendered natively in React and React Native.
 
 ```bash
-npm i @scene-kit/core
+npm i @chiko111/scene-kit-core
 ```
 
 ```ts
-import { parseScene } from '@scene-kit/core';
+import { parseScene } from '@chiko111/scene-kit-core';
 
 const result = parseScene(jsonFromServer); // never throws
 if (result.ok) render(result.scene);       // invalid nodes/effects are dropped with warnings

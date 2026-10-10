@@ -1,8 +1,8 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { parseScene, type Palette, type Scene, type SceneAction } from '@scene-kit/core';
-import { SceneEditor } from '@scene-kit/editor';
-import { SceneView } from '@scene-kit/web';
+import { parseScene, type Palette, type Scene, type SceneAction } from '@chiko111/scene-kit-core';
+import { SceneEditor } from '@chiko111/scene-kit-editor';
+import { SceneView } from '@chiko111/scene-kit-web';
 
 // In the real apps this comes from your Colors.* theme.
 const palette: Palette = {

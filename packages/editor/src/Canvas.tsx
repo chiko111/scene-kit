@@ -1,6 +1,6 @@
 import { useRef, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
-import type { Palette, SceneNode } from '@scene-kit/core';
-import { SceneView } from '@scene-kit/web';
+import type { Palette, SceneNode } from '@chiko111/scene-kit-core';
+import { SceneView } from '@chiko111/scene-kit-web';
 import type { SceneHistory } from './history';
 import { applyDrag, setFrame, type DragMode } from './sceneOps';
 

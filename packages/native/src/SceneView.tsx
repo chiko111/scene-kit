@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View, type LayoutChangeEvent, type StyleProp, type ViewStyle } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
-import type { Palette, Scene, SceneAction } from '@scene-kit/core';
+import type { Palette, Scene, SceneAction } from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { useAppActive } from './useAppActive';
 

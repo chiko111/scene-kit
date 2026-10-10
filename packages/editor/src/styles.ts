@@ -1,4 +1,4 @@
-/** Editor chrome only (the scene itself is styled by @scene-kit/web). Override the --ske-* vars to theme it. */
+/** Editor chrome only (the scene itself is styled by @chiko111/scene-kit-web). Override the --ske-* vars to theme it. */
 export const EDITOR_CSS = `
 .ske-root{
   --ske-bg:#0f1115;--ske-panel:#171a21;--ske-raised:#1f2430;--ske-line:#2b3140;

@@ -1,6 +1,6 @@
 import { useId, useState, type ReactNode } from 'react';
-import type { ColorToken, Palette } from '@scene-kit/core';
-import { COLOR_TOKENS } from '@scene-kit/core';
+import type { ColorToken, Palette } from '@chiko111/scene-kit-core';
+import { COLOR_TOKENS } from '@chiko111/scene-kit-core';
 
 /** Fired on focus / blur so a typing session becomes a single undo step. */
 export type EditSession = { begin: () => void; end: () => void };

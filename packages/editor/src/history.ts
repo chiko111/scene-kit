@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import type { Scene } from '@scene-kit/core';
+import type { Scene } from '@chiko111/scene-kit-core';
 
 const LIMIT = 100;
 

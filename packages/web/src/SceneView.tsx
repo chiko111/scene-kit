@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { Palette, Scene, SceneAction } from '@scene-kit/core';
+import type { Palette, Scene, SceneAction } from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { SCENE_CSS } from './styles';
 import { useInViewport } from './useInViewport';

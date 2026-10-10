@@ -9,7 +9,7 @@ import {
   type Palette,
   type SceneAction,
   type SceneNode,
-} from '@scene-kit/core';
+} from '@chiko111/scene-kit-core';
 import { OutlineRing } from './OutlineRing';
 import { useNodeMotion } from './useNodeMotion';
 

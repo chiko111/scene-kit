@@ -1,4 +1,4 @@
-import { MAX_NODES, type Frame, type Scene, type SceneNode } from '@scene-kit/core';
+import { MAX_NODES, type Frame, type Scene, type SceneNode } from '@chiko111/scene-kit-core';
 
 export const round2 = (n: number) => Math.round(n * 100) / 100;
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));

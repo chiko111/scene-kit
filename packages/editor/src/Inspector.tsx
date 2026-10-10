@@ -12,7 +12,7 @@ import {
   type SceneAction,
   type SceneNode,
   type Shadow,
-} from '@scene-kit/core';
+} from '@chiko111/scene-kit-core';
 import {
   CheckboxField,
   ColorField,

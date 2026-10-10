@@ -1,4 +1,4 @@
-# @scene-kit/core
+# @chiko111/scene-kit-core
 
 ## 0.2.0
 

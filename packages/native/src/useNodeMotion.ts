@@ -9,7 +9,7 @@ import {
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated';
-import { findEffect, type Effect } from '@scene-kit/core';
+import { findEffect, type Effect } from '@chiko111/scene-kit-core';
 
 /**
  * 0 → 1 → 0 … loop while `enabled`. Resets to 0 when disabled (not visible anyway).

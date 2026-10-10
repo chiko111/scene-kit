@@ -1,5 +1,5 @@
 {
-  "name": "@scene-kit/core",
+  "name": "@chiko111/scene-kit-core",
   "version": "0.2.0",
   "description": "Scene schema, validation and helpers for scene-kit (animated, data-driven banners for React and React Native).",
   "license": "MIT",

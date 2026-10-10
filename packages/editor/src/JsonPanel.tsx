@@ -1,5 +1,5 @@
 import { useActionState, useState } from 'react';
-import { parseScene, serializeScene, type ParseIssue, type Scene } from '@scene-kit/core';
+import { parseScene, serializeScene, type ParseIssue, type Scene } from '@chiko111/scene-kit-core';
 
 type Props = {
   scene: Scene;

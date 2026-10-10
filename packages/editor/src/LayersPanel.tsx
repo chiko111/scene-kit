@@ -1,4 +1,4 @@
-import type { Scene, SceneNode } from '@scene-kit/core';
+import type { Scene, SceneNode } from '@chiko111/scene-kit-core';
 
 const TYPE_ICON: Record<SceneNode['type'], string> = {
   image: '▣',

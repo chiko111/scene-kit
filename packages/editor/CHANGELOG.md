@@ -1,4 +1,4 @@
-# @scene-kit/editor
+# @chiko111/scene-kit-editor
 
 ## 0.2.0
 
@@ -9,5 +9,5 @@
 ### Patch Changes
 
 - Updated dependencies [fe61db5]
-  - @scene-kit/core@0.2.0
-  - @scene-kit/web@0.2.0
+  - @chiko111/scene-kit-core@0.2.0
+  - @chiko111/scene-kit-web@0.2.0

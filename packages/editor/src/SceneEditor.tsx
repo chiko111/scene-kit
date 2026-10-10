@@ -11,7 +11,7 @@ import {
   type Palette,
   type Scene,
   type SceneNode,
-} from '@scene-kit/core';
+} from '@chiko111/scene-kit-core';
 import { AddPanel } from './AddPanel';
 import { Canvas } from './Canvas';
 import { Section } from './fields';

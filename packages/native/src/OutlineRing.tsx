@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import type { EffectOf } from '@scene-kit/core';
+import type { EffectOf } from '@chiko111/scene-kit-core';
 import { useLoop } from './useNodeMotion';
 
 type Props = {

@@ -7,7 +7,7 @@ import {
   type Palette,
   type SceneAction,
   type SceneNode,
-} from '@scene-kit/core';
+} from '@chiko111/scene-kit-core';
 
 type CSSVars = CSSProperties & Record<`--${string}`, string | number>;
 

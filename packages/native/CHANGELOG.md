@@ -1,4 +1,4 @@
-# @scene-kit/native
+# @chiko111/scene-kit-native
 
 ## 0.2.0
 
@@ -9,4 +9,4 @@
 ### Patch Changes
 
 - Updated dependencies [fe61db5]
-  - @scene-kit/core@0.2.0
+  - @chiko111/scene-kit-core@0.2.0

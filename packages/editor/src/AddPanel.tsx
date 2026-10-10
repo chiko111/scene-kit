@@ -1,5 +1,5 @@
 import { useActionState } from 'react';
-import { ImageUriSchema } from '@scene-kit/core';
+import { ImageUriSchema } from '@chiko111/scene-kit-core';
 
 const ACCEPTED_TYPES = ['image/webp', 'image/png', 'image/jpeg', 'image/gif'] as const;
 const LOAD_TIMEOUT_MS = 15000;

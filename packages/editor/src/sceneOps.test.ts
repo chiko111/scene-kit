@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createScene, createShapeNode, createTextNode, SceneSchema } from '@scene-kit/core';
+import { createScene, createShapeNode, createTextNode, SceneSchema } from '@chiko111/scene-kit-core';
 import { applyDrag, clampFrame, moveNode, setFrame } from './sceneOps';
 
 const frame = { x: 10, y: 10, w: 20, h: 10, rotation: 0 };

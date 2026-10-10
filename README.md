@@ -4,34 +4,34 @@
 
 ```
 Бекофис (SceneEditor)  ──save──▶  JSON + assets (CDN)  ──fetch──▶  parseScene()  ──▶  <SceneView />
-                                                                                       ├─ @scene-kit/native (iOS/Android)
-                                                                                       └─ @scene-kit/web    (web, mobile web)
+                                                                                       ├─ @chiko111/scene-kit-native (iOS/Android)
+                                                                                       └─ @chiko111/scene-kit-web    (web, mobile web)
 ```
 
 | Пакет | Какво е | Зависимости |
 |---|---|---|
-| `@scene-kit/core` | zod схема, `parseScene`, типове, helpers | `zod@4` |
-| `@scene-kit/web` | `SceneView` за React DOM, CSS анимации | `react@19.2+` |
-| `@scene-kit/native` | `SceneView` за RN, Reanimated + expo-image | RN 0.81+ (New Arch), Reanimated 4, expo-image |
-| `@scene-kit/editor` | Редактор за бекофиса (React DOM) | `react@19.2+`, `@scene-kit/web` |
+| `@chiko111/scene-kit-core` | zod схема, `parseScene`, типове, helpers | `zod@4` |
+| `@chiko111/scene-kit-web` | `SceneView` за React DOM, CSS анимации | `react@19.2+` |
+| `@chiko111/scene-kit-native` | `SceneView` за RN, Reanimated + expo-image | RN 0.81+ (New Arch), Reanimated 4, expo-image |
+| `@chiko111/scene-kit-editor` | Редактор за бекофиса (React DOM) | `react@19.2+`, `@chiko111/scene-kit-web` |
 
 ## Инсталация
 
 ```bash
 # Бекофис
-npm i @scene-kit/editor @scene-kit/web @scene-kit/core
+npm i @chiko111/scene-kit-editor @chiko111/scene-kit-web @chiko111/scene-kit-core
 
 # Web сайт
-npm i @scene-kit/web @scene-kit/core
+npm i @chiko111/scene-kit-web @chiko111/scene-kit-core
 
 # React Native
-npm i @scene-kit/native @scene-kit/core react-native-reanimated react-native-worklets expo-image
+npm i @chiko111/scene-kit-native @chiko111/scene-kit-core react-native-reanimated react-native-worklets expo-image
 
 # Backend (валидация преди запис)
-npm i @scene-kit/core
+npm i @chiko111/scene-kit-core
 ```
 
-Пакетите са ESM + `.d.ts`. `web` и `editor` са предварително компилирани с React Compiler (auto-memoization и без компилатор в проекта ви). Всички `@scene-kit/*` пакети имат една обща версия — ползвайте еднакви версии навсякъде.
+Пакетите са ESM + `.d.ts`. `web` и `editor` са предварително компилирани с React Compiler (auto-memoization и без компилатор в проекта ви). Всички `@chiko111/scene-kit-*` пакети имат една обща версия — ползвайте еднакви версии навсякъде.
 
 ## Модел
 
@@ -48,8 +48,8 @@ npm i @scene-kit/core
 import { use } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { parseScene, type Palette, type Scene, type SceneAction } from '@scene-kit/core';
-import { SceneView } from '@scene-kit/native';
+import { parseScene, type Palette, type Scene, type SceneAction } from '@chiko111/scene-kit-core';
+import { SceneView } from '@chiko111/scene-kit-native';
 import { Colors } from '@/constants/Colors';
 
 const palette: Palette = {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
 ## Web (React DOM)
 
 ```tsx
-import { SceneView } from '@scene-kit/web';
+import { SceneView } from '@chiko111/scene-kit-web';
 
 <SceneView scene={scene} palette={palette} fontFamily="Inter, sans-serif" onAction={handleAction} />
 ```
@@ -150,8 +150,8 @@ import { SceneView } from '@scene-kit/web';
 ## Бекофис редактор
 
 ```tsx
-import { parseScene, type Scene } from '@scene-kit/core';
-import { SceneEditor } from '@scene-kit/editor';
+import { parseScene, type Scene } from '@chiko111/scene-kit-core';
+import { SceneEditor } from '@chiko111/scene-kit-editor';
 
 <div style={{ height: '100vh' }}>
   <SceneEditor
@@ -180,7 +180,7 @@ import { SceneEditor } from '@scene-kit/editor';
 </div>
 ```
 
-- Превюто в редактора е **същият** `@scene-kit/web` рендерер → WYSIWYG.
+- Превюто в редактора е **същият** `@chiko111/scene-kit-web` рендерер → WYSIWYG.
 - Drag за местене, ъгли за resize (Shift пази пропорцията), стрелки за nudge (Shift = 1%).
 - Undo/redo (Ctrl/Cmd+Z, Ctrl/Cmd+Shift+Z): drag или едно писане в поле = една стъпка.
 - Delete, Ctrl/Cmd+D (duplicate), Esc (deselect).
@@ -221,6 +221,5 @@ npm run e2e         # Playwright тест срещу пуснатото demo
 3. Merge на този PR → Action-ът build-ва и публикува в npm с provenance.
 
 Еднократна настройка:
-- npm организация `scene-kit` (npmjs.com → Add Organization, безплатна за публични пакети).
-- npm **Granular Access Token** с право за publish в `@scene-kit` → GitHub repo → Settings → Secrets → Actions → `NPM_TOKEN`.
+- npm **Granular Access Token** на акаунта `chiko111`: Read and write за пакетите, **Bypass two-factor authentication** включено → GitHub repo → Settings → Secrets → Actions → `NPM_TOKEN`.
 - GitHub repo → Settings → Actions → General → Workflow permissions: **Read and write** + **Allow GitHub Actions to create and approve pull requests**.
