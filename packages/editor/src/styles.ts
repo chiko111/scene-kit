@@ -78,4 +78,8 @@ export const EDITOR_CSS = `
 .ske-code{font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}
 .ske-warnings{margin:0;padding-left:16px;color:var(--ske-muted);font-size:12px}
 .ske-right>p.ske-muted{padding:12px}
+.ske-colors{display:flex;flex-direction:column;gap:4px}
+.ske-colors-label{font-size:11px;color:var(--ske-muted)}
+.ske-colors-row{display:flex;align-items:flex-end;gap:4px}
+.ske-colors-row .ske-color{flex:1}
 `;

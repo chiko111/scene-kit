@@ -13,7 +13,7 @@ type Props = {
 
 /** Ripple ring: scale 1 → spread, opacity 0.9 → 0. Only transform + opacity are animated. */
 export function OutlineRing({ effect, color, radius, unit, running }: Props) {
-  const progress = useLoop(effect.durationMs, running, false);
+  const progress = useLoop(effect.durationMs, running, 'ripple');
   const spread = effect.spread - 1;
 
   const animatedStyle = useAnimatedStyle(() => {

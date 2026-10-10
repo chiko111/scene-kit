@@ -1,11 +1,14 @@
 import {
   EFFECT_TYPES,
+  FontKeySchema,
+  MAX_EFFECT_COLORS,
   IdSchema,
   ParamKeySchema,
   RouteSchema,
   createEffect,
   type Effect,
   type EffectType,
+  type FontMap,
   type FontWeight,
   type Palette,
   type Scene,
@@ -16,6 +19,7 @@ import {
 import {
   CheckboxField,
   ColorField,
+  ColorListField,
   NumberField,
   Section,
   SelectField,
@@ -34,6 +38,9 @@ const WEIGHTS: readonly { value: FontWeight; label: string }[] = [
 const EFFECT_LABELS: Record<EffectType, string> = {
   pulse: 'Pulse',
   outlinePulse: 'Pulsing outline',
+  glow: 'Glow',
+  edgeBlink: 'Blinking edge',
+  borderRun: 'Running border light',
   float: 'Float',
   fadeIn: 'Fade in',
 };
@@ -125,11 +132,12 @@ type NodeProps = {
   node: SceneNode;
   palette: Palette;
   routes: readonly string[];
+  fonts: FontMap | undefined;
   onChange: (node: SceneNode) => void;
   session: EditSession;
 };
 
-export function NodeInspector({ node, palette, routes, onChange, session }: NodeProps) {
+export function NodeInspector({ node, palette, routes, fonts, onChange, session }: NodeProps) {
   const { frame } = node;
   const setFrame = (patch: Partial<SceneNode['frame']>) => onChange({ ...node, frame: { ...frame, ...patch } });
 
@@ -173,7 +181,7 @@ export function NodeInspector({ node, palette, routes, onChange, session }: Node
         </div>
       </Section>
 
-      <TypeFields node={node} palette={palette} routes={routes} onChange={onChange} session={session} />
+      <TypeFields node={node} palette={palette} routes={routes} fonts={fonts} onChange={onChange} session={session} />
 
       <ShadowEditor
         shadow={node.shadow}
@@ -193,7 +201,7 @@ export function NodeInspector({ node, palette, routes, onChange, session }: Node
   );
 }
 
-function TypeFields({ node, palette, routes, onChange, session }: NodeProps) {
+function TypeFields({ node, palette, routes, fonts, onChange, session }: NodeProps) {
   switch (node.type) {
     case 'image':
       return (
@@ -241,6 +249,7 @@ function TypeFields({ node, palette, routes, onChange, session }: NodeProps) {
             onChange={(text) => onChange({ ...node, text })}
           />
           <ColorField label="Color" value={node.color} palette={palette} onChange={(color) => onChange({ ...node, color })} />
+          <FontField fonts={fonts} value={node.font} onChange={(font) => onChange({ ...node, font })} />
           <NumberField label="Size (u)" value={node.fontSize} min={0.5} max={30} step={0.25} session={session} onChange={(fontSize) => onChange({ ...node, fontSize })} />
           <SelectField label="Weight" value={node.weight} options={WEIGHTS} onChange={(weight) => onChange({ ...node, weight })} />
           <SelectField
@@ -270,6 +279,7 @@ function TypeFields({ node, palette, routes, onChange, session }: NodeProps) {
             />
             <ColorField label="Background" value={node.bg} palette={palette} onChange={(bg) => onChange({ ...node, bg })} />
             <ColorField label="Text color" value={node.fg} palette={palette} onChange={(fg) => onChange({ ...node, fg })} />
+            <FontField fonts={fonts} value={node.font} onChange={(font) => onChange({ ...node, font })} />
             <NumberField label="Size (u)" value={node.fontSize} min={0.5} max={30} step={0.25} session={session} onChange={(fontSize) => onChange({ ...node, fontSize })} />
             <SelectField label="Weight" value={node.weight} options={WEIGHTS} onChange={(weight) => onChange({ ...node, weight })} />
             <NumberField label="Radius (u)" value={node.radius} min={0} max={50} step={0.25} session={session} onChange={(radius) => onChange({ ...node, radius })} />
@@ -302,6 +312,27 @@ function TypeFields({ node, palette, routes, onChange, session }: NodeProps) {
         </Section>
       );
   }
+}
+
+/* ───────────── Font ───────────── */
+
+function FontField({
+  fonts,
+  value,
+  onChange,
+}: {
+  fonts: FontMap | undefined;
+  value: string | undefined;
+  onChange: (font: string | undefined) => void;
+}) {
+  const keys = Object.keys(fonts ?? {}).filter((k) => FontKeySchema.safeParse(k).success);
+  if (keys.length === 0 && !value) return null;
+  const options = [
+    { value: '', label: 'Default' },
+    ...keys.map((k) => ({ value: k, label: k })),
+    ...(value && !keys.includes(value) ? [{ value, label: `${value} (not configured)` }] : []),
+  ];
+  return <SelectField label="Font" value={value ?? ''} options={options} onChange={(v) => onChange(v || undefined)} />;
 }
 
 /* ───────────── Action ───────────── */
@@ -514,6 +545,41 @@ function EffectFields({
         <>
           <NumberField label="Distance (u)" value={effect.distance} min={0.1} max={10} step={0.1} session={session} onChange={(distance) => onChange({ ...effect, distance })} />
           {duration}
+        </>
+      );
+    case 'glow':
+      return (
+        <>
+          <ColorListField label="Colors (blends 1 → 2 → …)" colors={effect.colors} palette={palette} max={MAX_EFFECT_COLORS} onChange={(colors) => onChange({ ...effect, colors })} />
+          <NumberField label="Blur (u)" value={effect.blur} min={0.5} max={10} step={0.25} session={session} onChange={(blur) => onChange({ ...effect, blur })} />
+          <NumberField label="Spread (u)" value={effect.spread} min={0} max={5} step={0.25} session={session} onChange={(spread) => onChange({ ...effect, spread })} />
+          <NumberField label="Ms per color" value={effect.durationMs} {...DURATION} session={session} onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })} />
+        </>
+      );
+    case 'edgeBlink':
+      return (
+        <>
+          <ColorListField label="Colors (in order)" colors={effect.colors} palette={palette} max={MAX_EFFECT_COLORS} onChange={(colors) => onChange({ ...effect, colors })} />
+          <SelectField
+            label="Mode"
+            value={effect.mode}
+            options={[
+              { value: 'blink', label: 'Blink (hard switch)' },
+              { value: 'fade', label: 'Fade (smooth)' },
+            ]}
+            onChange={(mode) => onChange({ ...effect, mode })}
+          />
+          <NumberField label="Width (u)" value={effect.width} min={0.1} max={3} step={0.1} session={session} onChange={(width) => onChange({ ...effect, width })} />
+          <NumberField label="Glow (u)" value={effect.blur} min={0} max={5} step={0.25} session={session} onChange={(blur) => onChange({ ...effect, blur })} />
+          <NumberField label="Ms per color" value={effect.durationMs} {...DURATION} session={session} onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })} />
+        </>
+      );
+    case 'borderRun':
+      return (
+        <>
+          <ColorListField label="Lights (one per color)" colors={effect.colors} palette={palette} max={MAX_EFFECT_COLORS} onChange={(colors) => onChange({ ...effect, colors })} />
+          <NumberField label="Size (u)" value={effect.size} min={0.3} max={5} step={0.1} session={session} onChange={(size) => onChange({ ...effect, size })} />
+          <NumberField label="Ms per lap" value={effect.durationMs} {...DURATION} session={session} onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })} />
         </>
       );
     case 'fadeIn':

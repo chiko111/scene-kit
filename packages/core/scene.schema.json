@@ -167,7 +167,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 4,
+                "maxItems": 7,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -292,6 +292,173 @@
                       "required": [
                         "type",
                         "delayMs",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "glow"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0.5,
+                          "maximum": 10
+                        },
+                        "spread": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "blur",
+                        "spread",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "edgeBlink"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "width": {
+                          "type": "number",
+                          "minimum": 0.1,
+                          "maximum": 3
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "fade"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "width",
+                        "blur",
+                        "mode",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "borderRun"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "size": {
+                          "type": "number",
+                          "minimum": 0.3,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "size",
                         "durationMs"
                       ],
                       "additionalProperties": false
@@ -457,7 +624,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 4,
+                "maxItems": 7,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -585,6 +752,173 @@
                         "durationMs"
                       ],
                       "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "glow"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0.5,
+                          "maximum": 10
+                        },
+                        "spread": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "blur",
+                        "spread",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "edgeBlink"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "width": {
+                          "type": "number",
+                          "minimum": 0.1,
+                          "maximum": 3
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "fade"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "width",
+                        "blur",
+                        "mode",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "borderRun"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "size": {
+                          "type": "number",
+                          "minimum": 0.3,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "size",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
                     }
                   ]
                 }
@@ -615,6 +949,10 @@
                   "white",
                   "black"
                 ]
+              },
+              "font": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$"
               },
               "fontSize": {
                 "type": "number",
@@ -773,7 +1111,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 4,
+                "maxItems": 7,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -901,6 +1239,173 @@
                         "durationMs"
                       ],
                       "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "glow"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0.5,
+                          "maximum": 10
+                        },
+                        "spread": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "blur",
+                        "spread",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "edgeBlink"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "width": {
+                          "type": "number",
+                          "minimum": 0.1,
+                          "maximum": 3
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "fade"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "width",
+                        "blur",
+                        "mode",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "borderRun"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "size": {
+                          "type": "number",
+                          "minimum": 0.3,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "size",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
                     }
                   ]
                 }
@@ -1018,6 +1523,10 @@
                   "white",
                   "black"
                 ]
+              },
+              "font": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,31}$"
               },
               "fontSize": {
                 "type": "number",
@@ -1175,7 +1684,7 @@
                 ]
               },
               "effects": {
-                "maxItems": 4,
+                "maxItems": 7,
                 "type": "array",
                 "items": {
                   "oneOf": [
@@ -1300,6 +1809,173 @@
                       "required": [
                         "type",
                         "delayMs",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "glow"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0.5,
+                          "maximum": 10
+                        },
+                        "spread": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "blur",
+                        "spread",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "edgeBlink"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "width": {
+                          "type": "number",
+                          "minimum": 0.1,
+                          "maximum": 3
+                        },
+                        "blur": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "blink",
+                            "fade"
+                          ]
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "width",
+                        "blur",
+                        "mode",
+                        "durationMs"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "borderRun"
+                        },
+                        "colors": {
+                          "minItems": 1,
+                          "maxItems": 4,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "primary",
+                              "onPrimary",
+                              "secondary",
+                              "onSecondary",
+                              "accent",
+                              "gold",
+                              "success",
+                              "danger",
+                              "surface",
+                              "onSurface",
+                              "background",
+                              "white",
+                              "black"
+                            ]
+                          }
+                        },
+                        "size": {
+                          "type": "number",
+                          "minimum": 0.3,
+                          "maximum": 5
+                        },
+                        "durationMs": {
+                          "type": "integer",
+                          "minimum": 100,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "colors",
+                        "size",
                         "durationMs"
                       ],
                       "additionalProperties": false

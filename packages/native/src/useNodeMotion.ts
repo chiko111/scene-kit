@@ -11,11 +11,20 @@ import {
 } from 'react-native-reanimated';
 import { findEffect, type Effect } from '@chiko111/scene-kit-core';
 
+export type LoopMode = 'pingpong' | 'ripple' | 'linear';
+
+const LOOP_EASING = {
+  pingpong: Easing.inOut(Easing.sin),
+  ripple: Easing.out(Easing.quad),
+  linear: Easing.linear,
+} as const;
+
 /**
- * 0 → 1 → 0 … loop while `enabled`. Resets to 0 when disabled (not visible anyway).
+ * Loops a shared value 0 → 1 while `enabled` ('pingpong' goes back to 0, the others restart).
+ * Resets to 0 when disabled (not visible anyway).
  * Uses .get()/.set() — required for React Compiler compatibility.
  */
-export function useLoop(durationMs: number, enabled: boolean, reverse = true): SharedValue<number> {
+export function useLoop(durationMs: number, enabled: boolean, mode: LoopMode = 'pingpong'): SharedValue<number> {
   const progress = useSharedValue(0);
 
   useEffect(() => {
@@ -26,17 +35,10 @@ export function useLoop(durationMs: number, enabled: boolean, reverse = true): S
     }
     progress.set(0);
     progress.set(
-      withRepeat(
-        withTiming(1, {
-          duration: durationMs,
-          easing: reverse ? Easing.inOut(Easing.sin) : Easing.out(Easing.quad),
-        }),
-        -1,
-        reverse,
-      ),
+      withRepeat(withTiming(1, { duration: durationMs, easing: LOOP_EASING[mode] }), -1, mode === 'pingpong'),
     );
     return () => cancelAnimation(progress);
-  }, [durationMs, enabled, reverse, progress]);
+  }, [durationMs, enabled, mode, progress]);
 
   return progress;
 }

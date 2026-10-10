@@ -1,4 +1,4 @@
-import type { EffectOf, EffectType, Palette, SceneNode, Shadow } from './schema';
+import type { EffectOf, EffectType, FontMap, Palette, SceneNode, Shadow } from './schema';
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -53,4 +53,10 @@ export function nodeRadius(node: SceneNode): number | 'ellipse' {
     case 'text':
       return 0;
   }
+}
+
+/** Font family for a node's font key, or undefined (→ the scene's default font). Ignores unknown keys. */
+export function resolveFont(fonts: FontMap | undefined, key: string | undefined): string | undefined {
+  if (!fonts || !key || !Object.hasOwn(fonts, key)) return undefined;
+  return fonts[key];
 }

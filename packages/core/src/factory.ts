@@ -94,10 +94,15 @@ const EFFECT_DEFAULTS: { [T in EffectType]: EffectOf<T> } = {
   outlinePulse: { type: 'outlinePulse', color: 'gold', width: 0.4, spread: 1.12, durationMs: 1400 },
   float: { type: 'float', distance: 1.5, durationMs: 2000 },
   fadeIn: { type: 'fadeIn', delayMs: 0, durationMs: 600 },
+  glow: { type: 'glow', colors: ['gold', 'primary'], blur: 3, spread: 0.5, durationMs: 1200 },
+  edgeBlink: { type: 'edgeBlink', colors: ['gold', 'danger'], width: 0.4, blur: 1, mode: 'blink', durationMs: 500 },
+  borderRun: { type: 'borderRun', colors: ['gold', 'accent'], size: 1.2, durationMs: 2400 },
 };
 
 export function createEffect<T extends EffectType>(type: T): EffectOf<T> {
-  return { ...EFFECT_DEFAULTS[type] };
+  const effect = EFFECT_DEFAULTS[type];
+  // colors is an array: give every node its own copy
+  return 'colors' in effect ? { ...effect, colors: [...effect.colors] } : { ...effect };
 }
 
 /** Image node frame height (in % of scene height) that keeps the image's own aspect ratio. */

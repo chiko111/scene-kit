@@ -1,5 +1,5 @@
 import { useRef, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
-import type { Palette, SceneNode } from '@chiko111/scene-kit-core';
+import type { FontMap, Palette, SceneNode } from '@chiko111/scene-kit-core';
 import { SceneView } from '@chiko111/scene-kit-web';
 import type { SceneHistory } from './history';
 import { applyDrag, setFrame, type DragMode } from './sceneOps';
@@ -10,6 +10,7 @@ type Props = {
   history: SceneHistory;
   palette: Palette;
   fontFamily: string | undefined;
+  fonts: FontMap | undefined;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   playing: boolean;
@@ -19,7 +20,7 @@ type Props = {
  * Preview = the real web renderer (what you see is exactly what ships).
  * The overlay on top only handles selection, moving and resizing.
  */
-export function Canvas({ history, palette, fontFamily, selectedId, onSelect, playing }: Props) {
+export function Canvas({ history, palette, fontFamily, fonts, selectedId, onSelect, playing }: Props) {
   const { scene } = history;
   const canvasRef = useRef<HTMLDivElement>(null);
   const canvasStyle: CSSProperties & { '--ske-ar': number } = { '--ske-ar': scene.aspectRatio };
@@ -73,7 +74,7 @@ export function Canvas({ history, palette, fontFamily, selectedId, onSelect, pla
         className="ske-canvas"
         style={canvasStyle}
       >
-        <SceneView scene={scene} palette={palette} fontFamily={fontFamily} interactive={false} active={playing} />
+        <SceneView scene={scene} palette={palette} fontFamily={fontFamily} fonts={fonts} interactive={false} active={playing} />
         <div
           className="ske-overlay"
           onPointerDown={(e) => {

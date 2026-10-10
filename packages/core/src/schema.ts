@@ -10,7 +10,8 @@ import { z } from 'zod';
 
 export const SCENE_VERSION = 1;
 export const MAX_NODES = 60;
-export const MAX_EFFECTS_PER_NODE = 4;
+export const MAX_EFFECTS_PER_NODE = 7;
+export const MAX_EFFECT_COLORS = 4;
 
 export const COLOR_TOKENS = [
   'primary',
@@ -89,16 +90,57 @@ export const FadeInEffectSchema = z.object({
   durationMs: DurationSchema,
 });
 
+/** 1–4 colors; the effect cycles through them in order. */
+const EffectColorsSchema = z.array(ColorTokenSchema).min(1).max(MAX_EFFECT_COLORS);
+
+/** Soft glow around the element that breathes and blends from color to color. durationMs = per color. */
+export const GlowEffectSchema = z.object({
+  type: z.literal('glow'),
+  colors: EffectColorsSchema,
+  blur: z.number().min(0.5).max(10),
+  spread: z.number().min(0).max(5),
+  durationMs: DurationSchema,
+});
+
+/** The edge flashes ("blink") or cross-fades ("fade") through the colors. durationMs = per color. */
+export const EdgeBlinkEffectSchema = z.object({
+  type: z.literal('edgeBlink'),
+  colors: EffectColorsSchema,
+  width: z.number().min(0.1).max(3),
+  blur: z.number().min(0).max(5),
+  mode: z.enum(['blink', 'fade']),
+  durationMs: DurationSchema,
+});
+
+/** Lights running around the border; one light per color, evenly spaced. durationMs = one lap. */
+export const BorderRunEffectSchema = z.object({
+  type: z.literal('borderRun'),
+  colors: EffectColorsSchema,
+  size: z.number().min(0.3).max(5),
+  durationMs: DurationSchema,
+});
+
 export const EffectSchema = z.discriminatedUnion('type', [
   PulseEffectSchema,
   OutlinePulseEffectSchema,
   FloatEffectSchema,
   FadeInEffectSchema,
+  GlowEffectSchema,
+  EdgeBlinkEffectSchema,
+  BorderRunEffectSchema,
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 export type EffectType = Effect['type'];
 export type EffectOf<T extends EffectType> = Extract<Effect, { type: T }>;
-export const EFFECT_TYPES: readonly EffectType[] = ['pulse', 'outlinePulse', 'float', 'fadeIn'];
+export const EFFECT_TYPES: readonly EffectType[] = [
+  'pulse',
+  'outlinePulse',
+  'glow',
+  'edgeBlink',
+  'borderRun',
+  'float',
+  'fadeIn',
+];
 
 const EffectsSchema = z
   .array(EffectSchema)
@@ -129,6 +171,10 @@ export type SceneAction = z.infer<typeof ActionSchema>;
 /* ───────────── Nodes ───────────── */
 
 const WeightSchema = z.enum(['400', '500', '600', '700', '800']);
+/** Key into the app's font map (e.g. "heading" → "Montserrat-Bold"). Missing/unknown → default font. */
+export const FontKeySchema = z.string().regex(/^[A-Za-z][A-Za-z0-9_-]{0,31}$/, 'font: letter first, max 32 chars');
+/** Maps font keys used in scenes to real font families. Each app passes its own. */
+export type FontMap = Readonly<Record<string, string>>;
 export type FontWeight = z.infer<typeof WeightSchema>;
 const RadiusSchema = z.number().min(0).max(50);
 const FontSizeSchema = z.number().min(0.5).max(30);
@@ -157,6 +203,7 @@ export const TextNodeSchema = z.object({
   type: z.literal('text'),
   text: z.string().min(1).max(500),
   color: ColorTokenSchema,
+  font: FontKeySchema.optional(),
   fontSize: FontSizeSchema,
   weight: WeightSchema,
   align: z.enum(['left', 'center', 'right']),
@@ -169,6 +216,7 @@ export const ButtonNodeSchema = z.object({
   action: ActionSchema,
   bg: ColorTokenSchema,
   fg: ColorTokenSchema,
+  font: FontKeySchema.optional(),
   fontSize: FontSizeSchema,
   weight: WeightSchema,
   radius: RadiusSchema,

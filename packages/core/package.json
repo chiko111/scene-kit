@@ -23,11 +23,11 @@
   "type": "module",
   "sideEffects": false,
   "files": [
-    "dist",
-    "scene.schema.json",
-    "fixtures",
+    "LICENSE",
     "README.md",
-    "LICENSE"
+    "dist",
+    "fixtures",
+    "scene.schema.json"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",

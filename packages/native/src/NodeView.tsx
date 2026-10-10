@@ -4,12 +4,15 @@ import { Image } from 'expo-image';
 import {
   findEffect,
   nodeRadius,
+  resolveFont,
   toBoxShadow,
   withAlpha,
+  type FontMap,
   type Palette,
   type SceneAction,
   type SceneNode,
 } from '@chiko111/scene-kit-core';
+import { BorderRunners, EdgeLayers, GlowLayers, TextGlowLayers } from './effects';
 import { OutlineRing } from './OutlineRing';
 import { useNodeMotion } from './useNodeMotion';
 
@@ -18,9 +21,12 @@ type Props = {
   palette: Palette;
   /** px per "u" (1% of scene width) */
   unit: number;
+  /** scene.aspectRatio — needed for the node's height in px */
+  aspectRatio: number;
   running: boolean;
   reducedMotion: boolean;
   fontFamily: string | undefined;
+  fonts: FontMap | undefined;
   onAction: ((action: SceneAction) => void) | undefined;
 };
 
@@ -34,7 +40,7 @@ function frameStyle(node: SceneNode): ViewStyle {
   return { left: `${x}%`, top: `${y}%`, width: `${w}%`, height: `${h}%` };
 }
 
-function Content({ node, palette, unit, running, fontFamily, onAction }: Omit<Props, 'reducedMotion'>) {
+function Content({ node, palette, unit, running, fontFamily, fonts, onAction }: Omit<Props, 'reducedMotion' | 'aspectRatio'>) {
   const r = nodeRadius(node);
   const borderRadius = r === 'ellipse' ? '50%' : r * unit;
   const boxShadow = toBoxShadow(node.shadow, palette, (u) => `${u * unit}px`);
@@ -65,7 +71,7 @@ function Content({ node, palette, unit, running, fontFamily, onAction }: Omit<Pr
               styles.text,
               {
                 color: palette[node.color],
-                fontFamily,
+                fontFamily: resolveFont(fonts, node.font) ?? fontFamily,
                 fontSize: node.fontSize * unit,
                 fontWeight: node.weight,
                 textAlign: node.align,
@@ -101,7 +107,12 @@ function Content({ node, palette, unit, running, fontFamily, onAction }: Omit<Pr
             numberOfLines={2}
             style={[
               styles.buttonLabel,
-              { color: palette[node.fg], fontFamily, fontSize: node.fontSize * unit, fontWeight: node.weight },
+              {
+                color: palette[node.fg],
+                fontFamily: resolveFont(fonts, node.font) ?? fontFamily,
+                fontSize: node.fontSize * unit,
+                fontWeight: node.weight,
+              },
             ]}
           >
             {node.label}
@@ -115,7 +126,17 @@ function Content({ node, palette, unit, running, fontFamily, onAction }: Omit<Pr
   }
 }
 
-export function NodeView({ node, palette, unit, running, reducedMotion, fontFamily, onAction }: Props) {
+export function NodeView({
+  node,
+  palette,
+  unit,
+  aspectRatio,
+  running,
+  reducedMotion,
+  fontFamily,
+  fonts,
+  onAction,
+}: Props) {
   const motionStyle = useNodeMotion({
     effects: node.effects,
     opacity: node.opacity,
@@ -127,15 +148,32 @@ export function NodeView({ node, palette, unit, running, reducedMotion, fontFami
 
   const ring = findEffect(node.effects, 'outlinePulse');
   const r = nodeRadius(node);
+  const radius = r === 'ellipse' ? '50%' : r * unit;
+  const fx = { effects: node.effects, palette, unit, running, reducedMotion };
 
   return (
     <Animated.View style={[styles.node, frameStyle(node), motionStyle]}>
-      <Content node={node} palette={palette} unit={unit} running={running} fontFamily={fontFamily} onAction={onAction} />
+      {node.type === 'text' ? (
+        <TextGlowLayers {...fx} node={node} fontFamily={resolveFont(fonts, node.font) ?? fontFamily} />
+      ) : (
+        <GlowLayers {...fx} radius={radius} />
+      )}
+      <Content
+        node={node}
+        palette={palette}
+        unit={unit}
+        running={running}
+        fontFamily={fontFamily}
+        fonts={fonts}
+        onAction={onAction}
+      />
+      <EdgeLayers {...fx} radius={radius} />
+      <BorderRunners {...fx} width={node.frame.w * unit} height={(node.frame.h * unit) / aspectRatio} />
       {ring && (
         <OutlineRing
           effect={ring}
           color={palette[ring.color]}
-          radius={r === 'ellipse' ? '50%' : r * unit}
+          radius={radius}
           unit={unit}
           running={running && !reducedMotion}
         />

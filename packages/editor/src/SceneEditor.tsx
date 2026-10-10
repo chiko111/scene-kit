@@ -8,6 +8,7 @@ import {
   createTextNode,
   duplicateNode,
   heightForImage,
+  type FontMap,
   type Palette,
   type Scene,
   type SceneNode,
@@ -36,6 +37,8 @@ export type SceneEditorProps = {
   maxUploadBytes?: number;
   /** Font the apps use for scene text — keeps the preview identical. */
   fontFamily?: string;
+  /** Selectable fonts: key stored in the scene → CSS font-family loaded in the back office. Same keys as the apps. */
+  fonts?: FontMap;
 };
 
 const DEFAULT_MAX_UPLOAD = 2 * 1024 * 1024;
@@ -66,6 +69,7 @@ export function SceneEditor({
   onUpload,
   maxUploadBytes,
   fontFamily,
+  fonts,
 }: SceneEditorProps) {
   const routes = routesProp ?? NO_ROUTES;
   const uploadLimit = maxUploadBytes ?? DEFAULT_MAX_UPLOAD;
@@ -210,6 +214,7 @@ export function SceneEditor({
           history={history}
           palette={palette}
           fontFamily={fontFamily}
+          fonts={fonts}
           selectedId={selectedId}
           onSelect={setSelectedId}
           playing={playing}
@@ -232,6 +237,7 @@ export function SceneEditor({
               node={selected}
               palette={palette}
               routes={routes}
+              fonts={fonts}
               session={session}
               onChange={(node) => history.apply((s) => replaceNode(s, node))}
             />

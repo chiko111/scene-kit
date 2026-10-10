@@ -1,9 +1,12 @@
 import type { CSSProperties } from 'react';
+import { BorderRunners, EdgeLayers, GlowLayers, TextGlowLayers } from './effects';
 import {
   findEffect,
   nodeRadius,
+  resolveFont,
   toBoxShadow,
   withAlpha,
+  type FontMap,
   type Palette,
   type SceneAction,
   type SceneNode,
@@ -14,6 +17,9 @@ type CSSVars = CSSProperties & Record<`--${string}`, string | number>;
 type Props = {
   node: SceneNode;
   palette: Palette;
+  /** scene.aspectRatio — needed to know the node's height in "u" */
+  aspectRatio: number;
+  fonts: FontMap | undefined;
   interactive: boolean;
   onAction: ((action: SceneAction) => void) | undefined;
 };
@@ -66,7 +72,7 @@ function ringStyle(node: SceneNode, palette: Palette): CSSVars | null {
   };
 }
 
-function Content({ node, palette, interactive, onAction }: Props) {
+function Content({ node, palette, fonts, interactive, onAction }: Omit<Props, 'aspectRatio'>) {
   const shadow = toBoxShadow(node.shadow, palette, cqw);
 
   switch (node.type) {
@@ -97,6 +103,7 @@ function Content({ node, palette, interactive, onAction }: Props) {
           className="sk-content sk-text"
           style={{
             color: palette[node.color],
+            fontFamily: resolveFont(fonts, node.font),
             fontSize: cqw(node.fontSize),
             fontWeight: Number(node.weight),
             textAlign: node.align,
@@ -120,6 +127,7 @@ function Content({ node, palette, interactive, onAction }: Props) {
           style={{
             background: palette[node.bg],
             color: palette[node.fg],
+            fontFamily: resolveFont(fonts, node.font),
             fontSize: cqw(node.fontSize),
             fontWeight: Number(node.weight),
             boxShadow: shadow,
@@ -136,12 +144,24 @@ function Content({ node, palette, interactive, onAction }: Props) {
 }
 
 export function NodeView(props: Props) {
-  const { node, palette } = props;
+  const { node, palette, aspectRatio, fonts } = props;
   const ring = ringStyle(node, palette);
 
   return (
     <div className="sk-node" data-node-id={node.id} style={nodeStyle(node)}>
+      {node.type === 'text' ? (
+        <TextGlowLayers node={node} palette={palette} fontFamily={resolveFont(fonts, node.font)} />
+      ) : (
+        <GlowLayers effects={node.effects} palette={palette} />
+      )}
       <Content {...props} />
+      <EdgeLayers effects={node.effects} palette={palette} />
+      <BorderRunners
+        effects={node.effects}
+        palette={palette}
+        width={node.frame.w}
+        height={node.frame.h / aspectRatio}
+      />
       {ring && <div className="sk-ring" style={ring} aria-hidden />}
     </div>
   );

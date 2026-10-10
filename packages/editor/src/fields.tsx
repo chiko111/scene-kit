@@ -212,3 +212,52 @@ export function CheckboxField({
     </label>
   );
 }
+
+/** 1–max theme colors in order; the effect cycles through them. */
+export function ColorListField({
+  label,
+  colors,
+  palette,
+  max,
+  onChange,
+}: {
+  label: string;
+  colors: readonly ColorToken[];
+  palette: Palette;
+  max: number;
+  onChange: (colors: ColorToken[]) => void;
+}) {
+  return (
+    <div className="ske-field ske-field-wide ske-colors">
+      <span className="ske-colors-label">{label}</span>
+      {colors.map((token, i) => (
+        <div key={i} className="ske-colors-row">
+          <ColorField
+            label={`${i + 1}`}
+            value={token}
+            palette={palette}
+            onChange={(next) => onChange(colors.map((c, j) => (j === i ? next : c)))}
+          />
+          <button
+            type="button"
+            className="ske-icon-btn"
+            aria-label={`Remove color ${i + 1}`}
+            disabled={colors.length <= 1}
+            onClick={() => onChange(colors.filter((_, j) => j !== i))}
+          >
+            ✕
+          </button>
+        </div>
+      ))}
+      {colors.length < max && (
+        <button
+          type="button"
+          className="ske-btn ske-btn-small"
+          onClick={() => onChange([...colors, colors[colors.length - 1] ?? 'gold'])}
+        >
+          + Color
+        </button>
+      )}
+    </div>
+  );
+}

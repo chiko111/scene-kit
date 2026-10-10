@@ -43,6 +43,16 @@
           "type": "float",
           "distance": 1.5,
           "durationMs": 2000
+        },
+        {
+          "type": "glow",
+          "colors": [
+            "gold",
+            "primary"
+          ],
+          "blur": 3,
+          "spread": 0.5,
+          "durationMs": 1200
         }
       ],
       "type": "image",
@@ -80,6 +90,7 @@
       "type": "text",
       "text": "Welcome bonus",
       "color": "white",
+      "font": "heading",
       "fontSize": 5,
       "weight": "800",
       "align": "left"
@@ -134,6 +145,15 @@
           "width": 0.4,
           "spread": 1.12,
           "durationMs": 1400
+        },
+        {
+          "type": "borderRun",
+          "colors": [
+            "gold",
+            "accent"
+          ],
+          "size": 1.2,
+          "durationMs": 2400
         }
       ],
       "type": "button",
@@ -161,7 +181,20 @@
       "opacity": 1,
       "hidden": false,
       "shadow": null,
-      "effects": [],
+      "effects": [
+        {
+          "type": "edgeBlink",
+          "colors": [
+            "gold",
+            "danger",
+            "accent"
+          ],
+          "width": 0.4,
+          "blur": 1,
+          "mode": "blink",
+          "durationMs": 500
+        }
+      ],
       "type": "button",
       "label": "Details",
       "action": {

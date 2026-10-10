@@ -8,7 +8,14 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
-import { fitSceneWidth, type Palette, type Scene, type SceneAction, type SceneFit } from '@chiko111/scene-kit-core';
+import {
+  fitSceneWidth,
+  type FontMap,
+  type Palette,
+  type Scene,
+  type SceneAction,
+  type SceneFit,
+} from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { useAppActive } from './useAppActive';
 
@@ -24,6 +31,8 @@ export type SceneViewProps = {
   active?: boolean;
   /** Same font family the web/editor uses, so text wraps the same way. */
   fontFamily?: string;
+  /** Font keys used in scenes → font families bundled in the app (e.g. { heading: 'Montserrat-Bold' }). */
+  fonts?: FontMap;
   /** Upper limits in dp. The scene keeps its aspect ratio and is centered. */
   maxWidth?: number;
   maxHeight?: number;
@@ -44,6 +53,7 @@ export function SceneView({
   onAction,
   active,
   fontFamily,
+  fonts,
   maxWidth,
   maxHeight,
   fit,
@@ -91,9 +101,11 @@ export function SceneView({
                 node={node}
                 palette={palette}
                 unit={width / 100}
+                aspectRatio={scene.aspectRatio}
                 running={running}
                 reducedMotion={reducedMotion}
                 fontFamily={fontFamily}
+                fonts={fonts}
                 onAction={onAction}
               />
             ),

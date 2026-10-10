@@ -1,6 +1,7 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { parseScene, type Palette, type Scene, type SceneAction } from '@chiko111/scene-kit-core';
+import { parseScene, type FontMap, type Palette, type Scene, type SceneAction } from '@chiko111/scene-kit-core';
+import sampleJson from '../packages/core/fixtures/valid-full.json';
 import { SceneEditor } from '@chiko111/scene-kit-editor';
 import { SceneView } from '@chiko111/scene-kit-web';
 
@@ -22,6 +23,15 @@ const palette: Palette = {
 };
 
 const FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif';
+const FONTS: FontMap = { heading: 'Georgia, "Times New Roman", serif', mono: 'ui-monospace, Menlo, monospace' };
+
+// ?sample → open the editor with the full sample scene (images served by this dev server)
+function sampleScene(): Scene | undefined {
+  if (!new URLSearchParams(window.location.search).has('sample')) return undefined;
+  const json = JSON.stringify(sampleJson).replaceAll('https://cdn.example.com/scene-assets/', `${window.location.origin}/`);
+  const result = parseScene(json);
+  return result.ok ? result.scene : undefined;
+}
 const ROUTES = ['Home', 'Casino', 'LiveCasino', 'Sport', 'Promotions'] as const;
 
 // Fake upload: uses files from demo/public so they are served over https by Vite.
@@ -30,6 +40,8 @@ async function fakeUpload(file: File): Promise<string> {
   return new URL(file.name.endsWith('.webp') ? '/coin.webp' : '/bg.png', window.location.origin).href;
 }
 
+const SAMPLE = sampleScene();
+
 function App() {
   const [saved, setSaved] = useState<Scene | null>(null);
   const [actions, setActions] = useState<SceneAction[]>([]);
@@ -37,8 +49,10 @@ function App() {
   return (
     <div style={{ display: 'grid', gridTemplateRows: '1fr auto', height: '100%' }}>
       <SceneEditor
+        initialScene={SAMPLE}
         palette={palette}
         fontFamily={FONT}
+        fonts={FONTS}
         routes={ROUTES}
         onUpload={fakeUpload}
         onSave={async (scene) => {
@@ -53,7 +67,7 @@ function App() {
         {saved ? (
           <>
             <div style={{ maxWidth: 480 }}>
-              <SceneView scene={saved} palette={palette} fontFamily={FONT} onAction={(a) => setActions((list) => [...list, a])} />
+              <SceneView scene={saved} palette={palette} fontFamily={FONT} fonts={FONTS} onAction={(a) => setActions((list) => [...list, a])} />
             </div>
             <div data-testid="limit-max-height" style={{ width: 800 }}>
               <SceneView scene={saved} palette={palette} fontFamily={FONT} maxHeight={120} />

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { Palette, Scene, SceneAction, SceneFit } from '@chiko111/scene-kit-core';
+import type { FontMap, Palette, Scene, SceneAction, SceneFit } from '@chiko111/scene-kit-core';
 import { NodeView } from './NodeView';
 import { SCENE_CSS } from './styles';
 import { useInViewport } from './useInViewport';
@@ -14,6 +14,8 @@ export type SceneViewProps = {
   interactive?: boolean;
   /** Font of the app (same value in editor and app keeps the preview identical). */
   fontFamily?: string;
+  /** Font keys used in scenes → font families loaded on the page (e.g. { heading: '"Montserrat", sans-serif' }). */
+  fonts?: FontMap;
   /** Upper limits in px. The scene keeps its aspect ratio and is centered. */
   maxWidth?: number;
   maxHeight?: number;
@@ -43,6 +45,7 @@ export function SceneView({
   active,
   interactive,
   fontFamily,
+  fonts,
   maxWidth,
   maxHeight,
   fit,
@@ -77,6 +80,8 @@ export function SceneView({
               key={node.id}
               node={node}
               palette={palette}
+              aspectRatio={scene.aspectRatio}
+              fonts={fonts}
               interactive={isInteractive}
               onAction={onAction}
             />
