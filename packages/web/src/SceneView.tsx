@@ -1,8 +1,9 @@
-import { useRef } from 'react';
-import type { FontMap, Palette, Scene, SceneAction, SceneFit } from '@chiko111/scene-kit-core';
+import { use, useEffect, useRef, useState, type RefObject } from 'react';
+import { findEffect, type FontMap, type Palette, type Scene, type SceneAction, type SceneFit, type SceneNode } from '@chiko111/scene-kit-core/runtime';
 import { NodeView } from './NodeView';
+import { SceneEnvContext } from './sceneEnv';
 import { SCENE_CSS } from './styles';
-import { useInViewport } from './useInViewport';
+import { useEntered, useInViewport } from './useInViewport';
 
 export type SceneViewProps = {
   scene: Scene;
@@ -25,7 +26,44 @@ export type SceneViewProps = {
    */
   fit?: SceneFit;
   className?: string;
+  /**
+   * Change it to replay the scene's entrances (enter / timeline / splitText) – e.g. every time a slide
+   * becomes active. Layers remount, so their animations start over.
+   */
+  replayKey?: number;
 };
+
+const initialVisibility = (nodes: readonly SceneNode[]): Record<string, boolean> =>
+  Object.fromEntries(nodes.filter((n) => n.startHidden).map((n) => [n.id, false]));
+
+/**
+ * Parallax (PageView only): writes the scene's offset from the viewport centre into --sk-par-off (px),
+ * rAF-throttled on scroll (any scroll container) and resize. Layers move by -depth · 0.3 · offset.
+ */
+function useParallaxOffset(ref: RefObject<HTMLDivElement | null>, enabled: boolean) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!enabled || !el || typeof window === 'undefined') return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = el.getBoundingClientRect();
+      const offset = rect.top + rect.height / 2 - window.innerHeight / 2;
+      el.style.setProperty('--sk-par-off', `${Math.round(offset * 10) / 10}px`);
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', queue, { passive: true, capture: true });
+    window.addEventListener('resize', queue, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', queue, { capture: true });
+      window.removeEventListener('resize', queue);
+    };
+  }, [ref, enabled]);
+}
 
 const positive = (n: number | undefined): n is number => typeof n === 'number' && Number.isFinite(n) && n > 0;
 
@@ -50,11 +88,29 @@ export function SceneView({
   maxHeight,
   fit,
   className,
+  replayKey,
 }: SceneViewProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInViewport(ref);
+  const entered = useEntered(ref);
   const running = (active ?? true) && inView;
   const isInteractive = interactive ?? true;
+  const env = use(SceneEnvContext);
+  useParallaxOffset(ref, env.parallax && scene.nodes.some((n) => findEffect(n.effects, 'parallax')));
+
+  // triggers: visibility overrides (startHidden / show / hide / toggle) + per-layer replay counters (play)
+  const [visibility, setVisibility] = useState(() => initialVisibility(scene.nodes));
+  const [plays, setPlays] = useState<Record<string, number>>({});
+  const runTriggers = (node: SceneNode) => {
+    for (const t of node.triggers ?? []) {
+      if (t.do === 'play') setPlays((p) => ({ ...p, [t.target]: (p[t.target] ?? 0) + 1 }));
+      else
+        setVisibility((v) => {
+          const current = v[t.target] ?? true;
+          return { ...v, [t.target]: t.do === 'show' ? true : t.do === 'hide' ? false : !current };
+        });
+    }
+  };
 
   return (
     <div className="sk-frame" data-fit={fit ?? 'width'}>
@@ -77,13 +133,17 @@ export function SceneView({
         {scene.nodes.map((node) =>
           node.hidden ? null : (
             <NodeView
-              key={node.id}
+              key={`${node.id}:${replayKey ?? 0}:${plays[node.id] ?? 0}`}
               node={node}
               palette={palette}
               aspectRatio={scene.aspectRatio}
               fonts={fonts}
               interactive={isInteractive}
               onAction={onAction}
+              entered={entered}
+              running={running}
+              visible={visibility[node.id] ?? true}
+              onTrigger={node.triggers && node.triggers.length > 0 ? () => runTriggers(node) : undefined}
             />
           ),
         )}

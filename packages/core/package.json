@@ -27,7 +27,8 @@
     "README.md",
     "dist",
     "fixtures",
-    "scene.schema.json"
+    "scene.schema.json",
+    "page.schema.json"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -39,6 +40,11 @@
       "default": "./dist/index.js"
     },
     "./scene.schema.json": "./scene.schema.json",
+    "./runtime": {
+      "scene-kit-source": "./src/runtime.ts",
+      "types": "./dist/runtime.d.ts",
+      "default": "./dist/runtime.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

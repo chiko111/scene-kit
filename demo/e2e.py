@@ -3,7 +3,7 @@ from playwright.sync_api import sync_playwright, expect
 
 import os, tempfile
 SCRATCH = os.environ.get('E2E_OUT', tempfile.gettempdir())
-URL = 'https://localhost:5173/'
+URL = os.environ.get('E2E_URL', 'https://localhost:5173/')
 errors = []
 results = []
 
@@ -24,7 +24,10 @@ with sync_playwright() as p:
     page.goto(URL)
     page.wait_for_selector('.ske-root')
 
+    image_pop = page.locator('summary', has_text='+ Image')
+
     # 1. Add a background image by URL
+    image_pop.click()
     page.get_by_placeholder('https://cdn…/image.webp').fill('https://localhost:5173/bg.png')
     page.get_by_role('button', name='Add image').click()
     page.wait_for_selector('.ske-canvas .sk-img')
@@ -32,6 +35,7 @@ with sync_playwright() as p:
     check('image by URL renders', img_ok)
 
     # 2. Reject http:// URL
+    image_pop.click()
     page.get_by_placeholder('https://cdn…/image.webp').fill('http://localhost/x.png')
     page.get_by_role('button', name='Add image').click()
     expect(page.get_by_text('Image URL must start with https://')).to_be_visible()
@@ -46,6 +50,7 @@ with sync_playwright() as p:
     # 4. Add button + effects
     page.get_by_role('button', name='+ Button').click()
     expect(page.locator('.ske-canvas .sk-btn')).to_have_text('Play now')
+    page.get_by_role('tab', name='Animation').click()
     page.get_by_role('button', name='+ Pulse').click()
     page.get_by_role('button', name='+ Pulsing outline').click()
     page.get_by_role('button', name='+ Fade in').click()
@@ -64,7 +69,7 @@ with sync_playwright() as p:
 
     # 6. Drag the selected button
     before = scene_json(page)['nodes'][-1]['frame']
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Style').click()
     box = page.locator('.ske-box.is-selected').bounding_box()
     page.mouse.move(box['x'] + box['width'] / 2, box['y'] + box['height'] / 2)
     page.mouse.down()
@@ -74,7 +79,7 @@ with sync_playwright() as p:
     check('drag moves node', after['x'] > before['x'] and after['y'] > before['y'], f'{before} -> {after}')
 
     # 7. Undo drag = exactly one step
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Style').click()
     page.keyboard.press('Control+z')
     undone = scene_json(page)['nodes'][-1]['frame']
     check('undo reverts whole drag in one step', undone == before, f'{undone} vs {before}')
@@ -82,7 +87,7 @@ with sync_playwright() as p:
     check('redo restores drag', scene_json(page)['nodes'][-1]['frame'] == after)
 
     # 8. Resize via handle with min size
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Style').click()
     se = page.locator('.ske-handle-se').bounding_box()
     page.mouse.move(se['x'] + 5, se['y'] + 5)
     page.mouse.down()
@@ -90,7 +95,7 @@ with sync_playwright() as p:
     page.mouse.up()
     tiny = scene_json(page)['nodes'][-1]['frame']
     check('resize clamps to min size', tiny['w'] >= 1 and tiny['h'] >= 1, str(tiny))
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Style').click()
     page.keyboard.press('Control+z')
 
     # 9. Typing a label = single undo step
@@ -106,7 +111,8 @@ with sync_playwright() as p:
     expect(page.locator('.ske-canvas .sk-btn')).to_have_text('Bet now')
 
     # 10. Action: invalid promo id is never committed
-    page.locator('.ske-layer-name', has_text='Button').click()
+    page.locator('.ske-tlp-layer', has_text='Button').click()
+    page.get_by_role('tab', name='Interaction').click()
     page.get_by_label('Action', exact=True).select_option('openPromo')
     promo = page.get_by_label('Promo id', exact=True)
     promo.fill('bad id!')
@@ -114,7 +120,7 @@ with sync_playwright() as p:
     promo.press('Tab')
     data = scene_json(page)
     check('invalid promo id not committed', data['nodes'][-1]['action'] == {'type': 'openPromo', 'promoId': 'promo'} and invalid == 'true', str(data['nodes'][-1]['action']))
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Interaction').click()
     page.get_by_label('Action', exact=True).select_option('navigate')
     page.get_by_label('Screen', exact=True).select_option('Casino')
 
@@ -155,21 +161,22 @@ with sync_playwright() as p:
     check('import drops invalid node with warning', True)
 
     # 14. Delete key + layer order
-    page.get_by_role('tab', name='Properties').click()
-    page.locator('.ske-layer-name', has_text='Button').click()
-    page.get_by_role('button', name='Send backward').first.click()
+    page.get_by_role('tab', name='Style').click()
+    page.locator('.ske-tlp-layer', has_text='Button').click()
+    page.get_by_role('button', name='More for Button').click()
+    page.get_by_role('menuitem', name='Send backward').click()
     order = [n['type'] for n in scene_json(page)['nodes']]
     check('send backward reorders', order == ['image', 'button', 'image'], str(order))
-    page.get_by_role('tab', name='Properties').click()
-    page.locator('.ske-layer-name', has_text='Button').click()
+    page.get_by_role('tab', name='Style').click()
+    page.locator('.ske-tlp-layer', has_text='Button').click()
     page.keyboard.press('Delete')
     check('delete removes layer', [n['type'] for n in scene_json(page)['nodes']] == ['image', 'image'])
-    page.get_by_role('tab', name='Properties').click()
+    page.get_by_role('tab', name='Scene').click()  # nothing selected → the first tab is the scene's settings
     page.keyboard.press('Control+z')
     check('undo delete', len(scene_json(page)['nodes']) == 3)
 
-    page.get_by_role('tab', name='Properties').click()
-    page.locator('.ske-layer-name', has_text='Button').click()
+    page.locator('.ske-tlp-layer', has_text='Button').click()
+    page.get_by_role('tab', name='Animation').click()
     page.wait_for_timeout(700)
     page.screenshot(path=f'{SCRATCH}/editor.png')
     browser.close()

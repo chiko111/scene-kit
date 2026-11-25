@@ -1,0 +1,188 @@
+[
+  {
+    "name": "burst",
+    "width": 720,
+    "height": 720,
+    "bytes": 155870
+  },
+  {
+    "name": "cabinet-1",
+    "width": 460,
+    "height": 800,
+    "bytes": 27338
+  },
+  {
+    "name": "cabinet-2",
+    "width": 460,
+    "height": 800,
+    "bytes": 28442
+  },
+  {
+    "name": "cabinet-3",
+    "width": 460,
+    "height": 800,
+    "bytes": 27308
+  },
+  {
+    "name": "carousel-bg",
+    "width": 1920,
+    "height": 1000,
+    "bytes": 115852
+  },
+  {
+    "name": "coin",
+    "width": 240,
+    "height": 240,
+    "bytes": 17184
+  },
+  {
+    "name": "giftbox",
+    "width": 640,
+    "height": 640,
+    "bytes": 37410
+  },
+  {
+    "name": "moon-clock",
+    "width": 720,
+    "height": 720,
+    "bytes": 81842
+  },
+  {
+    "name": "panel-desk",
+    "width": 1920,
+    "height": 1100,
+    "bytes": 41478
+  },
+  {
+    "name": "panel-mob",
+    "width": 750,
+    "height": 1700,
+    "bytes": 28996
+  },
+  {
+    "name": "plate-1",
+    "width": 1200,
+    "height": 170,
+    "bytes": 15406
+  },
+  {
+    "name": "plate-2",
+    "width": 1200,
+    "height": 170,
+    "bytes": 15042
+  },
+  {
+    "name": "plate-3",
+    "width": 1200,
+    "height": 170,
+    "bytes": 15472
+  },
+  {
+    "name": "plate-4",
+    "width": 1200,
+    "height": 170,
+    "bytes": 14932
+  },
+  {
+    "name": "plate-5",
+    "width": 1200,
+    "height": 170,
+    "bytes": 15166
+  },
+  {
+    "name": "prize-50000",
+    "width": 1320,
+    "height": 320,
+    "bytes": 131718
+  },
+  {
+    "name": "sign-hours",
+    "width": 1240,
+    "height": 400,
+    "bytes": 159754
+  },
+  {
+    "name": "sky-desk",
+    "width": 1920,
+    "height": 900,
+    "bytes": 10982
+  },
+  {
+    "name": "sky-mob",
+    "width": 750,
+    "height": 1100,
+    "bytes": 6384
+  },
+  {
+    "name": "slot-laser-fruits",
+    "width": 496,
+    "height": 640,
+    "bytes": 28932
+  },
+  {
+    "name": "slot-midnight-drive",
+    "width": 496,
+    "height": 640,
+    "bytes": 28836
+  },
+  {
+    "name": "slot-neon-cherry",
+    "width": 496,
+    "height": 640,
+    "bytes": 30978
+  },
+  {
+    "name": "slot-pixel-jackpot",
+    "width": 496,
+    "height": 640,
+    "bytes": 26550
+  },
+  {
+    "name": "slot-retro-spin",
+    "width": 496,
+    "height": 640,
+    "bytes": 28414
+  },
+  {
+    "name": "slot-synth-7s",
+    "width": 496,
+    "height": 640,
+    "bytes": 22610
+  },
+  {
+    "name": "stars-desk",
+    "width": 1920,
+    "height": 900,
+    "bytes": 20394
+  },
+  {
+    "name": "stars-mob",
+    "width": 750,
+    "height": 1100,
+    "bytes": 12142
+  },
+  {
+    "name": "sun-desk",
+    "width": 1920,
+    "height": 900,
+    "bytes": 172348
+  },
+  {
+    "name": "sun-mob",
+    "width": 750,
+    "height": 1100,
+    "bytes": 91410
+  },
+  {
+    "name": "title-desk",
+    "width": 1640,
+    "height": 300,
+    "bytes": 107266
+  },
+  {
+    "name": "title-mob",
+    "width": 760,
+    "height": 420,
+    "bytes": 70380
+  }
+]

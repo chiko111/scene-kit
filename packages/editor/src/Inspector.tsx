@@ -1,13 +1,16 @@
 import {
   EFFECT_TYPES,
+  ENTER_PRESETS,
+  type EnterPreset,
   FontKeySchema,
-  IMAGE_ONLY_EFFECTS,
+  LottieUriSchema,
   MAX_EFFECT_COLORS,
+  DateKeySchema,
   IdSchema,
+  TimeZoneSchema,
   ParamKeySchema,
   RouteSchema,
   WebPathSchema,
-  createEffect,
   type Effect,
   type EffectType,
   type FontMap,
@@ -23,11 +26,15 @@ import {
   ColorField,
   ColorListField,
   NumberField,
+  OptionalNumberField,
   Section,
   SelectField,
   TextField,
   type EditSession,
 } from './fields';
+import { TimelineEditor } from './TimelineEditor';
+import { TriggersEditor } from './TriggersEditor';
+import { HoverEditor } from './HoverEditor';
 
 const WEIGHTS: readonly { value: FontWeight; label: string }[] = [
   { value: '400', label: 'Regular' },
@@ -37,7 +44,7 @@ const WEIGHTS: readonly { value: FontWeight; label: string }[] = [
   { value: '800', label: 'Extra bold' },
 ];
 
-const EFFECT_LABELS: Record<EffectType, string> = {
+export const EFFECT_LABELS: Record<EffectType, string> = {
   pulse: 'Pulse',
   outlinePulse: 'Pulsing outline',
   glow: 'Glow',
@@ -45,7 +52,14 @@ const EFFECT_LABELS: Record<EffectType, string> = {
   edgeBlink: 'Blinking edge',
   borderRun: 'Running border light',
   float: 'Float',
+  wiggle: 'Wiggle',
+  spin: 'Spin',
   fadeIn: 'Fade in',
+  enter: 'Entrance',
+  timeline: 'Keyframe motion',
+  kenBurns: 'Slow zoom (Ken Burns)',
+  parallax: 'Parallax on scroll',
+  splitText: 'Letter by letter',
 };
 
 const ASPECTS = [
@@ -66,12 +80,16 @@ export function SceneInspector({
   palette,
   onChange,
   session,
+  advanced: advancedProp,
 }: {
   scene: Scene;
   palette: Palette;
   onChange: (scene: Scene) => void;
   session: EditSession;
+  /** Show technical fields (scene id, exact aspect ratio). */
+  advanced?: boolean;
 }) {
+  const advanced = advancedProp ?? true;
   const aspectValue = ASPECTS.find((a) => Math.abs(Number(a.value) - scene.aspectRatio) < 0.001)?.value;
 
   return (
@@ -84,7 +102,7 @@ export function SceneInspector({
           session={session}
           onChange={(name) => onChange({ ...scene, name })}
         />
-        <TextField
+        {advanced && <TextField
           label="Scene id"
           value={scene.id}
           maxLength={64}
@@ -92,7 +110,7 @@ export function SceneInspector({
           hint="A–Z, 0–9, _ and -"
           session={session}
           onChange={(id) => onChange({ ...scene, id })}
-        />
+        />}
         {aspectValue ? (
           <SelectField
             label="Format"
@@ -100,8 +118,10 @@ export function SceneInspector({
             options={ASPECTS}
             onChange={(value) => onChange({ ...scene, aspectRatio: Number(value) })}
           />
+        ) : !advanced ? (
+          <p className="ske-hint">Format: custom ({scene.aspectRatio.toFixed(2)} : 1). Switch on Advanced to change it.</p>
         ) : null}
-        <NumberField
+        {advanced && <NumberField
           label="Aspect (w/h)"
           value={scene.aspectRatio}
           min={0.2}
@@ -109,7 +129,7 @@ export function SceneInspector({
           step={0.01}
           session={session}
           onChange={(aspectRatio) => onChange({ ...scene, aspectRatio })}
-        />
+        />}
         <CheckboxField
           label="Background color"
           checked={scene.background !== null}
@@ -124,7 +144,7 @@ export function SceneInspector({
           />
         )}
       </Section>
-      <p className="ske-muted">Select a layer on the canvas or in the list to edit it.</p>
+      <p className="ske-muted ske-right-empty">Click a layer on the canvas or in the timeline to edit its style, animation and interactions.</p>
     </>
   );
 }
@@ -140,6 +160,10 @@ type NodeProps = {
   session: EditSession;
 };
 
+/** Set by the timeline panel: scroll to this effect (and open this keyframe). `nonce` changes on every click. */
+export type EffectFocus = { effect: EffectType; keyframe?: number; nonce: number };
+
+/** Style tab: what the layer looks like and where it is. */
 export function NodeInspector({ node, palette, routes, fonts, onChange, session }: NodeProps) {
   const { frame } = node;
   const setFrame = (patch: Partial<SceneNode['frame']>) => onChange({ ...node, frame: { ...frame, ...patch } });
@@ -166,7 +190,18 @@ export function NodeInspector({ node, palette, routes, fonts, onChange, session 
         <CheckboxField label="Hidden" checked={node.hidden} onChange={(hidden) => onChange({ ...node, hidden })} />
       </Section>
 
-      <Section title="Position (% of scene)">
+      <TypeFields node={node} palette={palette} routes={routes} fonts={fonts} onChange={onChange} session={session} />
+
+      <ShadowEditor
+        shadow={node.shadow}
+        palette={palette}
+        session={session}
+        label={node.type === 'text' ? 'Text shadow' : 'Shadow'}
+        onChange={(shadow) => onChange({ ...node, shadow })}
+      />
+
+      <details className="ske-section ske-more">
+        <summary>Exact position (% of scene)</summary>
         <div className="ske-grid">
           <NumberField label="X" value={frame.x} min={-100} max={200} step={0.5} session={session} onChange={(x) => setFrame({ x })} />
           <NumberField label="Y" value={frame.y} min={-100} max={200} step={0.5} session={session} onChange={(y) => setFrame({ y })} />
@@ -182,30 +217,46 @@ export function NodeInspector({ node, palette, routes, fonts, onChange, session 
             onChange={(rotation) => setFrame({ rotation })}
           />
         </div>
-      </Section>
-
-      <TypeFields node={node} palette={palette} routes={routes} fonts={fonts} onChange={onChange} session={session} />
-
-      <ShadowEditor
-        shadow={node.shadow}
-        palette={palette}
-        session={session}
-        label={node.type === 'text' ? 'Text shadow' : 'Shadow'}
-        onChange={(shadow) => onChange({ ...node, shadow })}
-      />
-
-      <EffectsEditor
-        effects={node.effects}
-        nodeType={node.type}
-        palette={palette}
-        session={session}
-        onChange={(effects) => onChange({ ...node, effects })}
-      />
+      </details>
     </>
   );
 }
 
-function TypeFields({ node, palette, routes, fonts, onChange, session }: NodeProps) {
+/** Interaction tab: what happens on tap / press / hover. */
+export function InteractionInspector({
+  node,
+  palette,
+  routes,
+  onChange,
+  session,
+  layers,
+}: Omit<NodeProps, 'fonts'> & { layers: readonly SceneNode[] }) {
+  return (
+    <>
+      {node.type === 'button' && (
+        <ActionEditor title="On press" action={node.action} routes={routes} session={session} onChange={(action) => onChange({ ...node, action })} />
+      )}
+      {node.type === 'image' && (
+        <Section title="On tap">
+          <OptionalActionEditor
+            title="Tap action"
+            action={node.action}
+            routes={routes}
+            session={session}
+            onChange={(action) => {
+              const { action: _old, ...rest } = node;
+              onChange(action ? { ...rest, action } : rest);
+            }}
+          />
+        </Section>
+      )}
+      <HoverEditor node={node} palette={palette} session={session} onChange={onChange} />
+      <TriggersEditor node={node} layers={layers} onChange={onChange} />
+    </>
+  );
+}
+
+function TypeFields({ node, palette, fonts, onChange, session }: Omit<NodeProps, 'routes'> & { routes?: readonly string[] }) {
   switch (node.type) {
     case 'image':
       return (
@@ -288,12 +339,6 @@ function TypeFields({ node, palette, routes, fonts, onChange, session }: NodePro
             <SelectField label="Weight" value={node.weight} options={WEIGHTS} onChange={(weight) => onChange({ ...node, weight })} />
             <NumberField label="Radius (u)" value={node.radius} min={0} max={50} step={0.25} session={session} onChange={(radius) => onChange({ ...node, radius })} />
           </Section>
-          <ActionEditor
-            action={node.action}
-            routes={routes}
-            session={session}
-            onChange={(action) => onChange({ ...node, action })}
-          />
         </>
       );
 
@@ -314,6 +359,100 @@ function TypeFields({ node, palette, routes, fonts, onChange, session }: NodePro
             <NumberField label="Radius (u)" value={node.radius} min={0} max={50} step={0.25} session={session} onChange={(radius) => onChange({ ...node, radius })} />
           )}
         </Section>
+      );
+
+    case 'lottie':
+      return (
+        <Section title="Lottie animation">
+          <TextField
+            label="Lottie file URL"
+            value={node.uri}
+            maxLength={2048}
+            validate={(v) => LottieUriSchema.safeParse(v).success}
+            hint="https:// .json or .lottie (After Effects / LottieFiles export)"
+            session={session}
+            onChange={(uri) => onChange({ ...node, uri })}
+          />
+          <CheckboxField label="Loop" checked={node.loop} onChange={(loop) => onChange({ ...node, loop })} />
+          <NumberField label="Speed" value={node.speed} min={0.1} max={3} step={0.1} session={session} onChange={(speed) => onChange({ ...node, speed })} />
+          <TextField
+            label="Alt text"
+            value={node.alt}
+            maxLength={200}
+            placeholder="Empty = decorative"
+            session={session}
+            onChange={(alt) => onChange({ ...node, alt })}
+          />
+        </Section>
+      );
+
+    case 'countdown':
+      return (
+        <>
+          <Section title="Countdown">
+            <TextField
+              label="Ends on (YYYY-MM-DD)"
+              value={node.endDate}
+              maxLength={10}
+              validate={(v) => DateKeySchema.safeParse(v).success}
+              session={session}
+              onChange={(endDate) => onChange({ ...node, endDate })}
+            />
+            <div className="ske-grid">
+              <NumberField label="at hour" value={node.endTime.hour} min={0} max={23} step={1} session={session} onChange={(hour) => onChange({ ...node, endTime: { ...node.endTime, hour: Math.round(hour) } })} />
+              <NumberField label="minute" value={node.endTime.minute} min={0} max={59} step={1} session={session} onChange={(minute) => onChange({ ...node, endTime: { ...node.endTime, minute: Math.round(minute) } })} />
+            </div>
+            <TextField
+              label="Time zone"
+              value={node.timeZone}
+              maxLength={64}
+              validate={(v) => TimeZoneSchema.safeParse(v).success}
+              hint="e.g. Europe/Sofia – the end time is in this zone for every player"
+              session={session}
+              onChange={(timeZone) => onChange({ ...node, timeZone })}
+            />
+            <SelectField
+              label="Format"
+              value={node.format}
+              options={[
+                { value: 'auto', label: 'Days only while > 0' },
+                { value: 'dhms', label: 'Always days' },
+                { value: 'hms', label: 'Hours (no days)' },
+              ]}
+              onChange={(format) => onChange({ ...node, format })}
+            />
+            <div className="ske-grid">
+              {(['days', 'hours', 'minutes', 'seconds'] as const).map((unit) => (
+                <TextField
+                  key={unit}
+                  label={`${unit} label`}
+                  value={node.labels[unit]}
+                  maxLength={10}
+                  session={session}
+                  onChange={(v) => onChange({ ...node, labels: { ...node.labels, [unit]: v } })}
+                />
+              ))}
+            </div>
+            <small className="ske-hint">All labels empty = digits only, e.g. 02:03:14:09</small>
+            <TextField label="After the end" value={node.endedText} maxLength={80} session={session} onChange={(endedText) => onChange({ ...node, endedText })} />
+          </Section>
+          <Section title="Text style">
+            <ColorField label="Color" value={node.color} palette={palette} onChange={(color) => onChange({ ...node, color })} />
+            <FontField fonts={fonts} value={node.font} onChange={(font) => onChange({ ...node, font })} />
+            <NumberField label="Size (u)" value={node.fontSize} min={0.5} max={30} step={0.25} session={session} onChange={(fontSize) => onChange({ ...node, fontSize })} />
+            <SelectField label="Weight" value={node.weight} options={WEIGHTS} onChange={(weight) => onChange({ ...node, weight })} />
+            <SelectField
+              label="Align"
+              value={node.align}
+              options={[
+                { value: 'left', label: 'Left' },
+                { value: 'center', label: 'Center' },
+                { value: 'right', label: 'Right' },
+              ]}
+              onChange={(align) => onChange({ ...node, align })}
+            />
+          </Section>
+        </>
       );
   }
 }
@@ -367,31 +506,76 @@ const ACTION_TYPES: readonly { value: SceneAction['type']; label: string }[] = [
   { value: 'openGame', label: 'Open game' },
 ];
 
-function ActionEditor({
+const NONE = 'none' as const;
+
+/** Action that may be absent (e.g. image tap). "None" removes it. */
+export function OptionalActionEditor({
+  title,
   action,
   routes,
   onChange,
   session,
 }: {
+  title: string;
+  action: SceneAction | undefined;
+  routes: readonly string[];
+  onChange: (action: SceneAction | undefined) => void;
+  session: EditSession;
+}) {
+  if (action) {
+    return (
+      <div className="ske-field-wide">
+        <ActionEditor title={title} action={action} routes={routes} session={session} onChange={onChange} />
+        <button type="button" className="ske-btn ske-btn-small" onClick={() => onChange(undefined)}>
+          Remove {title.toLowerCase()}
+        </button>
+      </div>
+    );
+  }
+  return (
+    <SelectField
+      label={title}
+      value={NONE as string}
+      wide
+      options={[{ value: NONE, label: 'None' }, ...ACTION_TYPES]}
+      onChange={(type) => {
+        if (type === NONE) return;
+        onChange(defaultAction(type as SceneAction['type'], routes));
+      }}
+    />
+  );
+}
+
+function defaultAction(type: SceneAction['type'], routes: readonly string[]): SceneAction {
+  switch (type) {
+    case 'navigate':
+      return { type, route: routes[0] ?? 'Home' };
+    case 'openPromo':
+      return { type, promoId: 'promo' };
+    case 'openGame':
+      return { type, gameId: 'game' };
+  }
+}
+
+export function ActionEditor({
+  action,
+  routes,
+  onChange,
+  session,
+  title,
+}: {
   action: SceneAction;
   routes: readonly string[];
   onChange: (action: SceneAction) => void;
   session: EditSession;
+  title?: string;
 }) {
   const changeType = (type: SceneAction['type']) => {
-    if (type === action.type) return;
-    switch (type) {
-      case 'navigate':
-        return onChange({ type, route: routes[0] ?? 'Home' });
-      case 'openPromo':
-        return onChange({ type, promoId: 'promo' });
-      case 'openGame':
-        return onChange({ type, gameId: 'game' });
-    }
+    if (type !== action.type) onChange(defaultAction(type, routes));
   };
 
   return (
-    <Section title="On press">
+    <Section title={title ?? 'On press'}>
       <SelectField label="Action" value={action.type} options={ACTION_TYPES} onChange={changeType} wide />
       {action.type === 'navigate' && (
         <>
@@ -516,26 +700,61 @@ function ShadowEditor({
 
 const DURATION = { min: 100, max: 20000, step: 50 } as const;
 
-function EffectFields({
+export const ENTER_LABELS: Record<EnterPreset, string> = {
+  fade: 'Fade',
+  fadeUp: 'Fade up',
+  fadeDown: 'Fade down',
+  slideLeft: 'Slide in from right',
+  slideRight: 'Slide in from left',
+  zoomIn: 'Zoom in',
+  zoomOut: 'Zoom out',
+  bounceIn: 'Bounce in',
+  flipIn: 'Flip in',
+};
+const ENTER_OPTIONS = ENTER_PRESETS.map((value) => ({ value, label: ENTER_LABELS[value] }));
+
+/** Sets / removes the optional loop start delay (undefined = no key, keeps JSON minimal). */
+function withDelay<E extends { delayMs?: number }>(effect: E, delayMs: number | undefined): E {
+  const { delayMs: _old, ...rest } = effect;
+  return (delayMs === undefined || delayMs === 0 ? rest : { ...rest, delayMs }) as E;
+}
+
+export function EffectFields({
   effect,
-  nodeType,
+  node,
   palette,
   onChange,
   session,
+  focusKeyframe,
 }: {
   effect: Effect;
-  nodeType: SceneNode['type'];
+  node: SceneNode;
   palette: Palette;
   onChange: (effect: Effect) => void;
   session: EditSession;
+  focusKeyframe?: { index: number; nonce: number };
 }) {
-  const duration = (
-    <NumberField
-      label="Duration ms"
-      value={effect.durationMs}
-      {...DURATION}
+  const nodeType = node.type;
+  const duration =
+    'durationMs' in effect ? (
+      <NumberField
+        label="Duration ms"
+        value={effect.durationMs}
+        {...DURATION}
+        session={session}
+        onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) } as Effect)}
+      />
+    ) : null;
+
+  const loopDelay = (value: number | undefined, set: (delayMs: number | undefined) => void) => (
+    <OptionalNumberField
+      label="Start delay ms"
+      value={value}
+      min={0}
+      max={10000}
+      step={50}
       session={session}
-      onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })}
+      onChange={(v) => set(v === undefined ? undefined : Math.round(v))}
     />
   );
 
@@ -545,6 +764,7 @@ function EffectFields({
         <>
           <NumberField label="Scale" value={effect.scale} min={1.01} max={1.5} step={0.01} session={session} onChange={(scale) => onChange({ ...effect, scale })} />
           {duration}
+          {loopDelay(effect.delayMs, (delayMs) => onChange(withDelay(effect, delayMs)))}
         </>
       );
     case 'outlinePulse':
@@ -560,6 +780,46 @@ function EffectFields({
       return (
         <>
           <NumberField label="Distance (u)" value={effect.distance} min={0.1} max={10} step={0.1} session={session} onChange={(distance) => onChange({ ...effect, distance })} />
+          {duration}
+          {loopDelay(effect.delayMs, (delayMs) => onChange(withDelay(effect, delayMs)))}
+        </>
+      );
+    case 'wiggle':
+      return (
+        <>
+          <NumberField label="Angle °" value={effect.angle} min={0.5} max={30} step={0.5} session={session} onChange={(angle) => onChange({ ...effect, angle })} />
+          {duration}
+          {loopDelay(effect.delayMs, (delayMs) => onChange(withDelay(effect, delayMs)))}
+        </>
+      );
+    case 'spin':
+      return (
+        <>
+          <SelectField
+            label="Direction"
+            value={effect.direction}
+            options={[
+              { value: 'cw', label: 'Clockwise' },
+              { value: 'ccw', label: 'Counter-clockwise' },
+            ]}
+            onChange={(direction) => onChange({ ...effect, direction })}
+          />
+          <NumberField label="Ms per turn" value={effect.durationMs} {...DURATION} session={session} onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })} />
+        </>
+      );
+    case 'enter':
+      return (
+        <>
+          <SelectField label="Animation" value={effect.preset} options={ENTER_OPTIONS} onChange={(preset) => onChange({ ...effect, preset })} />
+          <NumberField
+            label="Delay ms"
+            value={effect.delayMs}
+            min={0}
+            max={10000}
+            step={50}
+            session={session}
+            onChange={(delayMs) => onChange({ ...effect, delayMs: Math.round(delayMs) })}
+          />
           {duration}
         </>
       );
@@ -639,62 +899,84 @@ function EffectFields({
           {duration}
         </>
       );
-  }
-}
-
-function EffectsEditor({
-  effects,
-  nodeType,
-  palette,
-  onChange,
-  session,
-}: {
-  effects: readonly Effect[];
-  nodeType: SceneNode['type'];
-  palette: Palette;
-  onChange: (effects: Effect[]) => void;
-  session: EditSession;
-}) {
-  const available = EFFECT_TYPES.filter(
-    (type) => !effects.some((e) => e.type === type) && (nodeType === 'image' || !IMAGE_ONLY_EFFECTS.includes(type)),
-  );
-
-  return (
-    <Section title="Effects">
-      {effects.length === 0 && <p className="ske-muted">No effects.</p>}
-      {effects.map((effect) => (
-        <div key={effect.type} className="ske-effect">
-          <div className="ske-effect-head">
-            <strong>{EFFECT_LABELS[effect.type]}</strong>
-            <button
-              type="button"
-              className="ske-icon-btn"
-              aria-label={`Remove ${EFFECT_LABELS[effect.type]}`}
-              onClick={() => onChange(effects.filter((e) => e.type !== effect.type))}
-            >
-              ✕
-            </button>
-          </div>
-          <div className="ske-grid">
-            <EffectFields
-              effect={effect}
-              nodeType={nodeType}
-              palette={palette}
-              session={session}
-              onChange={(next) => onChange(effects.map((e) => (e.type === next.type ? next : e)))}
+    case 'timeline':
+      return <TimelineEditor effect={effect} node={node} session={session} onChange={onChange} focusKeyframe={focusKeyframe} />;
+    case 'kenBurns':
+      return (
+        <>
+          <NumberField label="From zoom" value={effect.fromScale} min={1} max={2} step={0.01} session={session} onChange={(fromScale) => onChange({ ...effect, fromScale })} />
+          <NumberField label="To zoom" value={effect.toScale} min={1} max={2} step={0.01} session={session} onChange={(toScale) => onChange({ ...effect, toScale })} />
+          <NumberField label="From X %" value={effect.fromX} min={-25} max={25} step={0.5} session={session} onChange={(fromX) => onChange({ ...effect, fromX })} />
+          <NumberField label="From Y %" value={effect.fromY} min={-25} max={25} step={0.5} session={session} onChange={(fromY) => onChange({ ...effect, fromY })} />
+          <NumberField label="To X %" value={effect.toX} min={-25} max={25} step={0.5} session={session} onChange={(toX) => onChange({ ...effect, toX })} />
+          <NumberField label="To Y %" value={effect.toY} min={-25} max={25} step={0.5} session={session} onChange={(toY) => onChange({ ...effect, toY })} />
+          <NumberField
+            label="Duration ms"
+            value={effect.durationMs}
+            min={1000}
+            max={60000}
+            step={500}
+            session={session}
+            onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })}
+          />
+          <SelectField
+            label="Mode"
+            value={effect.mode}
+            options={[
+              { value: 'pingpong', label: 'Back and forth' },
+              { value: 'once', label: 'Once (holds the end)' },
+            ]}
+            onChange={(mode) => onChange({ ...effect, mode })}
+          />
+        </>
+      );
+    case 'parallax':
+      return (
+        <div className="ske-field-wide ske-range">
+          <label>
+            <span>
+              Depth {effect.depth.toFixed(2)} – {effect.depth > 0 ? 'farther (moves slower)' : effect.depth < 0 ? 'closer (moves faster)' : 'no movement'}
+            </span>
+            <input
+              type="range"
+              min={-1}
+              max={1}
+              step={0.05}
+              value={effect.depth}
+              aria-label="Parallax depth"
+              onPointerDown={session.begin}
+              onPointerUp={session.end}
+              onChange={(e) => onChange({ ...effect, depth: Number(e.target.value) })}
             />
-          </div>
+          </label>
+          <small className="ske-hint">Only moves inside a page (a standalone banner doesn't scroll).</small>
         </div>
-      ))}
-      {available.length > 0 && (
-        <div className="ske-row">
-          {available.map((type) => (
-            <button key={type} type="button" className="ske-btn ske-btn-small" onClick={() => onChange([...effects, createEffect(type)])}>
-              + {EFFECT_LABELS[type]}
-            </button>
-          ))}
-        </div>
-      )}
-    </Section>
-  );
+      );
+    case 'splitText':
+      return (
+        <>
+          <SelectField
+            label="Split by"
+            value={effect.by}
+            options={[
+              { value: 'char', label: 'Letters' },
+              { value: 'word', label: 'Words' },
+            ]}
+            onChange={(by) => onChange({ ...effect, by })}
+          />
+          <SelectField label="Animation" value={effect.preset} options={ENTER_OPTIONS} onChange={(preset) => onChange({ ...effect, preset })} />
+          <NumberField label="Stagger ms" value={effect.staggerMs} min={0} max={500} step={5} session={session} onChange={(staggerMs) => onChange({ ...effect, staggerMs: Math.round(staggerMs) })} />
+          <NumberField label="Delay ms" value={effect.delayMs} min={0} max={10000} step={50} session={session} onChange={(delayMs) => onChange({ ...effect, delayMs: Math.round(delayMs) })} />
+          <NumberField
+            label="Each piece ms"
+            value={effect.durationMs}
+            min={100}
+            max={5000}
+            step={50}
+            session={session}
+            onChange={(durationMs) => onChange({ ...effect, durationMs: Math.round(durationMs) })}
+          />
+        </>
+      );
+  }
 }

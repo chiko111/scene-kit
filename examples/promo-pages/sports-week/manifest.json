@@ -1,0 +1,86 @@
+[
+  {
+    "name": "bg-desk",
+    "width": 1920,
+    "height": 4400,
+    "bytes": 56658
+  },
+  {
+    "name": "bg-mob",
+    "width": 750,
+    "height": 3400,
+    "bytes": 24782
+  },
+  {
+    "name": "card1-boosted-odds",
+    "width": 1210,
+    "height": 520,
+    "bytes": 65028
+  },
+  {
+    "name": "card2-free-bet",
+    "width": 1250,
+    "height": 520,
+    "bytes": 64758
+  },
+  {
+    "name": "card3-accumulator",
+    "width": 1430,
+    "height": 520,
+    "bytes": 71182
+  },
+  {
+    "name": "card4-cashback",
+    "width": 1090,
+    "height": 520,
+    "bytes": 63448
+  },
+  {
+    "name": "card5-champions-league",
+    "width": 1150,
+    "height": 520,
+    "bytes": 61774
+  },
+  {
+    "name": "card6-live-bonus",
+    "width": 1030,
+    "height": 520,
+    "bytes": 57924
+  },
+  {
+    "name": "chevron-down",
+    "width": 192,
+    "height": 192,
+    "bytes": 14882
+  },
+  {
+    "name": "chevron-down-left",
+    "width": 192,
+    "height": 192,
+    "bytes": 14326
+  },
+  {
+    "name": "chevron-down-right",
+    "width": 192,
+    "height": 192,
+    "bytes": 14394
+  },
+  {
+    "name": "header-desk",
+    "width": 1700,
+    "height": 360,
+    "bytes": 115270
+  },
+  {
+    "name": "header-mob",
+    "width": 1060,
+    "height": 560,
+    "bytes": 95526
+  },
+  {
+    "name": "podium",
+    "width": 1400,
+    "height": 760,
+    "bytes": 92276
+  }
+]

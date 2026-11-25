@@ -14,13 +14,15 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   playing: boolean;
+  /** Changing it replays entrances / timelines / split text (SceneView replayKey). */
+  replayKey?: number;
 };
 
 /**
  * Preview = the real web renderer (what you see is exactly what ships).
  * The overlay on top only handles selection, moving and resizing.
  */
-export function Canvas({ history, palette, fontFamily, fonts, selectedId, onSelect, playing }: Props) {
+export function Canvas({ history, palette, fontFamily, fonts, selectedId, onSelect, playing, replayKey }: Props) {
   const { scene } = history;
   const canvasRef = useRef<HTMLDivElement>(null);
   const canvasStyle: CSSProperties & { '--ske-ar': number } = { '--ske-ar': scene.aspectRatio };
@@ -74,7 +76,7 @@ export function Canvas({ history, palette, fontFamily, fonts, selectedId, onSele
         className="ske-canvas"
         style={canvasStyle}
       >
-        <SceneView scene={scene} palette={palette} fontFamily={fontFamily} fonts={fonts} interactive={false} active={playing} />
+        <SceneView scene={scene} palette={palette} fontFamily={fontFamily} fonts={fonts} interactive={false} active={playing} replayKey={replayKey ?? 0} />
         <div
           className="ske-overlay"
           onPointerDown={(e) => {
