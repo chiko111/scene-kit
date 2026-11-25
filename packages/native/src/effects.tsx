@@ -11,8 +11,10 @@ import {
   type Effect,
   type NodeOf,
   type Palette,
-} from '@chiko111/scene-kit-core';
-import { useFadeIn, useLoop } from './useNodeMotion';
+  resolveAsset,
+} from '@chiko111/scene-kit-core/runtime';
+import { ease } from './easing';
+import { useFadeIn, useLoop, useOneShot } from './useNodeMotion';
 
 type Radius = number | '50%';
 
@@ -157,6 +159,9 @@ export function SceneImage({
   reducedMotion,
   borderRadius,
   boxShadow,
+  width,
+  height,
+  replayToken,
 }: {
   node: NodeOf<'image'>;
   unit: number;
@@ -164,7 +169,35 @@ export function SceneImage({
   reducedMotion: boolean;
   borderRadius: Radius;
   boxShadow: string | undefined;
+  /** layer size in px (Ken Burns pans in % of it) */
+  width: number;
+  height: number;
+  replayToken: number;
 }) {
+  const kb = findEffect(node.effects, 'kenBurns');
+  const kbOnce = useOneShot(
+    kb?.mode === 'once' ? 0 : undefined,
+    kb?.mode === 'once' ? kb.durationMs : undefined,
+    running,
+    reducedMotion,
+    replayToken,
+  );
+  // linear progress; the cubic in-out curve is applied below (web: ease-in-out alternate)
+  const kbLoop = useLoop(kb?.mode === 'pingpong' ? kb.durationMs : 0, running && !reducedMotion && kb?.mode === 'pingpong', 'linear-pingpong');
+  const kbMode = kb?.mode;
+  const k = kb ?? { fromScale: 1, toScale: 1, fromX: 0, fromY: 0, toX: 0, toY: 0 };
+  const kenBurnsStyle = useAnimatedStyle(() => {
+    'worklet';
+    if (!kbMode) return {};
+    const p = ease('easeInOut', kbMode === 'once' ? kbOnce.get() : kbLoop.get());
+    return {
+      transform: [
+        { translateX: ((k.fromX + (k.toX - k.fromX) * p) / 100) * width },
+        { translateY: ((k.fromY + (k.toY - k.fromY) * p) / 100) * height },
+        { scale: k.fromScale + (k.toScale - k.fromScale) * p },
+      ],
+    };
+  });
   const blur = findEffect(node.effects, 'blur');
   const focus = useFadeIn(
     blur?.mode === 'focusIn' ? 0 : undefined,
@@ -184,7 +217,7 @@ export function SceneImage({
 
   const image = (extra: { blurRadius?: number }) => (
     <Image
-      source={{ uri: node.uri }}
+      source={{ uri: resolveAsset(node.uri) }}
       contentFit={node.fit}
       autoplay={running}
       cachePolicy="memory-disk"
@@ -195,15 +228,21 @@ export function SceneImage({
     />
   );
 
+  const layers = (
+    <>
+      {blur && image({ blurRadius: blur.amount * unit })}
+      {blur?.mode !== 'static' && <Animated.View style={[styles.fill, sharpStyle]}>{image({})}</Animated.View>}
+    </>
+  );
+
   return (
     <View
-      style={[styles.fill, { borderRadius, boxShadow }]}
+      style={[styles.fill, { borderRadius, boxShadow }, kb && styles.clip]}
       accessible={node.alt.length > 0}
       accessibilityRole="image"
       accessibilityLabel={node.alt || undefined}
     >
-      {blur && image({ blurRadius: blur.amount * unit })}
-      {blur?.mode !== 'static' && <Animated.View style={[styles.fill, sharpStyle]}>{image({})}</Animated.View>}
+      {kb ? <Animated.View style={[styles.fill, kenBurnsStyle]}>{layers}</Animated.View> : layers}
     </View>
   );
 }
@@ -242,7 +281,7 @@ export function ImageContourGlow({
           style={styles.none}
         >
           <Image
-            source={{ uri: node.uri }}
+            source={{ uri: resolveAsset(node.uri) }}
             contentFit={node.fit}
             autoplay={running}
             cachePolicy="memory-disk"
@@ -368,6 +407,7 @@ export function BorderRunners({
 
 const styles = StyleSheet.create({
   fill: { ...StyleSheet.absoluteFill },
+  clip: { overflow: 'hidden' },
   runner: { position: 'absolute', left: 0, top: 0 },
   textBox: { justifyContent: 'center' },
   none: {},

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { findEffect, withAlpha, type Effect, type NodeOf, type Palette } from '@chiko111/scene-kit-core';
+import { findEffect, withAlpha, type Effect, type NodeOf, type Palette, resolveAsset } from '@chiko111/scene-kit-core/runtime';
 
 type CSSVars = CSSProperties & Record<`--${string}`, string | number>;
 
@@ -111,7 +111,7 @@ export function ImageContourGlow({ node, palette }: { node: NodeOf<'image'>; pal
           key={`${token}-${i}`}
           className="sk-img sk-fx-box sk-fx sk-layer"
           data-first={i === 0}
-          src={node.uri}
+          src={resolveAsset(node.uri)}
           alt=""
           draggable={false}
           decoding="async"

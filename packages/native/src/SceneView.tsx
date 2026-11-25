@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { SharedValue } from 'react-native-reanimated';
 import {
   PixelRatio,
   StyleSheet,
@@ -15,7 +16,8 @@ import {
   type Scene,
   type SceneAction,
   type SceneFit,
-} from '@chiko111/scene-kit-core';
+  type Trigger,
+} from '@chiko111/scene-kit-core/runtime';
 import { NodeView } from './NodeView';
 import { useAppActive } from './useAppActive';
 
@@ -43,7 +45,34 @@ export type SceneViewProps = {
   fit?: SceneFit;
   /** Style of the slot (outer frame), e.g. margins or a fixed height for fit="contain". */
   style?: StyleProp<ViewStyle>;
+  /** Change it to replay every entrance / timeline / split-text (e.g. each time a slide becomes active). */
+  replayKey?: number;
+  /** sectionCenterY − viewportCenterY in px (PageView passes it for `parallax` layers). */
+  parallaxDelta?: SharedValue<number>;
 };
+
+/** Per-scene trigger state: visibility overrides and per-layer replay counters. */
+type Runtime = { shown: Readonly<Record<string, boolean>>; replays: Readonly<Record<string, number>> };
+
+function initialRuntime(scene: Scene): Runtime {
+  const shown: Record<string, boolean> = {};
+  for (const n of scene.nodes) shown[n.id] = n.startHidden !== true;
+  return { shown, replays: {} };
+}
+
+function applyTriggers(rt: Runtime, triggers: readonly Trigger[]): Runtime {
+  const shown = { ...rt.shown };
+  const replays = { ...rt.replays };
+  for (const t of triggers) {
+    if (t.do === 'play') replays[t.target] = (replays[t.target] ?? 0) + 1;
+    else if (t.do === 'show') shown[t.target] = true;
+    else if (t.do === 'hide') shown[t.target] = false;
+    else shown[t.target] = !(shown[t.target] ?? true);
+    // a layer that appears plays its entrance again
+    if ((t.do === 'show' || t.do === 'toggle') && shown[t.target]) replays[t.target] = (replays[t.target] ?? 0) + 1;
+  }
+  return { shown, replays };
+}
 
 type Box = { width: number; height: number };
 
@@ -58,10 +87,17 @@ export function SceneView({
   maxHeight,
   fit,
   style,
+  replayKey = 0,
+  parallaxDelta,
 }: SceneViewProps) {
   const appActive = useAppActive();
   const reducedMotion = useReducedMotion();
   const [box, setBox] = useState<Box>({ width: 0, height: 0 });
+  const [runtime, setRuntime] = useState<{ sceneId: string; rt: Runtime }>(() => ({ sceneId: scene.id, rt: initialRuntime(scene) }));
+  // a different scene (e.g. desktop ↔ mobile variant) starts with fresh trigger state
+  const rt = runtime.sceneId === scene.id ? runtime.rt : initialRuntime(scene);
+  const runTriggers = (triggers: readonly Trigger[]) =>
+    setRuntime((prev) => ({ sceneId: scene.id, rt: applyTriggers(prev.sceneId === scene.id ? prev.rt : initialRuntime(scene), triggers) }));
   const running = (active ?? true) && appActive;
 
   const width = PixelRatio.roundToNearestPixel(
@@ -107,6 +143,10 @@ export function SceneView({
                 fontFamily={fontFamily}
                 fonts={fonts}
                 onAction={onAction}
+                replayToken={replayKey * 1000 + (rt.replays[node.id] ?? 0)}
+                shown={rt.shown[node.id] ?? true}
+                onTriggers={runTriggers}
+                parallaxDelta={parallaxDelta}
               />
             ),
           )}

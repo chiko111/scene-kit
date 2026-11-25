@@ -1,5 +1,6 @@
-import { useActionState } from 'react';
-import { ImageUriSchema } from '@chiko111/scene-kit-core';
+import { resolveAsset } from '@chiko111/scene-kit-core';
+import { useActionState, useRef, useState } from 'react';
+import { ImageUriSchema, LottieUriSchema } from '@chiko111/scene-kit-core';
 
 const ACCEPTED_TYPES = ['image/webp', 'image/png', 'image/jpeg', 'image/gif'] as const;
 const LOAD_TIMEOUT_MS = 15000;
@@ -10,6 +11,8 @@ type Props = {
   onAddText: () => void;
   onAddButton: () => void;
   onAddShape: () => void;
+  onAddCountdown: () => void;
+  onAddLottie: (uri: string) => void;
   onUpload: ((file: File) => Promise<string>) | undefined;
   maxUploadBytes: number;
 };
@@ -37,13 +40,18 @@ function loadImageAspect(uri: string): Promise<number> {
       window.clearTimeout(timer);
       reject(new Error('Image could not be loaded'));
     };
-    img.src = uri;
+    img.src = resolveAsset(uri); // dev hosts may serve CDN paths locally
   });
 }
 
 const isAccepted = (type: string) => ACCEPTED_TYPES.some((t) => t === type);
 
-export function AddPanel({ canAdd, onAddImage, onAddText, onAddButton, onAddShape, onUpload, maxUploadBytes }: Props) {
+/** Compact "add layer" toolbar: one click for simple layers, a small pop-up for images and Lottie files. */
+export function AddPanel({ canAdd, onAddImage, onAddText, onAddButton, onAddShape, onAddCountdown, onAddLottie, onUpload, maxUploadBytes }: Props) {
+  const [lottieUrl, setLottieUrl] = useState('');
+  const [lottieError, setLottieError] = useState<string | null>(null);
+  const imagePop = useRef<HTMLDetailsElement>(null);
+  const lottiePop = useRef<HTMLDetailsElement>(null);
   const [state, formAction, pending] = useActionState<UploadState, FormData>(async (_prev, formData) => {
     if (!canAdd) return { error: 'Layer limit reached' };
 
@@ -72,6 +80,7 @@ export function AddPanel({ canAdd, onAddImage, onAddText, onAddButton, onAddShap
 
     try {
       onAddImage(uri, await loadImageAspect(uri));
+      if (imagePop.current) imagePop.current.open = false;
       return { error: null };
     } catch (error) {
       return { error: messageOf(error) };
@@ -79,35 +88,64 @@ export function AddPanel({ canAdd, onAddImage, onAddText, onAddButton, onAddShap
   }, { error: null });
 
   return (
-    <div className="ske-add">
-      <div className="ske-row">
-        <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddButton}>
-          + Button
-        </button>
-        <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddText}>
-          + Text
-        </button>
-        <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddShape}>
-          + Shape
-        </button>
-      </div>
-
-      <form action={formAction} className="ske-upload">
-        <strong>+ Image</strong>
-        {onUpload && (
-          <input type="file" name="file" accept={ACCEPTED_TYPES.join(',')} disabled={pending || !canAdd} />
-        )}
-        <input type="url" name="url" placeholder="https://cdn…/image.webp" disabled={pending || !canAdd} />
-        <button type="submit" className="ske-btn ske-btn-primary" disabled={pending || !canAdd}>
-          {pending ? 'Adding…' : 'Add image'}
-        </button>
-        {state.error && (
-          <p className="ske-error" role="alert">
-            {state.error}
-          </p>
-        )}
-        <small className="ske-hint">Animated WebP is preferred over GIF (smaller, real transparency).</small>
-      </form>
+    <div className="ske-row ske-add" role="group" aria-label="Add layer">
+      <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddText}>
+        + Text
+      </button>
+      <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddButton}>
+        + Button
+      </button>
+      <details className="ske-pop" ref={imagePop}>
+        <summary className="ske-btn" aria-disabled={!canAdd}>+ Image</summary>
+        <form action={formAction} className="ske-pop-body ske-upload">
+          {onUpload && <input type="file" name="file" accept={ACCEPTED_TYPES.join(',')} disabled={pending || !canAdd} />}
+          <input type="url" name="url" placeholder="https://cdn…/image.webp" disabled={pending || !canAdd} />
+          <button type="submit" className="ske-btn ske-btn-primary" disabled={pending || !canAdd}>
+            {pending ? 'Adding…' : 'Add image'}
+          </button>
+          {state.error && (
+            <p className="ske-error" role="alert">
+              {state.error}
+            </p>
+          )}
+          <small className="ske-hint">Animated WebP is preferred over GIF (smaller, real transparency).</small>
+        </form>
+      </details>
+      <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddShape}>
+        + Shape
+      </button>
+      <button type="button" className="ske-btn" disabled={!canAdd} onClick={onAddCountdown}>
+        + Countdown
+      </button>
+      <details className="ske-pop" ref={lottiePop}>
+        <summary className="ske-btn" aria-disabled={!canAdd}>+ Lottie</summary>
+        <form
+          className="ske-pop-body ske-upload"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const uri = lottieUrl.trim();
+            if (!LottieUriSchema.safeParse(uri).success) {
+              setLottieError('Lottie URL must be https:// and end in .json or .lottie');
+              return;
+            }
+            setLottieError(null);
+            setLottieUrl('');
+            onAddLottie(uri);
+            if (lottiePop.current) lottiePop.current.open = false;
+          }}
+        >
+          <input type="url" aria-label="Lottie URL" placeholder="https://cdn…/animation.json" value={lottieUrl} disabled={!canAdd} onChange={(e) => setLottieUrl(e.target.value)} />
+          <button type="submit" className="ske-btn ske-btn-primary" disabled={!canAdd || lottieUrl.trim() === ''}>
+            Add Lottie
+          </button>
+          {lottieError && (
+            <p className="ske-error" role="alert">
+              {lottieError}
+            </p>
+          )}
+          <small className="ske-hint">After Effects / LottieFiles export (.json or .lottie).</small>
+        </form>
+      </details>
     </div>
   );
 }

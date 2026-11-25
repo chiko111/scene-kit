@@ -1,0 +1,1396 @@
+{
+  "version": 1,
+  "id": "sports-week",
+  "name": "Спортна седмица – inbet",
+  "background": "background",
+  "mobileBreakpoint": 600,
+  "maxWidth": 1920,
+  "sections": [
+    {
+      "kind": "scene",
+      "id": "path",
+      "scene": {
+        "version": 1,
+        "id": "sports_week_d",
+        "name": "Спортна седмица – desktop",
+        "aspectRatio": 0.436364,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Background",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/bg-desk.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": []
+          },
+          {
+            "id": "header",
+            "name": "СПОРТНА СЕДМИЦА",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/header-desk.webp",
+            "fit": "contain",
+            "alt": "Спортна седмица – оферти всеки ден",
+            "radius": 0,
+            "frame": {
+              "x": 16.0,
+              "y": 3.0,
+              "w": 68,
+              "h": 6.28,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeDown",
+                "delayMs": 0,
+                "durationMs": 900
+              }
+            ],
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "card1",
+            "name": "Card 1 – boosted-odds",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card1-boosted-odds.webp",
+            "fit": "contain",
+            "alt": "Повишени коефициенти на топ мачовете",
+            "radius": 0,
+            "frame": {
+              "x": 19.94,
+              "y": 11.48,
+              "w": 44.11,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideRight",
+                "delayMs": 120,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 0.69,
+                "durationMs": 2500,
+                "delayMs": 300
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/boosted-odds"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev1",
+            "name": "Chevron 1",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 47.0,
+              "y": 21.05,
+              "w": 6,
+              "h": 2.62,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 300,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 0.42,
+                "durationMs": 1400,
+                "delayMs": 0
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card2",
+            "name": "Card 2 – free-bet",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card2-free-bet.webp",
+            "fit": "contain",
+            "alt": "Безплатен залог 10 € за нов клиент",
+            "radius": 0,
+            "frame": {
+              "x": 35.21,
+              "y": 24.57,
+              "w": 45.57,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 260,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 0.56,
+                "durationMs": 2750,
+                "delayMs": 650
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Promo",
+              "webPath": "/promotions/free-bet",
+              "params": {
+                "slug": "free-bet"
+              }
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev2",
+            "name": "Chevron 2",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-left.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 47.0,
+              "y": 34.14,
+              "w": 6,
+              "h": 2.62,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 440,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 0.42,
+                "durationMs": 1400,
+                "delayMs": 200
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card3",
+            "name": "Card 3 – accumulator",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card3-accumulator.webp",
+            "fit": "contain",
+            "alt": "Акумулатор бонус до +50% за комбинирани залози",
+            "radius": 0,
+            "frame": {
+              "x": 15.93,
+              "y": 37.65,
+              "w": 52.14,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "zoomIn",
+                "delayMs": 400,
+                "durationMs": 900
+              },
+              {
+                "type": "wiggle",
+                "angle": 1.2,
+                "durationMs": 1600,
+                "delayMs": 1000
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/accumulator"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev3",
+            "name": "Chevron 3",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 47.0,
+              "y": 47.22,
+              "w": 6,
+              "h": 2.62,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 580,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 0.42,
+                "durationMs": 1400,
+                "delayMs": 400
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card4",
+            "name": "Card 4 – cashback",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card4-cashback.webp",
+            "fit": "contain",
+            "alt": "Кешбек до 20% при губещ залог",
+            "radius": 0,
+            "frame": {
+              "x": 38.13,
+              "y": 50.74,
+              "w": 39.74,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 540,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 0.56,
+                "durationMs": 2500,
+                "delayMs": 1350
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Promo",
+              "webPath": "/promotions/cashback",
+              "params": {
+                "slug": "cashback"
+              }
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev4",
+            "name": "Chevron 4",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-left.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 47.0,
+              "y": 60.31,
+              "w": 6,
+              "h": 2.62,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 720,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 0.42,
+                "durationMs": 1400,
+                "delayMs": 600
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card5",
+            "name": "Card 5 – champions-league",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card5-champions-league.webp",
+            "fit": "contain",
+            "alt": "Шампионска лига – специални пазари",
+            "radius": 0,
+            "frame": {
+              "x": 21.04,
+              "y": 63.82,
+              "w": 41.93,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "bounceIn",
+                "delayMs": 680,
+                "durationMs": 900
+              },
+              {
+                "type": "wiggle",
+                "angle": 1.2,
+                "durationMs": 1600,
+                "delayMs": 1700
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/champions-league"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev5",
+            "name": "Chevron 5",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 47.0,
+              "y": 73.39,
+              "w": 6,
+              "h": 2.62,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 860,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 0.42,
+                "durationMs": 1400,
+                "delayMs": 800
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card6",
+            "name": "Card 6 – live-bonus",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card6-live-bonus.webp",
+            "fit": "contain",
+            "alt": "Лайв бонус всяка вечер",
+            "radius": 0,
+            "frame": {
+              "x": 39.22,
+              "y": 76.91,
+              "w": 37.55,
+              "h": 8.27,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 820,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 0.56,
+                "durationMs": 3000,
+                "delayMs": 2050
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/live"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 0.56,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 1.39,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "podium",
+            "name": "Podium",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/podium.webp",
+            "fit": "contain",
+            "alt": "Футболна топка на подиум",
+            "radius": 0,
+            "frame": {
+              "x": 24.0,
+              "y": 86.68,
+              "w": 52,
+              "h": 12.32,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 600,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 3,
+                    "scale": 0.8,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": -0.5,
+                    "scale": 1.05,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 1000,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "mobileScene": {
+        "version": 1,
+        "id": "sports_week_m",
+        "name": "Спортна седмица – mobile",
+        "aspectRatio": 0.220588,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Background",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/bg-mob.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": []
+          },
+          {
+            "id": "header",
+            "name": "СПОРТНА СЕДМИЦА",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/header-mob.webp",
+            "fit": "contain",
+            "alt": "Спортна седмица – оферти всеки ден",
+            "radius": 0,
+            "frame": {
+              "x": 4.0,
+              "y": 2.2,
+              "w": 92,
+              "h": 10.72,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeDown",
+                "delayMs": 0,
+                "durationMs": 900
+              }
+            ],
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "card1",
+            "name": "Card 1 – boosted-odds",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card1-boosted-odds.webp",
+            "fit": "contain",
+            "alt": "Повишени коефициенти на топ мачовете",
+            "radius": 0,
+            "frame": {
+              "x": 2.15,
+              "y": 14.92,
+              "w": 89.69,
+              "h": 8.5,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideRight",
+                "delayMs": 120,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 2.56,
+                "durationMs": 2500,
+                "delayMs": 300
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/boosted-odds"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev1",
+            "name": "Chevron 1",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 43.5,
+              "y": 24.15,
+              "w": 13,
+              "h": 2.87,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 300,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 1.54,
+                "durationMs": 1400,
+                "delayMs": 0
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card2",
+            "name": "Card 2 – free-bet",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card2-free-bet.webp",
+            "fit": "contain",
+            "alt": "Безплатен залог 10 € за нов клиент",
+            "radius": 0,
+            "frame": {
+              "x": 7.76,
+              "y": 27.34,
+              "w": 90.48,
+              "h": 8.3,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 260,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 2.05,
+                "durationMs": 2750,
+                "delayMs": 650
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Promo",
+              "webPath": "/promotions/free-bet",
+              "params": {
+                "slug": "free-bet"
+              }
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev2",
+            "name": "Chevron 2",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-left.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 43.5,
+              "y": 36.37,
+              "w": 13,
+              "h": 2.87,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 440,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 1.54,
+                "durationMs": 1400,
+                "delayMs": 200
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card3",
+            "name": "Card 3 – accumulator",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card3-accumulator.webp",
+            "fit": "contain",
+            "alt": "Акумулатор бонус до +50% за комбинирани залози",
+            "radius": 0,
+            "frame": {
+              "x": 1,
+              "y": 39.57,
+              "w": 94,
+              "h": 7.54,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "zoomIn",
+                "delayMs": 400,
+                "durationMs": 900
+              },
+              {
+                "type": "wiggle",
+                "angle": 1.2,
+                "durationMs": 1600,
+                "delayMs": 1000
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/accumulator"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev3",
+            "name": "Chevron 3",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 43.5,
+              "y": 47.83,
+              "w": 13,
+              "h": 2.87,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 580,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 1.54,
+                "durationMs": 1400,
+                "delayMs": 400
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card4",
+            "name": "Card 4 – cashback",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card4-cashback.webp",
+            "fit": "contain",
+            "alt": "Кешбек до 20% при губещ залог",
+            "radius": 0,
+            "frame": {
+              "x": 9.33,
+              "y": 51.03,
+              "w": 87.34,
+              "h": 9.19,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 540,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 2.05,
+                "durationMs": 2500,
+                "delayMs": 1350
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Promo",
+              "webPath": "/promotions/cashback",
+              "params": {
+                "slug": "cashback"
+              }
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev4",
+            "name": "Chevron 4",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-left.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 43.5,
+              "y": 60.94,
+              "w": 13,
+              "h": 2.87,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 720,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 1.54,
+                "durationMs": 1400,
+                "delayMs": 600
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card5",
+            "name": "Card 5 – champions-league",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card5-champions-league.webp",
+            "fit": "contain",
+            "alt": "Шампионска лига – специални пазари",
+            "radius": 0,
+            "frame": {
+              "x": 2.74,
+              "y": 64.14,
+              "w": 88.52,
+              "h": 8.83,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "bounceIn",
+                "delayMs": 680,
+                "durationMs": 900
+              },
+              {
+                "type": "wiggle",
+                "angle": 1.2,
+                "durationMs": 1600,
+                "delayMs": 1700
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/champions-league"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "chev5",
+            "name": "Chevron 5",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/chevron-down-right.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "frame": {
+              "x": 43.5,
+              "y": 73.69,
+              "w": 13,
+              "h": 2.87,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 860,
+                "durationMs": 700
+              },
+              {
+                "type": "float",
+                "distance": 1.54,
+                "durationMs": 1400,
+                "delayMs": 800
+              },
+              {
+                "type": "parallax",
+                "depth": 0.2
+              }
+            ]
+          },
+          {
+            "id": "card6",
+            "name": "Card 6 – live-bonus",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/card6-live-bonus.webp",
+            "fit": "contain",
+            "alt": "Лайв бонус всяка вечер",
+            "radius": 0,
+            "frame": {
+              "x": 9.92,
+              "y": 76.89,
+              "w": 86.17,
+              "h": 9.6,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 820,
+                "durationMs": 900
+              },
+              {
+                "type": "float",
+                "distance": 2.05,
+                "durationMs": 3000,
+                "delayMs": 2050
+              }
+            ],
+            "action": {
+              "type": "navigate",
+              "route": "Sport",
+              "webPath": "/sport/live"
+            },
+            "hover": {
+              "scale": 1.07,
+              "lift": 2.05,
+              "brightness": 1.15,
+              "glow": {
+                "color": "accent",
+                "blur": 5.13,
+                "opacity": 0.8
+              },
+              "durationMs": 500
+            }
+          },
+          {
+            "id": "podium",
+            "name": "Podium",
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/sports-week/podium.webp",
+            "fit": "contain",
+            "alt": "Футболна топка на подиум",
+            "radius": 0,
+            "frame": {
+              "x": 4.0,
+              "y": 87.98,
+              "w": 92,
+              "h": 11.02,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 600,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 3,
+                    "scale": 0.8,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": -0.5,
+                    "scale": 1.05,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 1000,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "terms",
+      "widget": {
+        "type": "terms",
+        "title": "ПРАВИЛА И УСЛОВИЯ:",
+        "expandLabel": "ПОКАЖИ ПЪЛНИ ПРАВИЛА И УСЛОВИЯ",
+        "collapseLabel": "СКРИЙ ПРАВИЛА И УСЛОВИЯ",
+        "previewBlocks": 3,
+        "blocks": [
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Кампанията „",
+                "bold": false
+              },
+              {
+                "text": "СПОРТНА СЕДМИЦА",
+                "bold": true
+              },
+              {
+                "text": "“ е активна от 01.12.2026 г. 00:00 ч. до 07.12.2026 г. 23:59 ч.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "В кампанията могат да участват само регистрирани и верифицирани потребители на inbet.com, навършили ",
+                "bold": false
+              },
+              {
+                "text": "18 години",
+                "bold": true
+              },
+              {
+                "text": ".",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Всяка оферта от кампанията може да бъде използвана веднъж на потребител, освен ако не е посочено друго.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Повишените коефициенти важат само за избрани събития, обозначени в секция „Спорт“.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Безплатният залог от ",
+                "bold": false
+              },
+              {
+                "text": "10 €",
+                "bold": true
+              },
+              {
+                "text": " се начислява на нови клиенти след първи депозит от минимум 10 €.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Акумулатор бонусът важи за комбинирани залози с минимум 3 селекции с коефициент от 1.30 или по-висок.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Максималният акумулатор бонус е ",
+                "bold": false
+              },
+              {
+                "text": "500 €",
+                "bold": true
+              },
+              {
+                "text": " на залог.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Кешбекът се изчислява върху нетната загуба от сингъл залози за периода и се изплаща до 48 часа след края на кампанията.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Бонус средствата подлежат на изискване за превъртане ",
+                "bold": false
+              },
+              {
+                "text": "x5",
+                "bold": true
+              },
+              {
+                "text": " с минимален коефициент 1.50 в рамките на 7 дни.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Лайв бонусът е валиден за залози на живо, направени между 18:00 ч. и 23:59 ч.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Организаторът си запазва правото да променя или прекратява кампанията по всяко време.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "paragraph",
+            "spans": [
+              {
+                "text": "18+ | Залагайте отговорно. Хазартът може да доведе до пристрастяване.",
+                "bold": true
+              }
+            ]
+          }
+        ],
+        "colors": {
+          "background": "background",
+          "card": "surface",
+          "text": "onSurface",
+          "accent": "primary"
+        },
+        "font": "heading"
+      }
+    }
+  ]
+}

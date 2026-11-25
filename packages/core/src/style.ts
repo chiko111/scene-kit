@@ -51,6 +51,8 @@ export function nodeRadius(node: SceneNode): number | 'ellipse' {
     case 'button':
       return node.radius;
     case 'text':
+    case 'lottie':
+    case 'countdown':
       return 0;
   }
 }

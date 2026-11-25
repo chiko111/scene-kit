@@ -75,6 +75,55 @@ export function NumberField({ label, value, min, max, step, onChange, session }:
   );
 }
 
+/** Like NumberField, but empty means "not set" (undefined). */
+export function OptionalNumberField({
+  label,
+  value,
+  min,
+  max,
+  step,
+  onChange,
+  session,
+}: Omit<NumberFieldProps, 'value' | 'onChange'> & { value: number | undefined; onChange: (value: number | undefined) => void }) {
+  const id = useId();
+  const [draft, setDraft] = useState<string | null>(null);
+  const text = draft ?? (value === undefined ? '' : String(value));
+  const ok = (t: string) => t.trim() === '' || (Number.isFinite(Number(t)) && Number(t) >= min && Number(t) <= max);
+
+  return (
+    <div className="ske-field">
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        type="number"
+        inputMode="decimal"
+        min={min}
+        max={max}
+        step={step}
+        placeholder="—"
+        aria-invalid={!ok(text)}
+        value={text}
+        onFocus={() => {
+          setDraft(text);
+          session?.begin();
+        }}
+        onChange={(e) => {
+          const t = e.target.value;
+          setDraft(t);
+          if (ok(t)) onChange(t.trim() === '' ? undefined : Number(t));
+        }}
+        onBlur={() => {
+          setDraft(null);
+          session?.end();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') e.currentTarget.blur();
+        }}
+      />
+    </div>
+  );
+}
+
 type TextFieldProps = {
   label: string;
   value: string;

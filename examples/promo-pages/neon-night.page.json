@@ -1,0 +1,5007 @@
+{
+  "version": 1,
+  "id": "neon-night",
+  "name": "Неонова нощ – турнир по слотове",
+  "background": "background",
+  "mobileBreakpoint": 600,
+  "maxWidth": 1920,
+  "sections": [
+    {
+      "kind": "slider",
+      "id": "hero",
+      "slides": [
+        {
+          "id": "slide1",
+          "scene": {
+            "version": 1,
+            "id": "nn_hero1_d",
+            "name": "Слайд 1 – Неонова нощ (desktop)",
+            "aspectRatio": 2.133333,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "title",
+                "name": "НЕОНОВА НОЩ (chrome)",
+                "frame": {
+                  "x": 16,
+                  "y": 3,
+                  "w": 68,
+                  "h": 26.54,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 0,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1.35,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 700,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 0.97,
+                        "rotate": 0,
+                        "easing": "easeOut"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "back"
+                      }
+                    ]
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/title-desk.webp",
+                "fit": "contain",
+                "alt": "Неонова нощ",
+                "radius": 0
+              },
+              {
+                "id": "subtitle",
+                "name": "ТУРНИР ПО СЛОТОВЕ",
+                "frame": {
+                  "x": 20,
+                  "y": 29.54,
+                  "w": 60,
+                  "h": 6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.12,
+                  "blur": 0.45
+                },
+                "effects": [
+                  {
+                    "type": "splitText",
+                    "by": "char",
+                    "preset": "fadeUp",
+                    "staggerMs": 40,
+                    "delayMs": 500,
+                    "durationMs": 500
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "secondary"
+                    ],
+                    "blur": 1,
+                    "spread": 0.1,
+                    "durationMs": 2000
+                  }
+                ],
+                "type": "text",
+                "text": "ТУРНИР ПО СЛОТОВЕ",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 2.2,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "label",
+                "name": "ЗАПОЧВА СЛЕД",
+                "frame": {
+                  "x": 30,
+                  "y": 66,
+                  "w": 40,
+                  "h": 4.5,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.12,
+                  "blur": 0.45
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 800,
+                    "durationMs": 600
+                  }
+                ],
+                "type": "text",
+                "text": "ЗАПОЧВА СЛЕД",
+                "color": "onSurface",
+                "font": "heading",
+                "fontSize": 1.3,
+                "weight": "700",
+                "align": "center"
+              },
+              {
+                "id": "countdown",
+                "name": "Countdown – start",
+                "frame": {
+                  "x": 25,
+                  "y": 70,
+                  "w": 50,
+                  "h": 9,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "secondary",
+                  "opacity": 0.85,
+                  "x": 0,
+                  "y": 0,
+                  "blur": 1.1
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 900,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "countdown",
+                "endDate": "2026-12-05",
+                "endTime": {
+                  "hour": 21,
+                  "minute": 0
+                },
+                "timeZone": "Europe/Sofia",
+                "format": "dhms",
+                "labels": {
+                  "days": "д",
+                  "hours": "ч",
+                  "minutes": "м",
+                  "seconds": "с"
+                },
+                "endedText": "ТУРНИРЪТ ЗАПОЧНА!",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 3.2,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 41.0,
+                  "y": 84,
+                  "w": 18,
+                  "h": 8.6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 1.9,
+                "weight": "800",
+                "radius": 4.3,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 0.56,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 1.53,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          },
+          "mobileScene": {
+            "version": 1,
+            "id": "nn_hero1_m",
+            "name": "Слайд 1 – Неонова нощ (mobile)",
+            "aspectRatio": 0.681818,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "title",
+                "name": "НЕОНОВА НОЩ (chrome)",
+                "frame": {
+                  "x": 4,
+                  "y": 5,
+                  "w": 92,
+                  "h": 34.67,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 0,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1.35,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 700,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 0.97,
+                        "rotate": 0,
+                        "easing": "easeOut"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "back"
+                      }
+                    ]
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/title-mob.webp",
+                "fit": "contain",
+                "alt": "Неонова нощ",
+                "radius": 0
+              },
+              {
+                "id": "subtitle",
+                "name": "ТУРНИР ПО СЛОТОВЕ",
+                "frame": {
+                  "x": 4,
+                  "y": 40.67,
+                  "w": 92,
+                  "h": 6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.3,
+                  "blur": 1.1
+                },
+                "effects": [
+                  {
+                    "type": "splitText",
+                    "by": "char",
+                    "preset": "fadeUp",
+                    "staggerMs": 40,
+                    "delayMs": 500,
+                    "durationMs": 500
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "secondary"
+                    ],
+                    "blur": 2,
+                    "spread": 0.2,
+                    "durationMs": 2000
+                  }
+                ],
+                "type": "text",
+                "text": "ТУРНИР ПО СЛОТОВЕ",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 5.2,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "label",
+                "name": "ЗАПОЧВА СЛЕД",
+                "frame": {
+                  "x": 10,
+                  "y": 69,
+                  "w": 80,
+                  "h": 4,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.3,
+                  "blur": 1.1
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 800,
+                    "durationMs": 600
+                  }
+                ],
+                "type": "text",
+                "text": "ЗАПОЧВА СЛЕД",
+                "color": "onSurface",
+                "font": "heading",
+                "fontSize": 3.6,
+                "weight": "700",
+                "align": "center"
+              },
+              {
+                "id": "countdown",
+                "name": "Countdown – start",
+                "frame": {
+                  "x": 2,
+                  "y": 73,
+                  "w": 96,
+                  "h": 6.5,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "secondary",
+                  "opacity": 0.85,
+                  "x": 0,
+                  "y": 0,
+                  "blur": 2.4
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 900,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "countdown",
+                "endDate": "2026-12-05",
+                "endTime": {
+                  "hour": 21,
+                  "minute": 0
+                },
+                "timeZone": "Europe/Sofia",
+                "format": "dhms",
+                "labels": {
+                  "days": "д",
+                  "hours": "ч",
+                  "minutes": "м",
+                  "seconds": "с"
+                },
+                "endedText": "ТУРНИРЪТ ЗАПОЧНА!",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 6.6,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 22.0,
+                  "y": 86,
+                  "w": 56,
+                  "h": 7.4,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 4.6,
+                "weight": "800",
+                "radius": 3.7,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 2.05,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 5.64,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "slide2",
+          "scene": {
+            "version": 1,
+            "id": "nn_hero2_d",
+            "name": "Слайд 2 – Награден фонд (desktop)",
+            "aspectRatio": 2.133333,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "fund",
+                "name": "НАГРАДЕН ФОНД",
+                "frame": {
+                  "x": 25,
+                  "y": 8,
+                  "w": 50,
+                  "h": 8,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeDown",
+                    "delayMs": 200,
+                    "durationMs": 700
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "secondary"
+                    ],
+                    "blur": 1,
+                    "spread": 0.1,
+                    "durationMs": 2000
+                  }
+                ],
+                "type": "text",
+                "text": "НАГРАДЕН ФОНД",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 2.8,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "prize",
+                "name": "50 000 € (chrome)",
+                "frame": {
+                  "x": 18,
+                  "y": 19,
+                  "w": 64,
+                  "h": 33.1,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 300,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 0.2,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 450,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1.12,
+                        "rotate": 0,
+                        "easing": "back"
+                      },
+                      {
+                        "atMs": 800,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "easeInOut"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.03,
+                    "durationMs": 2200,
+                    "delayMs": 1500
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/prize-50000.webp",
+                "fit": "contain",
+                "alt": "50 000 €",
+                "radius": 0
+              },
+              {
+                "id": "top",
+                "name": "ЗА ТОП 50 ИГРАЧИ",
+                "frame": {
+                  "x": 30,
+                  "y": 69,
+                  "w": 40,
+                  "h": 6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.12,
+                  "blur": 0.45
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeUp",
+                    "delayMs": 900,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "text",
+                "text": "ЗА ТОП 50 ИГРАЧИ",
+                "color": "onSurface",
+                "font": "heading",
+                "fontSize": 1.6,
+                "weight": "700",
+                "align": "center"
+              },
+              {
+                "id": "coin1",
+                "name": "Coin 1",
+                "frame": {
+                  "x": 7,
+                  "y": 20,
+                  "w": 7,
+                  "h": 14.93,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 600,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -6,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -4.800000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 0.6,
+                    "durationMs": 1800,
+                    "delayMs": 1600
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "coin2",
+                "name": "Coin 2",
+                "frame": {
+                  "x": 85,
+                  "y": 12,
+                  "w": 6,
+                  "h": 12.8,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 850,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -6,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -4.800000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 0.6,
+                    "durationMs": 2100,
+                    "delayMs": 1900
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "coin3",
+                "name": "Coin 3",
+                "frame": {
+                  "x": 80,
+                  "y": 50,
+                  "w": 8,
+                  "h": 17.07,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 1100,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -6,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -4.800000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 0.6,
+                    "durationMs": 2400,
+                    "delayMs": 2200
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 41.0,
+                  "y": 84,
+                  "w": 18,
+                  "h": 8.6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 1.9,
+                "weight": "800",
+                "radius": 4.3,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 0.56,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 1.53,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          },
+          "mobileScene": {
+            "version": 1,
+            "id": "nn_hero2_m",
+            "name": "Слайд 2 – Награден фонд (mobile)",
+            "aspectRatio": 0.681818,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "fund",
+                "name": "НАГРАДЕН ФОНД",
+                "frame": {
+                  "x": 4,
+                  "y": 12,
+                  "w": 92,
+                  "h": 6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeDown",
+                    "delayMs": 200,
+                    "durationMs": 700
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "secondary"
+                    ],
+                    "blur": 2,
+                    "spread": 0.2,
+                    "durationMs": 2000
+                  }
+                ],
+                "type": "text",
+                "text": "НАГРАДЕН ФОНД",
+                "color": "secondary",
+                "font": "heading",
+                "fontSize": 6.4,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "prize",
+                "name": "50 000 € (chrome)",
+                "frame": {
+                  "x": 3,
+                  "y": 21,
+                  "w": 94,
+                  "h": 15.54,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 300,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 0.2,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 450,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1.12,
+                        "rotate": 0,
+                        "easing": "back"
+                      },
+                      {
+                        "atMs": 800,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "easeInOut"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.03,
+                    "durationMs": 2200,
+                    "delayMs": 1500
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/prize-50000.webp",
+                "fit": "contain",
+                "alt": "50 000 €",
+                "radius": 0
+              },
+              {
+                "id": "top",
+                "name": "ЗА ТОП 50 ИГРАЧИ",
+                "frame": {
+                  "x": 10,
+                  "y": 71,
+                  "w": 80,
+                  "h": 5,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.3,
+                  "blur": 1.1
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeUp",
+                    "delayMs": 900,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "text",
+                "text": "ЗА ТОП 50 ИГРАЧИ",
+                "color": "onSurface",
+                "font": "heading",
+                "fontSize": 4.6,
+                "weight": "700",
+                "align": "center"
+              },
+              {
+                "id": "coin1",
+                "name": "Coin 1",
+                "frame": {
+                  "x": 3,
+                  "y": 38,
+                  "w": 16,
+                  "h": 10.91,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 600,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -14,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -11.200000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 1.2,
+                    "durationMs": 1800,
+                    "delayMs": 1600
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "coin2",
+                "name": "Coin 2",
+                "frame": {
+                  "x": 81,
+                  "y": 38,
+                  "w": 16,
+                  "h": 10.91,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 850,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -14,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -11.200000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 1.2,
+                    "durationMs": 2100,
+                    "delayMs": 1900
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "coin3",
+                "name": "Coin 3",
+                "frame": {
+                  "x": 42,
+                  "y": 52,
+                  "w": 16,
+                  "h": 10.91,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "timeline",
+                    "delayMs": 1100,
+                    "repeat": "none",
+                    "keyframes": [
+                      {
+                        "atMs": 0,
+                        "opacity": 0,
+                        "x": 0,
+                        "y": -14,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 200,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": -11.200000000000001,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "linear"
+                      },
+                      {
+                        "atMs": 1000,
+                        "opacity": 1,
+                        "x": 0,
+                        "y": 0,
+                        "scale": 1,
+                        "rotate": 0,
+                        "easing": "bounce"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "float",
+                    "distance": 1.2,
+                    "durationMs": 2400,
+                    "delayMs": 2200
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/coin.webp",
+                "fit": "contain",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 22.0,
+                  "y": 86,
+                  "w": 56,
+                  "h": 7.4,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 4.6,
+                "weight": "800",
+                "radius": 3.7,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 2.05,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 5.64,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "slide3",
+          "scene": {
+            "version": 1,
+            "id": "nn_hero3_d",
+            "name": "Слайд 3 – Всяка нощ (desktop)",
+            "aspectRatio": 2.133333,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-desk.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "moon",
+                "name": "Moon + clock",
+                "frame": {
+                  "x": 7,
+                  "y": 6,
+                  "w": 30,
+                  "h": 64.0,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "zoomIn",
+                    "delayMs": 100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "float",
+                    "distance": 0.7,
+                    "durationMs": 3200,
+                    "delayMs": 1000
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/moon-clock.webp",
+                "fit": "contain",
+                "alt": "Луна и неонов часовник",
+                "radius": 0
+              },
+              {
+                "id": "sign",
+                "name": "ВСЯКА НОЩ 21:00 – 02:00",
+                "frame": {
+                  "x": 41,
+                  "y": 10,
+                  "w": 52,
+                  "h": 35.78,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "flipIn",
+                    "delayMs": 300,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "primary",
+                      "secondary"
+                    ],
+                    "blur": 1.5,
+                    "spread": 0.2,
+                    "durationMs": 1500
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sign-hours.webp",
+                "fit": "contain",
+                "alt": "Всяка нощ 21:00 – 02:00",
+                "radius": 0
+              },
+              {
+                "id": "dates",
+                "name": "05.12 – 14.12.2026",
+                "frame": {
+                  "x": 25,
+                  "y": 67,
+                  "w": 50,
+                  "h": 6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.12,
+                  "blur": 0.45
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeUp",
+                    "delayMs": 700,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "text",
+                "text": "05.12 – 14.12.2026",
+                "color": "gold",
+                "font": "heading",
+                "fontSize": 2.2,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "eq",
+                "name": "Equalizer (Lottie)",
+                "frame": {
+                  "x": 80,
+                  "y": 74,
+                  "w": 12,
+                  "h": 15.36,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 900,
+                    "durationMs": 600
+                  }
+                ],
+                "type": "lottie",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/equalizer.json",
+                "loop": true,
+                "speed": 1,
+                "alt": "Неонов еквалайзер"
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 41.0,
+                  "y": 84,
+                  "w": 18,
+                  "h": 8.6,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 1.9,
+                "weight": "800",
+                "radius": 4.3,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 0.56,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 1.53,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          },
+          "mobileScene": {
+            "version": 1,
+            "id": "nn_hero3_m",
+            "name": "Слайд 3 – Всяка нощ (mobile)",
+            "aspectRatio": 0.681818,
+            "background": "background",
+            "nodes": [
+              {
+                "id": "sky",
+                "name": "Sky",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sky-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "stars",
+                "name": "Stars (parallax)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "parallax",
+                    "depth": 0.35
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/stars-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "sun",
+                "name": "Sun + grid (Ken Burns)",
+                "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "kenBurns",
+                    "fromScale": 1,
+                    "toScale": 1.08,
+                    "fromX": 0,
+                    "fromY": 0,
+                    "toX": 0,
+                    "toY": 2,
+                    "durationMs": 16000,
+                    "mode": "pingpong"
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sun-mob.webp",
+                "fit": "cover",
+                "alt": "",
+                "radius": 0
+              },
+              {
+                "id": "moon",
+                "name": "Moon + clock",
+                "frame": {
+                  "x": 22,
+                  "y": 3,
+                  "w": 56,
+                  "h": 38.18,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "zoomIn",
+                    "delayMs": 100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "float",
+                    "distance": 1.2,
+                    "durationMs": 3200,
+                    "delayMs": 1000
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/moon-clock.webp",
+                "fit": "contain",
+                "alt": "Луна и неонов часовник",
+                "radius": 0
+              },
+              {
+                "id": "sign",
+                "name": "ВСЯКА НОЩ 21:00 – 02:00",
+                "frame": {
+                  "x": 4,
+                  "y": 42,
+                  "w": 92,
+                  "h": 20.23,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "flipIn",
+                    "delayMs": 300,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "glow",
+                    "colors": [
+                      "primary",
+                      "secondary"
+                    ],
+                    "blur": 1.5,
+                    "spread": 0.2,
+                    "durationMs": 1500
+                  }
+                ],
+                "type": "image",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/sign-hours.webp",
+                "fit": "contain",
+                "alt": "Всяка нощ 21:00 – 02:00",
+                "radius": 0
+              },
+              {
+                "id": "dates",
+                "name": "05.12 – 14.12.2026",
+                "frame": {
+                  "x": 4,
+                  "y": 64.23,
+                  "w": 92,
+                  "h": 5,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": {
+                  "color": "black",
+                  "opacity": 0.9,
+                  "x": 0,
+                  "y": 0.3,
+                  "blur": 1.1
+                },
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fadeUp",
+                    "delayMs": 700,
+                    "durationMs": 700
+                  }
+                ],
+                "type": "text",
+                "text": "05.12 – 14.12.2026",
+                "color": "gold",
+                "font": "heading",
+                "fontSize": 5.2,
+                "weight": "800",
+                "align": "center"
+              },
+              {
+                "id": "eq",
+                "name": "Equalizer (Lottie)",
+                "frame": {
+                  "x": 38,
+                  "y": 72,
+                  "w": 24,
+                  "h": 9.82,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "fade",
+                    "delayMs": 900,
+                    "durationMs": 600
+                  }
+                ],
+                "type": "lottie",
+                "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/equalizer.json",
+                "loop": true,
+                "speed": 1,
+                "alt": "Неонов еквалайзер"
+              },
+              {
+                "id": "cta",
+                "name": "ВКЛЮЧИ СЕ",
+                "frame": {
+                  "x": 22.0,
+                  "y": 86,
+                  "w": 56,
+                  "h": 7.4,
+                  "rotation": 0
+                },
+                "opacity": 1,
+                "hidden": false,
+                "shadow": null,
+                "effects": [
+                  {
+                    "type": "enter",
+                    "preset": "bounceIn",
+                    "delayMs": 1100,
+                    "durationMs": 900
+                  },
+                  {
+                    "type": "pulse",
+                    "scale": 1.05,
+                    "durationMs": 900,
+                    "delayMs": 1800
+                  }
+                ],
+                "type": "button",
+                "label": "ВКЛЮЧИ СЕ",
+                "action": {
+                  "type": "navigate",
+                  "route": "Login"
+                },
+                "bg": "primary",
+                "fg": "onPrimary",
+                "font": "heading",
+                "fontSize": 4.6,
+                "weight": "800",
+                "radius": 3.7,
+                "hover": {
+                  "scale": 1.06,
+                  "lift": 2.05,
+                  "brightness": 1.2,
+                  "glow": {
+                    "color": "primary",
+                    "blur": 5.64,
+                    "opacity": 0.9
+                  },
+                  "durationMs": 350
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "transition": "zoom",
+      "transitionMs": 900,
+      "autoplayMs": 7000,
+      "loop": true,
+      "showDots": true,
+      "showArrows": true,
+      "pauseOnInteraction": true,
+      "dotColor": "onSurface",
+      "activeDotColor": "primary"
+    },
+    {
+      "kind": "scene",
+      "id": "howto",
+      "scene": {
+        "version": 1,
+        "id": "nn_howto_d",
+        "name": "Как се играе (desktop)",
+        "aspectRatio": 1.92,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-desk.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "КАК СЕ ИГРАЕ",
+            "frame": {
+              "x": 20,
+              "y": 5,
+              "w": 60,
+              "h": 9,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "splitText",
+                "by": "word",
+                "preset": "fadeDown",
+                "staggerMs": 150,
+                "delayMs": 0,
+                "durationMs": 600
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 1,
+                "spread": 0.1,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "КАК СЕ ИГРАЕ",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 3.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "eq",
+            "name": "Equalizer (Lottie)",
+            "frame": {
+              "x": 75,
+              "y": 5.5,
+              "w": 8,
+              "h": 9.22,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "lottie",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/equalizer.json",
+            "loop": true,
+            "speed": 1,
+            "alt": "Неонов еквалайзер"
+          },
+          {
+            "id": "cab1",
+            "name": "Cabinet 1",
+            "frame": {
+              "x": 14.0,
+              "y": 18,
+              "w": 17,
+              "h": 56.77,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 0,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 0.6,
+                "durationMs": 2600,
+                "delayMs": 1200
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-1.webp",
+            "fit": "contain",
+            "alt": "Стъпка 1: Регистрирай се",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 0.56,
+              "brightness": 1.2,
+              "glow": {
+                "color": "primary",
+                "blur": 1.53,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap1",
+            "name": "Регистрирай се",
+            "frame": {
+              "x": 10.0,
+              "y": 76.77,
+              "w": 25,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 300,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Регистрирай се",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 1.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "cab2",
+            "name": "Cabinet 2",
+            "frame": {
+              "x": 41.5,
+              "y": 18,
+              "w": 17,
+              "h": 56.77,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 200,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 0.6,
+                "durationMs": 2900,
+                "delayMs": 1450
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-2.webp",
+            "fit": "contain",
+            "alt": "Стъпка 2: Играй избраните слотове",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 0.56,
+              "brightness": 1.2,
+              "glow": {
+                "color": "secondary",
+                "blur": 1.53,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap2",
+            "name": "Играй избраните слотове",
+            "frame": {
+              "x": 37.5,
+              "y": 76.77,
+              "w": 25,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 500,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Играй избраните слотове",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 1.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "cab3",
+            "name": "Cabinet 3",
+            "frame": {
+              "x": 69.0,
+              "y": 18,
+              "w": 17,
+              "h": 56.77,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 400,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 0.6,
+                "durationMs": 3200,
+                "delayMs": 1700
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-3.webp",
+            "fit": "contain",
+            "alt": "Стъпка 3: Трупай точки и печели",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 0.56,
+              "brightness": 1.2,
+              "glow": {
+                "color": "accent",
+                "blur": 1.53,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap3",
+            "name": "Трупай точки и печели",
+            "frame": {
+              "x": 65.0,
+              "y": 76.77,
+              "w": 25,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 700,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Трупай точки и печели",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 1.6,
+            "weight": "800",
+            "align": "center"
+          }
+        ]
+      },
+      "mobileScene": {
+        "version": 1,
+        "id": "nn_howto_m",
+        "name": "Как се играе (mobile)",
+        "aspectRatio": 0.441176,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-mob.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "КАК СЕ ИГРАЕ",
+            "frame": {
+              "x": 4,
+              "y": 2.5,
+              "w": 92,
+              "h": 4.5,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "splitText",
+                "by": "word",
+                "preset": "fadeDown",
+                "staggerMs": 150,
+                "delayMs": 0,
+                "durationMs": 600
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 2,
+                "spread": 0.2,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "КАК СЕ ИГРАЕ",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 8.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "eq",
+            "name": "Equalizer (Lottie)",
+            "frame": {
+              "x": 40,
+              "y": 7.6,
+              "w": 20,
+              "h": 5.29,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "lottie",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/equalizer.json",
+            "loop": true,
+            "speed": 1,
+            "alt": "Неонов еквалайзер"
+          },
+          {
+            "id": "cab1",
+            "name": "Cabinet 1",
+            "frame": {
+              "x": 8,
+              "y": 12,
+              "w": 34,
+              "h": 26.09,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideRight",
+                "delayMs": 0,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 1,
+                "durationMs": 2600,
+                "delayMs": 1200
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-1.webp",
+            "fit": "contain",
+            "alt": "Стъпка 1: Регистрирай се",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 2.05,
+              "brightness": 1.2,
+              "glow": {
+                "color": "primary",
+                "blur": 5.64,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap1",
+            "name": "Регистрирай се",
+            "frame": {
+              "x": 44,
+              "y": 21.91,
+              "w": 52,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 300,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Регистрирай се",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 4.6,
+            "weight": "800",
+            "align": "left"
+          },
+          {
+            "id": "cab2",
+            "name": "Cabinet 2",
+            "frame": {
+              "x": 58,
+              "y": 41,
+              "w": 34,
+              "h": 26.09,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideLeft",
+                "delayMs": 200,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 1,
+                "durationMs": 2900,
+                "delayMs": 1450
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-2.webp",
+            "fit": "contain",
+            "alt": "Стъпка 2: Играй избраните слотове",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 2.05,
+              "brightness": 1.2,
+              "glow": {
+                "color": "secondary",
+                "blur": 5.64,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap2",
+            "name": "Играй избраните слотове",
+            "frame": {
+              "x": 4,
+              "y": 50.91,
+              "w": 52,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 500,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Играй избраните слотове",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 4.6,
+            "weight": "800",
+            "align": "right"
+          },
+          {
+            "id": "cab3",
+            "name": "Cabinet 3",
+            "frame": {
+              "x": 8,
+              "y": 70,
+              "w": 34,
+              "h": 26.09,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "slideRight",
+                "delayMs": 400,
+                "durationMs": 800
+              },
+              {
+                "type": "float",
+                "distance": 1,
+                "durationMs": 3200,
+                "delayMs": 1700
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/cabinet-3.webp",
+            "fit": "contain",
+            "alt": "Стъпка 3: Трупай точки и печели",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 2.05,
+              "brightness": 1.2,
+              "glow": {
+                "color": "accent",
+                "blur": 5.64,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            }
+          },
+          {
+            "id": "cap3",
+            "name": "Трупай точки и печели",
+            "frame": {
+              "x": 44,
+              "y": 79.91,
+              "w": 52,
+              "h": 8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeUp",
+                "delayMs": 700,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "Трупай точки и печели",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 4.6,
+            "weight": "800",
+            "align": "left"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "scene",
+      "id": "prizes",
+      "scene": {
+        "version": 1,
+        "id": "nn_prizes_d",
+        "name": "Награди (desktop)",
+        "aspectRatio": 1.745455,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-desk.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "НАГРАДИ",
+            "frame": {
+              "x": 30,
+              "y": 4,
+              "w": 40,
+              "h": 9,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "zoomIn",
+                "delayMs": 0,
+                "durationMs": 700
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold"
+                ],
+                "blur": 1,
+                "spread": 0.2,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "НАГРАДИ",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 3.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate1",
+            "name": "Prize plate 1",
+            "frame": {
+              "x": 24,
+              "y": 18.0,
+              "w": 52,
+              "h": 12.86,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 0,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-1.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount1",
+            "name": "10 000 €",
+            "frame": {
+              "x": 45.84,
+              "y": 20.57,
+              "w": 20.8,
+              "h": 7.71,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 150,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold"
+                ],
+                "blur": 0.8,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "10 000 €",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 2.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate2",
+            "name": "Prize plate 2",
+            "frame": {
+              "x": 24,
+              "y": 32.6,
+              "w": 52,
+              "h": 12.86,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 180,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-2.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount2",
+            "name": "5 000 €",
+            "frame": {
+              "x": 45.84,
+              "y": 35.17,
+              "w": 20.8,
+              "h": 7.71,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 330,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "secondary"
+                ],
+                "blur": 0.8,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "5 000 €",
+            "color": "secondary",
+            "font": "heading",
+            "fontSize": 2.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate3",
+            "name": "Prize plate 3",
+            "frame": {
+              "x": 24,
+              "y": 47.2,
+              "w": 52,
+              "h": 12.86,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 360,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-3.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount3",
+            "name": "2 500 €",
+            "frame": {
+              "x": 45.84,
+              "y": 49.77,
+              "w": 20.8,
+              "h": 7.71,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 510,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 0.8,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "2 500 €",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 2.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate4",
+            "name": "Prize plate 4",
+            "frame": {
+              "x": 24,
+              "y": 61.8,
+              "w": 52,
+              "h": 12.86,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 540,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-4.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount4",
+            "name": "1 000 €",
+            "frame": {
+              "x": 45.84,
+              "y": 64.37,
+              "w": 20.8,
+              "h": 7.71,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 690,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "accent"
+                ],
+                "blur": 0.8,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "1 000 €",
+            "color": "accent",
+            "font": "heading",
+            "fontSize": 2.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate5",
+            "name": "Prize plate 5",
+            "frame": {
+              "x": 24,
+              "y": 76.4,
+              "w": 52,
+              "h": 12.86,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 720,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-5.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount5",
+            "name": "200 €",
+            "frame": {
+              "x": 45.84,
+              "y": 78.97,
+              "w": 20.8,
+              "h": 7.71,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 870,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "accent"
+                ],
+                "blur": 0.8,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "200 €",
+            "color": "accent",
+            "font": "heading",
+            "fontSize": 2.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "points",
+            "name": "1 точка за всеки 1 € залог на турнирните",
+            "frame": {
+              "x": 20,
+              "y": 90.4,
+              "w": 60,
+              "h": 5,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 1100,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "1 точка за всеки 1 € залог на турнирните слотове",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 1.3,
+            "weight": "700",
+            "align": "center"
+          }
+        ]
+      },
+      "mobileScene": {
+        "version": 1,
+        "id": "nn_prizes_m",
+        "name": "Награди (mobile)",
+        "aspectRatio": 0.833333,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-mob.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "НАГРАДИ",
+            "frame": {
+              "x": 4,
+              "y": 2.5,
+              "w": 92,
+              "h": 7,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "zoomIn",
+                "delayMs": 0,
+                "durationMs": 700
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold"
+                ],
+                "blur": 2,
+                "spread": 0.2,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "НАГРАДИ",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 8.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate1",
+            "name": "Prize plate 1",
+            "frame": {
+              "x": 3,
+              "y": 12.0,
+              "w": 94,
+              "h": 11.1,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 0,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-1.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount1",
+            "name": "10 000 €",
+            "frame": {
+              "x": 43.42,
+              "y": 14.22,
+              "w": 37.6,
+              "h": 6.66,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 150,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold"
+                ],
+                "blur": 1.5,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "10 000 €",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 5.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate2",
+            "name": "Prize plate 2",
+            "frame": {
+              "x": 3,
+              "y": 24.6,
+              "w": 94,
+              "h": 11.1,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 180,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-2.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount2",
+            "name": "5 000 €",
+            "frame": {
+              "x": 43.42,
+              "y": 26.82,
+              "w": 37.6,
+              "h": 6.66,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 330,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "secondary"
+                ],
+                "blur": 1.5,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "5 000 €",
+            "color": "secondary",
+            "font": "heading",
+            "fontSize": 5.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate3",
+            "name": "Prize plate 3",
+            "frame": {
+              "x": 3,
+              "y": 37.2,
+              "w": 94,
+              "h": 11.1,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 360,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-3.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount3",
+            "name": "2 500 €",
+            "frame": {
+              "x": 43.42,
+              "y": 39.42,
+              "w": 37.6,
+              "h": 6.66,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 510,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 1.5,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "2 500 €",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 5.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate4",
+            "name": "Prize plate 4",
+            "frame": {
+              "x": 3,
+              "y": 49.8,
+              "w": 94,
+              "h": 11.1,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 540,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-4.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount4",
+            "name": "1 000 €",
+            "frame": {
+              "x": 43.42,
+              "y": 52.02,
+              "w": 37.6,
+              "h": 6.66,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 690,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "accent"
+                ],
+                "blur": 1.5,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "1 000 €",
+            "color": "accent",
+            "font": "heading",
+            "fontSize": 5.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "plate5",
+            "name": "Prize plate 5",
+            "frame": {
+              "x": 3,
+              "y": 62.4,
+              "w": 94,
+              "h": 11.1,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 720,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/plate-5.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "amount5",
+            "name": "200 €",
+            "frame": {
+              "x": 43.42,
+              "y": 64.62,
+              "w": 37.6,
+              "h": 6.66,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 870,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": -25,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 650,
+                    "opacity": 1,
+                    "x": 1.2,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeOut"
+                  },
+                  {
+                    "atMs": 900,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "back"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "accent"
+                ],
+                "blur": 1.5,
+                "spread": 0.1,
+                "durationMs": 2200
+              }
+            ],
+            "type": "text",
+            "text": "200 €",
+            "color": "accent",
+            "font": "heading",
+            "fontSize": 5.4,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "points",
+            "name": "1 точка за всеки 1 € залог на турнирните",
+            "frame": {
+              "x": 6,
+              "y": 74.4,
+              "w": 88,
+              "h": 9,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 1100,
+                "durationMs": 700
+              }
+            ],
+            "type": "text",
+            "text": "1 точка за всеки 1 € залог на турнирните слотове",
+            "color": "onSurface",
+            "font": "heading",
+            "fontSize": 3.8,
+            "weight": "700",
+            "align": "center"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "scene",
+      "id": "mystery",
+      "scene": {
+        "version": 1,
+        "id": "nn_mystery_d",
+        "name": "Мистериозна кутия (desktop)",
+        "aspectRatio": 2.133333,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-desk.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "МИСТЕРИОЗНА КУТИЯ",
+            "frame": {
+              "x": 20,
+              "y": 5,
+              "w": 60,
+              "h": 9,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeDown",
+                "delayMs": 0,
+                "durationMs": 700
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 1,
+                "spread": 0.1,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "МИСТЕРИОЗНА КУТИЯ",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 3.2,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "burst",
+            "name": "Burst (revealed)",
+            "frame": {
+              "x": 32,
+              "y": 14,
+              "w": 36,
+              "h": 76.8,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 0,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.2,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 450,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1.12,
+                    "rotate": 0,
+                    "easing": "back"
+                  },
+                  {
+                    "atMs": 800,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeInOut"
+                  }
+                ]
+              },
+              {
+                "type": "spin",
+                "direction": "cw",
+                "durationMs": 20000
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/burst.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "startHidden": true
+          },
+          {
+            "id": "box",
+            "name": "Mystery box (tap)",
+            "frame": {
+              "x": 39,
+              "y": 18,
+              "w": 22,
+              "h": 46.93,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "bounceIn",
+                "delayMs": 200,
+                "durationMs": 900
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary",
+                  "secondary"
+                ],
+                "blur": 2.5,
+                "spread": 0.4,
+                "durationMs": 1400
+              },
+              {
+                "type": "float",
+                "distance": 0.5,
+                "durationMs": 2400,
+                "delayMs": 1200
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/giftbox.webp",
+            "fit": "contain",
+            "alt": "Мистериозна кутия – докосни",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 0.56,
+              "brightness": 1.2,
+              "glow": {
+                "color": "primary",
+                "blur": 1.53,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            },
+            "triggers": [
+              {
+                "do": "hide",
+                "target": "box"
+              },
+              {
+                "do": "hide",
+                "target": "hint"
+              },
+              {
+                "do": "show",
+                "target": "burst"
+              },
+              {
+                "do": "play",
+                "target": "burst"
+              },
+              {
+                "do": "show",
+                "target": "prize"
+              },
+              {
+                "do": "play",
+                "target": "prize"
+              }
+            ]
+          },
+          {
+            "id": "hint",
+            "name": "ДОКОСНИ КУТИЯТА",
+            "frame": {
+              "x": 30,
+              "y": 66.93,
+              "w": 40,
+              "h": 7,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 900,
+                "durationMs": 600
+              },
+              {
+                "type": "pulse",
+                "scale": 1.06,
+                "durationMs": 900,
+                "delayMs": 1500
+              }
+            ],
+            "type": "text",
+            "text": "ДОКОСНИ КУТИЯТА",
+            "color": "secondary",
+            "font": "heading",
+            "fontSize": 1.8,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "prize",
+            "name": "+50 FREE SPINS",
+            "frame": {
+              "x": 20,
+              "y": 42,
+              "w": 60,
+              "h": 14,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": {
+              "color": "black",
+              "opacity": 0.9,
+              "x": 0,
+              "y": 0.12,
+              "blur": 0.45
+            },
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 200,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.2,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 450,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1.12,
+                    "rotate": 0,
+                    "easing": "back"
+                  },
+                  {
+                    "atMs": 800,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeInOut"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold",
+                  "primary"
+                ],
+                "blur": 2,
+                "spread": 0.3,
+                "durationMs": 1200
+              }
+            ],
+            "type": "text",
+            "text": "+50 FREE SPINS",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 4.6,
+            "weight": "800",
+            "align": "center",
+            "startHidden": true
+          }
+        ]
+      },
+      "mobileScene": {
+        "version": 1,
+        "id": "nn_mystery_m",
+        "name": "Мистериозна кутия (mobile)",
+        "aspectRatio": 0.75,
+        "background": "background",
+        "nodes": [
+          {
+            "id": "bg",
+            "name": "Panel background",
+            "frame": {
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/panel-mob.webp",
+            "fit": "cover",
+            "alt": "",
+            "radius": 0
+          },
+          {
+            "id": "title",
+            "name": "МИСТЕРИОЗНА КУТИЯ",
+            "frame": {
+              "x": 4,
+              "y": 3,
+              "w": 92,
+              "h": 6,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fadeDown",
+                "delayMs": 0,
+                "durationMs": 700
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary"
+                ],
+                "blur": 2,
+                "spread": 0.2,
+                "durationMs": 2000
+              }
+            ],
+            "type": "text",
+            "text": "МИСТЕРИОЗНА КУТИЯ",
+            "color": "primary",
+            "font": "heading",
+            "fontSize": 6.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "burst",
+            "name": "Burst (revealed)",
+            "frame": {
+              "x": 5,
+              "y": 13,
+              "w": 90,
+              "h": 67.5,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 0,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.2,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 450,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1.12,
+                    "rotate": 0,
+                    "easing": "back"
+                  },
+                  {
+                    "atMs": 800,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeInOut"
+                  }
+                ]
+              },
+              {
+                "type": "spin",
+                "direction": "cw",
+                "durationMs": 20000
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/burst.webp",
+            "fit": "contain",
+            "alt": "",
+            "radius": 0,
+            "startHidden": true
+          },
+          {
+            "id": "box",
+            "name": "Mystery box (tap)",
+            "frame": {
+              "x": 20,
+              "y": 18,
+              "w": 60,
+              "h": 45.0,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "bounceIn",
+                "delayMs": 200,
+                "durationMs": 900
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "primary",
+                  "secondary"
+                ],
+                "blur": 2.5,
+                "spread": 0.4,
+                "durationMs": 1400
+              },
+              {
+                "type": "float",
+                "distance": 1,
+                "durationMs": 2400,
+                "delayMs": 1200
+              }
+            ],
+            "type": "image",
+            "uri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/giftbox.webp",
+            "fit": "contain",
+            "alt": "Мистериозна кутия – докосни",
+            "radius": 0,
+            "hover": {
+              "scale": 1.06,
+              "lift": 2.05,
+              "brightness": 1.2,
+              "glow": {
+                "color": "primary",
+                "blur": 5.64,
+                "opacity": 0.9
+              },
+              "durationMs": 350
+            },
+            "triggers": [
+              {
+                "do": "hide",
+                "target": "box"
+              },
+              {
+                "do": "hide",
+                "target": "hint"
+              },
+              {
+                "do": "show",
+                "target": "burst"
+              },
+              {
+                "do": "play",
+                "target": "burst"
+              },
+              {
+                "do": "show",
+                "target": "prize"
+              },
+              {
+                "do": "play",
+                "target": "prize"
+              }
+            ]
+          },
+          {
+            "id": "hint",
+            "name": "ДОКОСНИ КУТИЯТА",
+            "frame": {
+              "x": 4,
+              "y": 65.0,
+              "w": 92,
+              "h": 6,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": null,
+            "effects": [
+              {
+                "type": "enter",
+                "preset": "fade",
+                "delayMs": 900,
+                "durationMs": 600
+              },
+              {
+                "type": "pulse",
+                "scale": 1.06,
+                "durationMs": 900,
+                "delayMs": 1500
+              }
+            ],
+            "type": "text",
+            "text": "ДОКОСНИ КУТИЯТА",
+            "color": "secondary",
+            "font": "heading",
+            "fontSize": 5.6,
+            "weight": "800",
+            "align": "center"
+          },
+          {
+            "id": "prize",
+            "name": "+50 FREE SPINS",
+            "frame": {
+              "x": 2,
+              "y": 40,
+              "w": 96,
+              "h": 10,
+              "rotation": 0
+            },
+            "opacity": 1,
+            "hidden": false,
+            "shadow": {
+              "color": "black",
+              "opacity": 0.9,
+              "x": 0,
+              "y": 0.3,
+              "blur": 1.1
+            },
+            "effects": [
+              {
+                "type": "timeline",
+                "delayMs": 200,
+                "repeat": "none",
+                "keyframes": [
+                  {
+                    "atMs": 0,
+                    "opacity": 0,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.2,
+                    "rotate": 0,
+                    "easing": "linear"
+                  },
+                  {
+                    "atMs": 450,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1.12,
+                    "rotate": 0,
+                    "easing": "back"
+                  },
+                  {
+                    "atMs": 800,
+                    "opacity": 1,
+                    "x": 0,
+                    "y": 0,
+                    "scale": 1,
+                    "rotate": 0,
+                    "easing": "easeInOut"
+                  }
+                ]
+              },
+              {
+                "type": "glow",
+                "colors": [
+                  "gold",
+                  "primary"
+                ],
+                "blur": 2,
+                "spread": 0.3,
+                "durationMs": 1200
+              }
+            ],
+            "type": "text",
+            "text": "+50 FREE SPINS",
+            "color": "gold",
+            "font": "heading",
+            "fontSize": 7,
+            "weight": "800",
+            "align": "center",
+            "startHidden": true
+          }
+        ]
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "games",
+      "widget": {
+        "type": "gameCarousel",
+        "title": "ТУРНИРНИ СЛОТОВЕ",
+        "backgroundUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/carousel-bg.webp",
+        "background": "background",
+        "games": [
+          {
+            "id": "neon-cherry",
+            "name": "Neon Cherry",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-neon-cherry.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "neon-cherry"
+            }
+          },
+          {
+            "id": "synth-7s",
+            "name": "Synth 7s",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-synth-7s.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "synth-7s"
+            }
+          },
+          {
+            "id": "midnight-drive",
+            "name": "Midnight Drive",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-midnight-drive.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "midnight-drive"
+            }
+          },
+          {
+            "id": "laser-fruits",
+            "name": "Laser Fruits",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-laser-fruits.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "laser-fruits"
+            }
+          },
+          {
+            "id": "retro-spin",
+            "name": "Retro Spin",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-retro-spin.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "retro-spin"
+            }
+          },
+          {
+            "id": "pixel-jackpot",
+            "name": "Pixel Jackpot",
+            "imageUri": "https://ibbgcdn.kubdev.com/common-content/landing-pages/container/neon-night/slot-pixel-jackpot.webp",
+            "action": {
+              "type": "openGame",
+              "gameId": "pixel-jackpot"
+            }
+          }
+        ],
+        "playLabel": "ИГРАЙ",
+        "ctaText": "ОЩЕ ИГРИ В КАЗИНОТО",
+        "ctaLabel": "КЪМ КАЗИНОТО",
+        "ctaAction": {
+          "type": "navigate",
+          "route": "Casino",
+          "webPath": "/casino"
+        },
+        "colors": {
+          "text": "white",
+          "accent": "primary",
+          "onAccent": "onPrimary"
+        },
+        "font": "heading"
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "terms",
+      "widget": {
+        "type": "terms",
+        "title": "ПРАВИЛА И УСЛОВИЯ:",
+        "expandLabel": "ПОКАЖИ ВСИЧКИ ПРАВИЛА",
+        "collapseLabel": "СКРИЙ ПРАВИЛАТА",
+        "previewBlocks": 3,
+        "blocks": [
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Турнирът „",
+                "bold": false
+              },
+              {
+                "text": "НЕОНОВА НОЩ",
+                "bold": true
+              },
+              {
+                "text": "“ се провежда от 05.12.2026 г. до 14.12.2026 г., всяка вечер от 21:00 ч. до 02:00 ч. българско време.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Участват само регистрирани и верифицирани потребители, навършили ",
+                "bold": false
+              },
+              {
+                "text": "18 години",
+                "bold": true
+              },
+              {
+                "text": ".",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "За всеки 1 € залог на турнирните слотове участникът получава 1 точка. Залози с бонус средства не носят точки.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Класирането се определя по общия брой точки. При равенство по-напред е участникът, достигнал резултата по-рано.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Наградният фонд от ",
+                "bold": false
+              },
+              {
+                "text": "50 000 €",
+                "bold": true
+              },
+              {
+                "text": " се разпределя между първите 50 участници в класирането.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Наградите се начисляват до 72 часа след края на турнира.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Безплатните завъртания от мистериозната кутия са валидни 24 часа и подлежат на превъртане ",
+                "bold": false
+              },
+              {
+                "text": "x30",
+                "bold": true
+              },
+              {
+                "text": ".",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Всеки участник може да отвори мистериозната кутия веднъж на ден.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "numbered",
+            "spans": [
+              {
+                "text": "Организаторът си запазва правото да променя или прекратява турнира при нарушение на правилата.",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "kind": "paragraph",
+            "spans": [
+              {
+                "text": "18+ | Играй отговорно. Хазартът може да доведе до пристрастяване.",
+                "bold": true
+              }
+            ]
+          }
+        ],
+        "colors": {
+          "background": "background",
+          "card": "surface",
+          "text": "onSurface",
+          "accent": "primary"
+        }
+      }
+    }
+  ]
+}

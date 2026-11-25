@@ -94,6 +94,22 @@ const EFFECT_DEFAULTS: { [T in EffectType]: EffectOf<T> } = {
   outlinePulse: { type: 'outlinePulse', color: 'gold', width: 0.4, spread: 1.12, durationMs: 1400 },
   float: { type: 'float', distance: 1.5, durationMs: 2000 },
   fadeIn: { type: 'fadeIn', delayMs: 0, durationMs: 600 },
+  enter: { type: 'enter', preset: 'fadeUp', delayMs: 0, durationMs: 800 },
+  wiggle: { type: 'wiggle', angle: 4, durationMs: 1200 },
+  spin: { type: 'spin', direction: 'cw', durationMs: 6000 },
+  timeline: {
+    type: 'timeline',
+    delayMs: 0,
+    repeat: 'none',
+    keyframes: [
+      { atMs: 0, opacity: 0, x: 0, y: 6, scale: 0.8, rotate: 0, easing: 'linear' },
+      { atMs: 700, opacity: 1, x: 0, y: -1, scale: 1.05, rotate: 0, easing: 'easeOut' },
+      { atMs: 1000, opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, easing: 'easeInOut' },
+    ],
+  },
+  kenBurns: { type: 'kenBurns', fromScale: 1, toScale: 1.15, fromX: 0, fromY: 0, toX: -4, toY: -3, durationMs: 12000, mode: 'pingpong' },
+  parallax: { type: 'parallax', depth: 0.3 },
+  splitText: { type: 'splitText', by: 'char', preset: 'fadeUp', staggerMs: 40, delayMs: 0, durationMs: 500 },
   glow: { type: 'glow', colors: ['gold', 'primary'], blur: 3, spread: 0.5, durationMs: 1200 },
   edgeBlink: { type: 'edgeBlink', colors: ['gold', 'danger'], width: 0.4, blur: 1, mode: 'blink', durationMs: 500 },
   borderRun: { type: 'borderRun', colors: ['gold', 'accent'], size: 1.2, durationMs: 2400 },
@@ -101,9 +117,35 @@ const EFFECT_DEFAULTS: { [T in EffectType]: EffectOf<T> } = {
 };
 
 export function createEffect<T extends EffectType>(type: T): EffectOf<T> {
-  const effect = EFFECT_DEFAULTS[type];
-  // colors is an array: give every node its own copy
-  return 'colors' in effect ? { ...effect, colors: [...effect.colors] } : { ...effect };
+  // arrays (colors, keyframes) are copied so every node owns its own
+  return JSON.parse(JSON.stringify(EFFECT_DEFAULTS[type])) as EffectOf<T>; // structuredClone isn't on every Hermes build
+}
+
+export function createLottieNode(uri: string, taken: ReadonlySet<string>): NodeOf<'lottie'> {
+  return { ...base('lot', 'Lottie', centered(30, 30), taken), type: 'lottie', uri, loop: true, speed: 1, alt: '' };
+}
+
+/** Countdown to `endDate` at 23:59 in the given time zone. */
+export function createCountdownNode(endDate: string, timeZone: string, taken: ReadonlySet<string>): NodeOf<'countdown'> {
+  return {
+    ...base('cd', 'Countdown', centered(60, 12), taken),
+    type: 'countdown',
+    endDate,
+    endTime: { hour: 23, minute: 59 },
+    timeZone,
+    format: 'auto',
+    labels: { days: 'д', hours: 'ч', minutes: 'м', seconds: 'с' },
+    endedText: 'ПРОМОЦИЯТА ПРИКЛЮЧИ',
+    color: 'white',
+    fontSize: 5,
+    weight: '800',
+    align: 'center',
+  };
+}
+
+/** Default hover: the classic promo-card lift + glow. */
+export function createHover(): import('./schema').Hover {
+  return { scale: 1.07, lift: 0.6, brightness: 1.15, glow: { color: 'accent', blur: 1.4, opacity: 0.8 }, durationMs: 500 };
 }
 
 /** Image node frame height (in % of scene height) that keeps the image's own aspect ratio. */

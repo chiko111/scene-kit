@@ -111,7 +111,18 @@ export function parseScene(input: unknown): ParseResult {
     nodes.push(parsed.data);
   });
 
-  return { ok: true, scene: { ...envelope.data, nodes }, warnings };
+  // triggers may only target layers of this scene
+  const ids = new Set(nodes.map((n) => n.id));
+  const checked = nodes.map((node, i) => {
+    if (!node.triggers) return node;
+    const kept = node.triggers.filter((t) => ids.has(t.target)); // self-targets allowed (e.g. tap to dismiss)
+    if (kept.length !== node.triggers.length) {
+      warnings.push({ path: `nodes[${i}].triggers`, message: 'dropped triggers pointing at missing layers' });
+    }
+    return { ...node, triggers: kept };
+  });
+
+  return { ok: true, scene: { ...envelope.data, nodes: checked }, warnings };
 }
 
 /** Strict validation for saving / exporting. Throws a readable Error. */

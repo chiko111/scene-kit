@@ -1,0 +1,47 @@
+{
+  "winbet": {
+    "primary": "#fecf6f",
+    "onPrimary": "#450102",
+    "secondary": "#c00006",
+    "onSecondary": "#ffffff",
+    "accent": "#e42314",
+    "gold": "#fecf6f",
+    "success": "#2ecc71",
+    "danger": "#c00006",
+    "surface": "#750004",
+    "onSurface": "#ffffe1",
+    "background": "#470001",
+    "white": "#ffffff",
+    "black": "#000000"
+  },
+  "inbet": {
+    "primary": "#ffd400",
+    "onPrimary": "#1d1400",
+    "secondary": "#007bff",
+    "onSecondary": "#ffffff",
+    "accent": "#00c3ff",
+    "gold": "#ffd400",
+    "success": "#2ecc71",
+    "danger": "#ff3b4e",
+    "surface": "#0b1330",
+    "onSurface": "#e6e9f2",
+    "background": "#010615",
+    "white": "#ffffff",
+    "black": "#000000"
+  },
+  "neon": {
+    "primary": "#ff2bd6",
+    "onPrimary": "#1a0026",
+    "secondary": "#00f0ff",
+    "onSecondary": "#001a1f",
+    "accent": "#8a5cff",
+    "gold": "#ffd24a",
+    "success": "#39ff88",
+    "danger": "#ff3864",
+    "surface": "#1a0b2e",
+    "onSurface": "#f4e9ff",
+    "background": "#0a0014",
+    "white": "#ffffff",
+    "black": "#000000"
+  }
+}
